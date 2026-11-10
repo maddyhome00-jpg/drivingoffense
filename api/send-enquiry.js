@@ -4,7 +4,7 @@ const RESEND_API_URL = "https://api.resend.com/emails";
 const FROM_EMAIL =
     "Driving Offence Solutions <no-reply@drivingoffencesolution.co.uk>";
 
-const OFFICE_EMAIL = "info@drivingoffencesolutions.co.uk";
+const OFFICE_EMAIL = "info@drivingoffencesolution.co.uk";
 const WHATSAPP_NUMBER = "+44 7480 214872";
 
 function clean(value, maxLength = 1000) {
