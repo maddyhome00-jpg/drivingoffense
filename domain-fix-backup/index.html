@@ -1,0 +1,2477 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+
+<title>Driving Offence Solutions | Motoring Notice Advice</title>
+<meta name="description" content="Motoring notice assessment and document review. Speeding notices, NIPs, Section 172 requests, court summonses, driving bans, fines, penalty points and court orders.">
+
+<link rel="canonical" href="https://www.drivingoffencesolutions.co.uk/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --black: #151515;
+    --white: #fff;
+    --grey: #686868;
+    --light: #f3f3f1;
+    --border: #dedede;
+    --serif: "DM Serif Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+    --transition: cubic-bezier(.2,0,0,1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: var(--sans);
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.65;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.container {
+    width: min(1200px, calc(100% - 48px));
+    margin: auto;
+}
+
+.skip-link {
+    position: absolute;
+    top: -60px;
+    left: 15px;
+    background: white;
+    padding: 12px;
+    z-index: 999;
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
+/* TOP BAR */
+
+.topbar {
+    background: #111;
+    color: #ddd;
+    font-size: 10px;
+    letter-spacing: .07em;
+}
+
+.topbar-inner {
+    min-height: 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar a {
+    color: white;
+    font-weight: 700;
+}
+
+/* HEADER */
+
+.header {
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 230px;
+}
+
+.brand-symbol {
+    width: 42px;
+    height: 42px;
+    background: #111;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.brand-name strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -.5px;
+}
+
+.brand-name small {
+    display: block;
+    color: #777;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    margin-top: 3px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.navigation a {
+    font-size: 11px;
+    font-weight: 700;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navigation a:not(.nav-button)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    bottom: 7px;
+    left: 0;
+    right: 100%;
+    background: #111;
+    transition: right .2s var(--transition);
+}
+
+.navigation a:hover::after {
+    right: 0;
+}
+
+.nav-button {
+    background: #111;
+    color: white;
+    padding: 0 19px;
+    transition: background .2s, color .2s;
+}
+
+.nav-button:hover {
+    background: white;
+    color: black;
+    outline: 1px solid black;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: #111;
+    margin: 5px auto;
+}
+
+/* GENERAL */
+
+.eyebrow {
+    color: #777;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+}
+
+.eyebrow.light {
+    color: #c8c8c8;
+}
+
+.section {
+    padding: 90px 0;
+}
+
+.section-heading {
+    font-family: var(--serif);
+    font-size: clamp(34px,4.2vw,51px);
+    line-height: 1.18;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+}
+
+.section-summary {
+    max-width: 450px;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.button {
+    min-height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 23px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid transparent;
+    transition: background .2s, color .2s, border-color .2s;
+    cursor: pointer;
+}
+
+.button span {
+    margin-left: 13px;
+}
+
+.button-black {
+    background: #111;
+    color: white;
+    border-color: #111;
+}
+
+.button-black:hover {
+    background: white;
+    color: #111;
+}
+
+.button-white {
+    background: white;
+    color: #111;
+    border-color: white;
+}
+
+.button-white:hover {
+    background: transparent;
+    color: white;
+}
+
+.button-outline {
+    border-color: #888;
+    color: white;
+    background: transparent;
+}
+
+.button-outline:hover {
+    background: white;
+    color: #111;
+}
+
+.text-link {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    margin-top: 10px;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    min-height: 600px;
+    background: #111;
+    color: white;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0 0 0 37%;
+    background-image:
+        linear-gradient(
+            90deg,
+            #111 0%,
+            rgba(17,17,17,.85) 16%,
+            rgba(17,17,17,.25) 70%,
+            rgba(17,17,17,.45) 100%
+        ),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85");
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(100%);
+}
+
+.hero-inner {
+    position: relative;
+    z-index: 2;
+    padding-top: 85px;
+    padding-bottom: 85px;
+}
+
+.hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px,6.4vw,78px);
+    line-height: 1.08;
+    letter-spacing: -2.5px;
+    max-width: 730px;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.hero h1 em {
+    font-style: normal;
+    color: #bdbdbd;
+}
+
+.hero-description {
+    max-width: 560px;
+    color: #e0e0e0;
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 29px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.hero-secondary {
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.hero-note {
+    color: #bcbcbc;
+    font-size: 10px;
+    margin-top: 22px;
+}
+
+/* TRUST STRIP */
+
+.trust-strip {
+    background: #f6f6f5;
+    border-bottom: 1px solid var(--border);
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    min-height: 110px;
+    align-items: center;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    border-left: 1px solid var(--border);
+}
+
+.trust-item:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.trust-number {
+    font-family: var(--serif);
+    font-size: 27px;
+    color: #888;
+}
+
+.trust-item p {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.trust-item:last-child {
+    justify-content: flex-end;
+}
+
+.trust-item:last-child a {
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+/* INTRODUCTION */
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 10%;
+    align-items: start;
+}
+
+.intro-copy {
+    max-width: 620px;
+}
+
+.intro-copy p {
+    color: #5e5e5e;
+    font-size: 14px;
+    line-height: 1.95;
+    margin-bottom: 17px;
+}
+
+.intro-copy .large-copy {
+    font-size: 19px;
+    color: #222;
+    line-height: 1.7;
+}
+
+/* SERVICES */
+
+.services-section {
+    background: #f5f5f3;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.service-item {
+    position: relative;
+    min-height: 230px;
+    padding: 26px 20px 35px 0;
+    border-right: 1px solid #d8d8d8;
+    transition: padding .2s, background .2s;
+}
+
+.service-item:not(:first-child) {
+    padding-left: 20px;
+}
+
+.service-item:last-child {
+    border-right: none;
+}
+
+.service-item:hover {
+    padding-top: 32px;
+    background: #fff;
+}
+
+.service-number {
+    font-size: 9px;
+    color: #777;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.service-item h3 {
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 28px 0 11px;
+}
+
+.service-item p {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.service-arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 16px;
+    font-size: 17px;
+}
+
+.all-services {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+/* DETAIL SECTIONS */
+
+.detail-section {
+    background: white;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 75px;
+}
+
+.detail-copy p {
+    font-size: 13px;
+    color: #606060;
+    line-height: 1.95;
+    margin-bottom: 16px;
+}
+
+.detail-list {
+    border-top: 1px solid var(--border);
+}
+
+.detail-row {
+    padding: 19px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-row h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.detail-row p {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+/* DOCUMENT CHECKS */
+
+.check-section {
+    background: #f5f5f3;
+}
+
+.check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 65px;
+    margin-top: 35px;
+}
+
+.check-column h3 {
+    font-size: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.check-item {
+    display: flex;
+    gap: 17px;
+    padding: 16px 0;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.check-item span {
+    font-size: 10px;
+    color: #888;
+    font-weight: 800;
+    padding-top: 3px;
+}
+
+.check-item h4 {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.check-item p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #666;
+}
+
+/* COURT SECTION */
+
+.dark-section {
+    background: #111;
+    color: white;
+    padding: 85px 0;
+}
+
+.dark-grid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 75px;
+    align-items: start;
+}
+
+.dark-heading {
+    font-family: var(--serif);
+    font-size: clamp(35px,4.5vw,55px);
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+}
+
+.dark-heading em {
+    color: #aaa;
+    font-style: normal;
+}
+
+.dark-copy {
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.9;
+    margin: 20px 0;
+}
+
+.dark-list {
+    border-top: 1px solid #555;
+}
+
+.dark-row {
+    padding: 16px 0;
+    border-bottom: 1px solid #555;
+}
+
+.dark-row h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.dark-row p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #bbb;
+}
+
+/* PRACTICAL NOTES */
+
+.notes-section {
+    background: white;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 35px;
+}
+
+.note-box {
+    border-top: 2px solid #222;
+    padding-top: 19px;
+}
+
+.note-box h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.note-box p {
+    font-size: 12px;
+    line-height: 1.9;
+    color: #626262;
+    margin-bottom: 13px;
+}
+
+.note-box ul {
+    list-style: none;
+}
+
+.note-box li {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.note-box li::before {
+    content: "—";
+    margin-right: 11px;
+    color: #777;
+}
+
+/* PROCESS */
+
+.process-section {
+    background: #f5f5f3;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 35px;
+}
+
+.process-item {
+    padding: 26px 28px 28px 0;
+    border-right: 1px solid var(--border);
+}
+
+.process-item + .process-item {
+    padding-left: 28px;
+}
+
+.process-item:last-child {
+    border-right: none;
+}
+
+.process-number {
+    font-family: var(--serif);
+    font-size: 29px;
+    color: #999;
+}
+
+.process-item h3 {
+    font-size: 16px;
+    margin: 15px 0 8px;
+}
+
+.process-item p {
+    font-size: 12px;
+    line-height: 1.9;
+    color: #666;
+}
+
+/* ABOUT — PORTRAIT REMOVED, TEXT USES FULL WIDTH */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: start;
+}
+
+.about-copy {
+    max-width: 850px;
+}
+
+.about-copy p {
+    color: #606060;
+    font-size: 13px;
+    line-height: 1.95;
+    margin-top: 17px;
+}
+
+.about-quote {
+    font-family: var(--serif);
+    color: #222 !important;
+    font-size: 22px !important;
+    line-height: 1.55 !important;
+}
+
+/* FAQ */
+
+.faq-section {
+    background: #f5f5f3;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 75px;
+}
+
+.faq-list {
+    border-top: 1px solid var(--border);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-question {
+    width: 100%;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.faq-question span:last-child {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.faq-answer {
+    display: none;
+    color: #666;
+    font-size: 12px;
+    line-height: 1.95;
+    padding: 0 35px 20px 0;
+}
+
+.faq-item.open .faq-answer {
+    display: block;
+}
+
+/* CTA */
+
+.contact-banner {
+    background: #222;
+    color: white;
+    padding: 65px 0;
+}
+
+.contact-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.contact-banner h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px,4.5vw,52px);
+    line-height: 1.15;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.contact-banner p:not(.eyebrow) {
+    color: #ccc;
+    font-size: 13px;
+}
+
+/* FOOTER */
+
+.footer {
+    background: #f4f4f2;
+    padding: 55px 0 22px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 40px;
+}
+
+.footer-description {
+    font-size: 12px;
+    color: #666;
+    max-width: 330px;
+    line-height: 1.9;
+    margin-top: 17px;
+}
+
+.footer h4 {
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.footer-column a {
+    display: block;
+    color: #555;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-legal {
+    border-top: 1px solid #d7d7d4;
+    padding-top: 18px;
+    color: #777;
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.footer-legal p {
+    margin-bottom: 7px;
+}
+
+.copyright {
+    display: block;
+    margin-top: 12px;
+}
+
+/* TABLET */
+
+@media(max-width: 950px) {
+    .navigation { gap: 13px; }
+    .navigation a { font-size: 10px; }
+    .brand { min-width: 190px; }
+    .brand-name strong { font-size: 13px; }
+    .section { padding: 75px 0; }
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+    .container {
+        width: calc(100% - 40px);
+    }
+
+    .topbar {
+        font-size: 9px;
+    }
+
+    .topbar-inner {
+        min-height: 31px;
+        justify-content: flex-end;
+    }
+
+    .topbar-inner span:first-child {
+        display: none;
+    }
+
+    .header { height: 70px; }
+
+    .brand {
+        min-width: 0;
+        gap: 9px;
+    }
+
+    .brand-symbol {
+        width: 36px;
+        height: 36px;
+    }
+
+    .brand-name strong { font-size: 13px; }
+    .brand-name small { font-size: 8px; }
+
+    .menu-toggle { display: block; }
+
+    .navigation {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 12px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        align-items: stretch;
+    }
+
+    .navigation.open {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navigation a {
+        min-height: 46px;
+        border-bottom: 1px solid #eee;
+        font-size: 13px;
+    }
+
+    .navigation .nav-button {
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .hero { min-height: auto; }
+
+    .hero-background {
+        inset: 0;
+        background-image:
+            linear-gradient(
+                90deg,
+                rgba(17,17,17,.94),
+                rgba(17,17,17,.74)
+            ),
+            url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80");
+    }
+
+    .hero-inner {
+        padding-top: 67px;
+        padding-bottom: 58px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px,11vw,62px);
+        line-height: 1.1;
+        letter-spacing: -1.8px;
+    }
+
+    .hero-description { font-size: 14px; }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .hero-actions .button { width: 100%; }
+
+    .hero-secondary { padding: 8px 0; }
+
+    .trust-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 12px 0;
+    }
+
+    .trust-item {
+        padding: 13px 5px;
+        border-left: none;
+    }
+
+    .trust-item:nth-child(even) {
+        border-left: 1px solid var(--border);
+        padding-left: 15px;
+    }
+
+    .trust-number { font-size: 23px; }
+    .trust-item p { font-size: 10px; }
+
+    .section { padding: 62px 0; }
+
+    .intro-grid,
+    .detail-grid,
+    .dark-grid,
+    .about-grid,
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .section-heading { font-size: 37px; }
+
+    .intro-copy .large-copy { font-size: 18px; }
+
+    .section-header {
+        display: block;
+        margin-bottom: 28px;
+    }
+
+    .section-summary { margin-top: 15px; }
+
+    .services-grid { grid-template-columns: 1fr 1fr; }
+
+    .service-item {
+        min-height: 195px;
+        padding: 20px 13px 30px 0;
+    }
+
+    .service-item:not(:first-child) { padding-left: 13px; }
+
+    .service-item:nth-child(2) { border-right: none; }
+
+    .service-item:nth-child(n+3) {
+        border-top: 1px solid #d8d8d8;
+    }
+
+    .service-item h3 {
+        font-size: 15px;
+        margin-top: 23px;
+    }
+
+    .service-item p { font-size: 11px; }
+
+    .check-grid,
+    .notes-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .dark-section { padding: 60px 0; }
+
+    .dark-heading { font-size: 40px; }
+
+    .process-grid { grid-template-columns: 1fr; }
+
+    .process-item,
+    .process-item + .process-item {
+        padding: 20px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .process-item:last-child { border-bottom: none; }
+
+    .process-number { font-size: 24px; }
+
+    .process-item h3 { margin: 8px 0; }
+
+    .contact-banner { padding: 45px 0; }
+
+    .contact-banner-inner { display: block; }
+
+    .contact-banner .button {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .contact-banner h2 { font-size: 40px; }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+
+    .footer-brand { grid-column: 1 / -1; }
+
+    .footer-legal { font-size: 9px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <span>LEEDS · MOTORING NOTICE ADVICE</span>
+        <span>
+            Monday–Friday, 9am–6pm &nbsp; | &nbsp;
+            <a href="https://wa.me/447480214872">+44 7480 214872</a>
+        </span>
+    </div>
+</div>
+
+<!-- HEADER -->
+
+<header class="header">
+    <div class="container header-inner">
+
+        <a href="index.html" class="brand">
+            <span class="brand-symbol">DOS</span>
+            <span class="brand-name">
+                <strong>Driving Offence Solutions</strong>
+                <small>Motoring notice advice · Leeds</small>
+            </span>
+        </a>
+
+        <button class="menu-toggle"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation" id="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="services.html">Our services</a>
+            <a href="court.html">Court &amp; bans</a>
+            <a href="about.html">About Gareth</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="nav-button">Free assessment →</a>
+        </nav>
+
+    </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+
+<section class="hero">
+    <div class="hero-background"></div>
+
+    <div class="container hero-inner">
+
+        <p class="eyebrow light">
+            ESTABLISHED 2011 · ENGLAND &amp; WALES
+        </p>
+
+        <h1>
+            Received a motoring<br>
+            notice? Let's examine<br>
+            <em>it properly.</em>
+        </h1>
+
+        <p class="hero-description">
+            From speeding allegations and fixed penalty notices
+            to magistrates' court documents, driving bans and
+            enforcement correspondence, I examine the paperwork
+            and the circumstances behind it. I explain what the
+            documents mean and whether there are grounds for
+            further investigation or action.
+        </p>
+
+        <div class="hero-actions">
+            <a href="contact.html" class="button button-white">
+                Request a free assessment <span>→</span>
+            </a>
+
+            <a href="services.html" class="hero-secondary">
+                Explore our services →
+            </a>
+        </div>
+
+        <p class="hero-note">
+            Initial assessment at no charge. No promise of a particular outcome.
+        </p>
+
+    </div>
+</section>
+
+<!-- TRUST STRIP -->
+
+<section class="trust-strip">
+    <div class="container trust-grid">
+
+        <div class="trust-item">
+            <strong class="trust-number">01</strong>
+            <p>Former West Yorkshire<br>traffic officer</p>
+        </div>
+
+        <div class="trust-item">
+            <strong class="trust-number">02</strong>
+            <p>Established in<br>2011</p>
+        </div>
+
+        <div class="trust-item">
+            <strong class="trust-number">03</strong>
+            <p>Individual document<br>assessment</p>
+        </div>
+
+        <div class="trust-item">
+            <a href="about.html">Meet Gareth Drummond →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- INTRODUCTION -->
+
+<section class="section">
+    <div class="container intro-grid">
+
+        <div>
+            <p class="eyebrow">A CLEAR PLACE TO START</p>
+
+            <h2 class="section-heading">
+                Before you respond<br>
+                to that letter.
+            </h2>
+        </div>
+
+        <div class="intro-copy">
+
+            <p class="large-copy">
+                A motoring notice can have consequences beyond
+                the original allegation.
+            </p>
+
+            <p>
+                What begins as a speeding allegation can develop
+                into a fixed penalty, a request to identify a driver,
+                a court prosecution or a potential driving
+                disqualification. Each stage involves different
+                documents, deadlines and procedural requirements.
+            </p>
+
+            <p>
+                You may also have received a letter from the
+                magistrates' court, a Single Justice Procedure Notice,
+                a financial penalty notice or correspondence concerning
+                an existing driving ban.
+            </p>
+
+            <p>
+                I examine the paperwork, the relevant dates,
+                the circumstances and the information available.
+                The purpose is to establish what has happened,
+                what the documents actually require and whether
+                any genuine issue warrants further investigation.
+            </p>
+
+            <p>
+                Not every notice is defective. Not every allegation
+                has a viable defence. If the documents appear correct,
+                I will explain that rather than suggest a challenge
+                without proper grounds.
+            </p>
+
+            <a href="about.html" class="text-link">
+                Learn about Gareth and the practice →
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="section services-section">
+    <div class="container">
+
+        <div class="section-header">
+            <div>
+                <p class="eyebrow">WHAT WE CAN REVIEW</p>
+
+                <h2 class="section-heading">
+                    Motoring matters.<br>
+                    Documents that matter.
+                </h2>
+            </div>
+
+            <p class="section-summary">
+                Different notices require different checks.
+                Explore the motoring matters covered by
+                Driving Offence Solutions, from the first
+                police letter to subsequent court correspondence.
+            </p>
+        </div>
+
+        <div class="services-grid">
+
+            <a href="services.html#notices" class="service-item">
+                <span class="service-number">01 / NOTICES</span>
+                <h3>Speeding &amp; NIPs</h3>
+                <p>
+                    Speed camera notices, Notices of Intended
+                    Prosecution, alleged speed, dates and
+                    service requirements.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="services.html#penalties" class="service-item">
+                <span class="service-number">02 / PENALTIES</span>
+                <h3>Fines &amp; penalty points</h3>
+                <p>
+                    Fixed penalties, endorsement codes, points,
+                    financial penalties and driving record
+                    consequences.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="court.html#summonses" class="service-item">
+                <span class="service-number">03 / COURT</span>
+                <h3>Court summons &amp; orders</h3>
+                <p>
+                    Magistrates' Court documents, requisitions,
+                    Single Justice Procedure Notices, sentencing
+                    and court correspondence.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="court.html#bans" class="service-item">
+                <span class="service-number">04 / DISQUALIFICATION</span>
+                <h3>Driving bans</h3>
+                <p>
+                    Totting-up disqualification, exceptional
+                    hardship considerations, driving restrictions
+                    and licence orders.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="services.html#driver-identification" class="service-item">
+                <span class="service-number">05 / DRIVER DETAILS</span>
+                <h3>Section 172 requests</h3>
+                <p>
+                    Driver identification requests, response
+                    deadlines, correspondence and related
+                    procedural questions.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="services.html#mobile-phone" class="service-item">
+                <span class="service-number">06 / MOBILE PHONE</span>
+                <h3>Mobile phone allegations</h3>
+                <p>
+                    Alleged handheld phone use, available
+                    photographs, video records and
+                    supporting evidence.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="services.html#drink-driving" class="service-item">
+                <span class="service-number">07 / SERIOUS OFFENCES</span>
+                <h3>Drink &amp; drug driving</h3>
+                <p>
+                    Related notices, charge documents,
+                    specimen records, evidential material
+                    and correspondence.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+            <a href="court.html#fines" class="service-item">
+                <span class="service-number">08 / ENFORCEMENT</span>
+                <h3>Court fines &amp; enforcement</h3>
+                <p>
+                    Fine notices, enforcement correspondence,
+                    payment records, outstanding balances
+                    and court orders.
+                </p>
+                <span class="service-arrow">→</span>
+            </a>
+
+        </div>
+
+        <a href="services.html" class="all-services">
+            View all motoring services →
+        </a>
+
+    </div>
+</section>
+
+<!-- MORE MOTORING DOCUMENTS -->
+
+<section class="section detail-section">
+    <div class="container detail-grid">
+
+        <div>
+            <p class="eyebrow">FROM THE FIRST NOTICE TO THE NEXT STAGE</p>
+
+            <h2 class="section-heading">
+                One allegation can produce several documents.
+            </h2>
+
+            <p class="section-summary" style="margin-top:18px">
+                Understanding which document you have received
+                is important. A request for driver details is
+                not the same thing as a fixed penalty or a
+                court charge.
+            </p>
+
+            <a href="contact.html" class="text-link">
+                Ask about your paperwork →
+            </a>
+        </div>
+
+        <div class="detail-list">
+
+            <div class="detail-row">
+                <h3>Notice of Intended Prosecution (NIP)</h3>
+                <p>
+                    A notice informing a person that prosecution
+                    for a specified road traffic offence is being
+                    considered. The date of the alleged offence,
+                    service details and statutory requirements
+                    may be relevant to the assessment.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Section 172 notice</h3>
+                <p>
+                    A request under section 172 of the Road Traffic
+                    Act 1988 requiring information about the identity
+                    of the driver. The recipient, vehicle details,
+                    response instructions and deadline should be
+                    checked carefully.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Fixed Penalty Notice (FPN)</h3>
+                <p>
+                    A fixed penalty document setting out the alleged
+                    offence and the available response. The amount,
+                    payment instructions, penalty points and
+                    consequences of accepting the offer should
+                    be understood before responding.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Single Justice Procedure Notice (SJPN)</h3>
+                <p>
+                    A notice used for certain criminal proceedings
+                    that may be decided by a magistrate without
+                    a conventional courtroom hearing. It contains
+                    a charge and response instructions. The
+                    response period is particularly important.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Written charge and requisition</h3>
+                <p>
+                    Documents identifying a prosecution and
+                    requiring the recipient to respond or attend
+                    court. The charge, hearing arrangements and
+                    accompanying information need to be read
+                    together.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Statement of facts and prosecution evidence</h3>
+                <p>
+                    Material setting out the prosecution's account
+                    of the allegation. Depending on the case,
+                    relevant material may include officer statements,
+                    photographs, technical records and other evidence.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Sentencing notice and court order</h3>
+                <p>
+                    Documents recording a court's decision,
+                    financial penalties, penalty points,
+                    disqualification and any other requirements
+                    imposed by the court.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Enforcement correspondence</h3>
+                <p>
+                    Letters relating to unpaid financial penalties,
+                    collection activity, enforcement agents,
+                    payment arrangements or other action following
+                    a court order.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- DOCUMENT REVIEW -->
+
+<section class="section check-section">
+    <div class="container">
+
+        <p class="eyebrow">THE DOCUMENT REVIEW</p>
+
+        <h2 class="section-heading">
+            What exactly gets examined?
+        </h2>
+
+        <p class="section-summary" style="margin-top:15px">
+            The checks depend on the allegation and the stage
+            of the proceedings. These are some of the matters
+            that may need attention.
+        </p>
+
+        <div class="check-grid">
+
+            <div class="check-column">
+                <h3>Notices, dates and procedure</h3>
+
+                <div class="check-item">
+                    <span>01</span>
+                    <div>
+                        <h4>Dates and timelines</h4>
+                        <p>
+                            The date of the alleged offence,
+                            issue dates, service dates, response
+                            periods and any subsequent court dates.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>02</span>
+                    <div>
+                        <h4>Notice wording and requirements</h4>
+                        <p>
+                            Whether the relevant document contains
+                            the information required for the
+                            particular notice and proceedings.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>03</span>
+                    <div>
+                        <h4>Service and delivery</h4>
+                        <p>
+                            Available postal records, addresses,
+                            delivery details and relevant
+                            statutory service provisions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>04</span>
+                    <div>
+                        <h4>Driver identification</h4>
+                        <p>
+                            What information was requested,
+                            who received the request, what
+                            response was made and when.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>05</span>
+                    <div>
+                        <h4>Previous correspondence</h4>
+                        <p>
+                            Letters, emails, response records,
+                            representations and communications
+                            with the relevant authority.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="check-column">
+                <h3>Evidence, penalties and court matters</h3>
+
+                <div class="check-item">
+                    <span>06</span>
+                    <div>
+                        <h4>Photographs and camera material</h4>
+                        <p>
+                            Available images, vehicle details,
+                            alleged location, camera records
+                            and other relevant material.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>07</span>
+                    <div>
+                        <h4>Technical and evidential records</h4>
+                        <p>
+                            Where relevant and available,
+                            device information, calibration
+                            records and evidential documentation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>08</span>
+                    <div>
+                        <h4>Penalty points and licence history</h4>
+                        <p>
+                            Existing endorsements, the alleged
+                            offence, the relevant driving record
+                            and possible disqualification implications.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>09</span>
+                    <div>
+                        <h4>Court documents and sentencing</h4>
+                        <p>
+                            Charges, statements, hearing notices,
+                            orders, financial penalties and
+                            disqualification details.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <span>10</span>
+                    <div>
+                        <h4>Potential grounds for further enquiries</h4>
+                        <p>
+                            Whether a genuine procedural, factual
+                            or evidential issue needs investigation
+                            or referral for specialist legal advice.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- COURT AND BANS -->
+
+<section class="dark-section">
+    <div class="container dark-grid">
+
+        <div>
+            <p class="eyebrow light">COURT AND DISQUALIFICATION</p>
+
+            <h2 class="dark-heading">
+                Already facing court?
+                <em>The details matter.</em>
+            </h2>
+
+            <p class="dark-copy">
+                A court summons, conviction or driving
+                disqualification requires more than looking
+                at the original speeding notice.
+            </p>
+
+            <p class="dark-copy">
+                I can examine the court paperwork, explain
+                what the documents mean and identify questions
+                that may require further investigation or
+                specialist legal representation.
+            </p>
+
+            <a href="court.html" class="button button-outline">
+                Explore court and ban matters →
+            </a>
+        </div>
+
+        <div class="dark-list">
+
+            <div class="dark-row">
+                <h3>Totting-up disqualification</h3>
+                <p>
+                    A driver who reaches 12 or more penalty
+                    points within three years will generally
+                    face disqualification under the totting-up
+                    provisions, subject to the applicable law
+                    and circumstances. The existing record,
+                    relevant dates and court documents matter.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Exceptional hardship</h3>
+                <p>
+                    A driver facing a totting-up ban may ask
+                    the court to consider exceptional hardship.
+                    The court assesses the evidence and
+                    circumstances. Ordinary inconvenience
+                    is not automatically exceptional hardship.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Magistrates' Court proceedings</h3>
+                <p>
+                    Review of written charges, requisitions,
+                    hearing dates, prosecution documents,
+                    plea instructions and other court correspondence.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Single Justice Procedure</h3>
+                <p>
+                    Assessment of Single Justice Procedure Notices,
+                    the charge, statement of facts, plea options
+                    and response requirements. The notice normally
+                    gives 21 days to respond.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Disqualification orders</h3>
+                <p>
+                    Examination of the wording of a driving ban,
+                    the effective date, duration, licence
+                    requirements and any instructions imposed
+                    by the court.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Appeals and post-conviction matters</h3>
+                <p>
+                    Court decisions, sentencing documents,
+                    appeal information and questions concerning
+                    the next procedural steps. Applicable
+                    appeal deadlines can be short.
+                </p>
+            </div>
+
+            <div class="dark-row">
+                <h3>Unpaid fines and enforcement</h3>
+                <p>
+                    Financial penalty notices, payment records,
+                    enforcement letters, outstanding balances
+                    and correspondence following a court decision.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FINES AND PENALTIES -->
+
+<section class="section detail-section">
+    <div class="container detail-grid">
+
+        <div>
+            <p class="eyebrow">FINES, PENALTY POINTS AND LICENCE RECORDS</p>
+
+            <h2 class="section-heading">
+                The financial penalty is not the only consequence.
+            </h2>
+
+            <p class="section-summary" style="margin-top:18px">
+                A motoring conviction can affect a person's
+                driving record, insurance position and ability
+                to continue driving.
+            </p>
+        </div>
+
+        <div class="detail-list">
+
+            <div class="detail-row">
+                <h3>Fixed penalties</h3>
+                <p>
+                    A fixed penalty is an alternative to
+                    prosecution in circumstances where it
+                    is offered. The document should be examined
+                    for the alleged offence, amount, response
+                    instructions and any associated endorsement.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Court-imposed fines</h3>
+                <p>
+                    A court fine is different from a fixed penalty.
+                    The court determines the financial penalty
+                    in accordance with the offence, applicable
+                    sentencing rules and relevant circumstances.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Penalty points and endorsements</h3>
+                <p>
+                    Endorsement codes identify the offence
+                    recorded on the driving record. Different
+                    offences carry different point ranges
+                    and endorsement periods.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Totting-up consequences</h3>
+                <p>
+                    Accumulating 12 or more points within
+                    three years can lead to a driving
+                    disqualification. New drivers may also
+                    be affected by separate licence-revocation
+                    rules.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Outstanding court balances</h3>
+                <p>
+                    A fine balance may be accompanied by
+                    enforcement fees, collection correspondence
+                    or other action. The original order and
+                    subsequent records should be considered together.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h3>Driving entitlement after a ban</h3>
+                <p>
+                    Whether a person needs to apply for a
+                    new licence, take a test or satisfy
+                    another requirement depends on the
+                    disqualification and the instructions
+                    from the court and DVLA.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- PRACTICAL NOTES -->
+
+<section class="section notes-section">
+    <div class="container">
+
+        <p class="eyebrow">IMPORTANT INFORMATION BEFORE YOU ACT</p>
+
+        <h2 class="section-heading">
+            A few things worth checking immediately.
+        </h2>
+
+        <p class="section-summary" style="margin-top:15px">
+            If you have received a motoring notice, there
+            are some basic steps that can help preserve
+            the relevant information.
+        </p>
+
+        <div class="notes-grid">
+
+            <div class="note-box">
+                <h3>What to keep</h3>
+
+                <ul>
+                    <li>The original notice and every page supplied with it.</li>
+                    <li>The envelope, postal markings and delivery information.</li>
+                    <li>Any photographs, camera images or evidence supplied.</li>
+                    <li>Copies of letters, emails and replies already sent.</li>
+                    <li>Proof of postage, online submissions or payments.</li>
+                    <li>Any court order, hearing notice or enforcement letter.</li>
+                    <li>A written record of relevant dates and conversations.</li>
+                </ul>
+            </div>
+
+            <div class="note-box">
+                <h3>What not to overlook</h3>
+
+                <ul>
+                    <li>Do not ignore a Section 172 driver identification request.</li>
+                    <li>Do not assume an enquiry pauses a statutory deadline.</li>
+                    <li>Do not ignore a court hearing or Single Justice notice.</li>
+                    <li>Do not assume a late-arriving letter is automatically invalid.</li>
+                    <li>Do not drive while subject to an active disqualification.</li>
+                    <li>Do not assume an unpaid fine will simply disappear.</li>
+                    <li>Do not submit inaccurate information or alter evidence.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div style="margin-top:35px;padding:22px 25px;background:#f4f4f2;border-left:3px solid #222;">
+            <h3 style="font-size:14px;margin-bottom:8px;">An important note about deadlines</h3>
+            <p style="font-size:12px;color:#606060;line-height:1.9;">
+                Different notices have different response periods.
+                For example, a Section 172 request generally requires
+                a response within 28 days, while a Single Justice
+                Procedure Notice normally allows 21 days. These are
+                not interchangeable deadlines. Read the actual
+                document and obtain appropriate advice promptly.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROCESS -->
+
+<section class="section process-section">
+    <div class="container">
+
+        <p class="eyebrow">HOW THE REVIEW WORKS</p>
+
+        <h2 class="section-heading">
+            A straightforward process.
+        </h2>
+
+        <p class="section-summary" style="margin-top:15px">
+            The first step is understanding what has happened.
+            The next steps depend on the documents and the
+            circumstances of the individual matter.
+        </p>
+
+        <div class="process-grid">
+
+            <div class="process-item">
+                <span class="process-number">01</span>
+                <h3>Send the documents</h3>
+                <p>
+                    Explain what you received and provide copies
+                    of the relevant notices, correspondence
+                    and supporting paperwork.
+                </p>
+            </div>
+
+            <div class="process-item">
+                <span class="process-number">02</span>
+                <h3>Review the circumstances</h3>
+                <p>
+                    The documents, dates, procedural requirements
+                    and available information are considered
+                    in the context of the allegation.
+                </p>
+            </div>
+
+            <div class="process-item">
+                <span class="process-number">03</span>
+                <h3>Understand the next step</h3>
+                <p>
+                    The findings are explained, including any
+                    apparent issues, limitations or need for
+                    advice from an authorised legal professional.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT GARETH -->
+
+<section class="section">
+    <div class="container about-grid">
+
+        <div class="about-copy">
+
+            <p class="eyebrow">THE PERSON BEHIND THE PRACTICE</p>
+
+            <h2 class="section-heading">
+                Experience that starts with understanding the paperwork.
+            </h2>
+
+            <p>
+                Gareth Drummond previously served as a traffic
+                officer with West Yorkshire Police. That experience
+                provides a background in road traffic enforcement
+                and the documentation associated with motoring matters.
+            </p>
+
+            <p>
+                Driving Offence Solutions was established in 2011
+                to provide motorists with assistance in understanding
+                notices, reviewing documents and identifying
+                potential procedural or evidential issues.
+            </p>
+
+            <p>
+                The approach is based on examining the individual
+                circumstances rather than promising a particular
+                result. Where the paperwork does not support
+                a challenge, that should be made clear.
+            </p>
+
+            <p>
+                Driving Offence Solutions is not a firm of solicitors.
+                Where a matter requires reserved legal advice,
+                formal representation or an appearance in court,
+                an appropriately authorised legal professional
+                must be instructed.
+            </p>
+
+            <p class="about-quote">
+                "I would rather explain that a notice is sound
+                than invent a challenge that has no proper basis."
+            </p>
+
+            <a href="about.html" class="text-link">
+                Read Gareth's full background →
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FAQ -->
+
+<section class="section faq-section" id="faqs">
+    <div class="container faq-grid">
+
+        <div>
+            <p class="eyebrow">COMMON QUESTIONS</p>
+
+            <h2 class="section-heading">
+                Questions motorists often ask.
+            </h2>
+
+            <p class="section-summary" style="margin-top:18px">
+                Some of the questions that arise when a motoring
+                notice, court document or driving restriction
+                arrives.
+            </p>
+        </div>
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Can a speeding notice be challenged?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    That depends on the circumstances, the
+                    available evidence and the relevant legal
+                    requirements. A notice should not be
+                    challenged simply because it is inconvenient.
+                    The documents and facts need to be examined
+                    before any conclusion is reached.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What happens if I have received a Section 172 notice?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    A Section 172 notice asks for information
+                    about the identity of the driver. The
+                    recipient should read the instructions
+                    carefully and pay close attention to
+                    the response deadline. Failure to comply
+                    can result in a separate offence.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Can I lose my licence for penalty points?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Reaching 12 or more penalty points within
+                    three years will generally lead to a
+                    totting-up disqualification, subject to
+                    the applicable legal provisions and
+                    circumstances. New drivers are subject
+                    to separate rules.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>How long is a totting-up ban?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    The minimum disqualification for a first
+                    totting-up ban is six months, subject to
+                    the applicable rules. New-driver licence
+                    revocation is a separate process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What is exceptional hardship?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Exceptional hardship is a legal consideration
+                    a court may take into account in a totting-up
+                    disqualification case. The person must provide
+                    evidence of the hardship relied upon. It is
+                    not an automatic exemption and the court
+                    decides whether the circumstances meet
+                    the legal test.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What is a Single Justice Procedure Notice?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    It is a notice for certain criminal cases
+                    that can be decided by a magistrate without
+                    a conventional hearing. The recipient normally
+                    has 21 days to respond. The notice explains
+                    the charge and the available plea options.
+                    Failing to respond can result in the case
+                    being decided without the recipient's input.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Can you help with a court summons?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    The paperwork can be examined to explain
+                    the charge, hearing details, prosecution
+                    material and procedural history. Formal
+                    legal representation and reserved legal
+                    advice must be provided by an appropriately
+                    authorised professional. Do not ignore
+                    the court's instructions.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Can you review a driving ban?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Yes. Relevant documents can include the
+                    disqualification order, court record,
+                    penalty point history and correspondence
+                    about the return of driving entitlement.
+                    Whether a decision can be appealed or
+                    otherwise addressed depends on the
+                    circumstances and applicable deadlines.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What if I cannot afford to pay a court fine?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    The court's financial penalty and enforcement
+                    arrangements should be examined. Contact
+                    the relevant court or enforcement authority
+                    promptly using verified contact details
+                    and explain your circumstances. Do not
+                    ignore enforcement correspondence.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>What if I have already missed my court date?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Contact the court immediately and establish
+                    what happened to the proceedings. Depending
+                    on the circumstances, a decision may have
+                    been made in your absence. There may be
+                    specific procedures and strict time limits
+                    for challenging certain decisions.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    <span>Are you a firm of solicitors?</span>
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    No. Driving Offence Solutions is not a firm
+                    of solicitors. Reserved legal activities
+                    and court representation must be undertaken
+                    by appropriately authorised professionals.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+
+<section class="contact-banner">
+    <div class="container contact-banner-inner">
+
+        <div>
+            <p class="eyebrow light">START WITH YOUR NOTICE</p>
+
+            <h2>
+                Have the letter<br>
+                in front of you?
+            </h2>
+
+            <p>
+                Tell me what arrived. We can start there.
+            </p>
+        </div>
+
+        <a href="contact.html" class="button button-white">
+            Request a free assessment <span>→</span>
+        </a>
+
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <a href="index.html" class="brand">
+                    <span class="brand-symbol">DOS</span>
+                    <span class="brand-name">
+                        <strong>Driving Offence Solutions</strong>
+                        <small>Motoring notice advice · Leeds</small>
+                    </span>
+                </a>
+
+                <p class="footer-description">
+                    Motoring notice assessment and document review
+                    in Leeds and across England and Wales.
+                    Assistance understanding notices, penalties,
+                    court correspondence and driving restrictions.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <a href="index.html">Home</a>
+                <a href="services.html">Our services</a>
+                <a href="court.html">Court &amp; bans</a>
+                <a href="about.html">About Gareth</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <a href="https://wa.me/447480214872">+44 7480 214872</a>
+                <a href="contact.html">Send an enquiry</a>
+                <a href="contact.html">Request an assessment</a>
+                <a href="https://www.gov.uk/view-driving-licence" target="_blank" rel="noopener">Check driving record →</a>
+            </div>
+
+        </div>
+
+        <div class="footer-legal">
+
+            <p>
+                Driving Offence Solutions Ltd · Company no. 08214993 ·
+                Suite 3, Kingsway House, 42 Wellington Street,
+                Leeds LS1 4DL · VAT GB 441 8827 03 · ICO ZB418377.
+            </p>
+
+            <p>
+                Driving Offence Solutions is not a firm of solicitors
+                and is not affiliated with the DVLA, police or courts.
+                Legal advice and reserved legal activities must be
+                provided by appropriately authorised professionals.
+            </p>
+
+            <p>
+                Information on this website is general information,
+                not individual legal advice. It should not be relied
+                upon as a substitute for advice on your circumstances.
+                No particular outcome is guaranteed.
+            </p>
+
+            <span class="copyright">
+                Â© 2026 Driving Offence Solutions Ltd. All rights reserved.
+            </span>
+
+        </div>
+
+    </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Mobile navigation
+
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector(".navigation");
+
+    if (toggle && navigation) {
+
+        toggle.addEventListener("click", function () {
+
+            const isOpen =
+                toggle.getAttribute("aria-expanded") === "true";
+
+            toggle.setAttribute("aria-expanded", String(!isOpen));
+
+            toggle.setAttribute(
+                "aria-label",
+                isOpen ? "Open navigation" : "Close navigation"
+            );
+
+            navigation.classList.toggle("open", !isOpen);
+
+        });
+
+        navigation.querySelectorAll("a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                navigation.classList.remove("open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Open navigation");
+
+            });
+
+        });
+
+    }
+
+    // FAQ accordion
+
+    document.querySelectorAll(".faq-question").forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const item = button.closest(".faq-item");
+            const isOpen = item.classList.contains("open");
+
+            item.classList.toggle("open", !isOpen);
+            button.setAttribute("aria-expanded", String(!isOpen));
+
+            button.querySelector("span:last-child").textContent =
+                isOpen ? "+" : "âˆ’";
+
+        });
+
+    });
+
+});
+</script>
+
+</body>
+</html>
