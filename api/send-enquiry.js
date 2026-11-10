@@ -2,7 +2,7 @@
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 const FROM_EMAIL =
-    "Driving Offence Solutions <no-reply@drivingoffencesolutions.co.uk>";
+    "Driving Offence Solutions <no-reply@drivingoffencesolution.co.uk>";
 
 const OFFICE_EMAIL = "info@drivingoffencesolutions.co.uk";
 
