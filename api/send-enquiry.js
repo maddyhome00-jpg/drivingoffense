@@ -1,4 +1,4 @@
-
+﻿
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 const FROM_EMAIL =
@@ -38,7 +38,7 @@ function emailLayout(title, content) {
                 ${content}
             </div>
             <p style="font-size:11px;color:#888;padding:10px 5px">
-                Driving Offence Solutions · Leeds
+                Driving Offence Solutions Â· Leeds
             </p>
         </div>
     `;
@@ -175,7 +175,7 @@ module.exports = async function handler(req, res) {
             from: FROM_EMAIL,
             to: [OFFICE_EMAIL],
             reply_to: email,
-            subject: `New website enquiry: ${matter} — ${name}`,
+            subject: `New website enquiry: ${matter} â€” ${name}`,
             html: emailLayout("New website enquiry", fields)
         };
 
@@ -208,7 +208,7 @@ module.exports = async function handler(req, res) {
 
                     <p>
                         If your matter is urgent, please telephone
-                        the office on 0113 456 0192.
+                        the office on +44 7480 214872.
                     </p>
 
                     <p>Regards,<br>
