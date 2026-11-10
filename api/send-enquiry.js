@@ -5,6 +5,7 @@ const FROM_EMAIL =
     "Driving Offence Solutions <no-reply@drivingoffencesolution.co.uk>";
 
 const OFFICE_EMAIL = "info@drivingoffencesolutions.co.uk";
+const WHATSAPP_NUMBER = "+44 7480 214872";
 
 function clean(value, maxLength = 1000) {
     if (typeof value !== "string") return "";
@@ -32,13 +33,17 @@ function emailLayout(title, content) {
                 <div style="font-size:11px;letter-spacing:2px;color:#bbb">
                     DRIVING OFFENCE SOLUTIONS
                 </div>
-                <h2 style="font-weight:400;margin:10px 0 0">${title}</h2>
+                <h2 style="font-weight:400;margin:10px 0 0">
+                    ${escapeHTML(title)}
+                </h2>
             </div>
+
             <div style="padding:28px;border:1px solid #ddd">
                 ${content}
             </div>
+
             <p style="font-size:11px;color:#888;padding:10px 5px">
-                Driving Offence Solutions Â· Leeds
+                Driving Offence Solutions · Leeds
             </p>
         </div>
     `;
@@ -52,7 +57,7 @@ function detail(label, value) {
             <td style="padding:10px;border-bottom:1px solid #eee;font-weight:bold;width:180px;vertical-align:top">
                 ${escapeHTML(label)}
             </td>
-            <td style="padding:10px;border-bottom:1px solid #eee">
+            <td style="padding:10px;border-bottom:1px solid #eee;white-space:pre-wrap">
                 ${escapeHTML(value)}
             </td>
         </tr>
@@ -84,6 +89,7 @@ module.exports = async function handler(req, res) {
 
     if (req.method !== "POST") {
         res.setHeader("Allow", "POST");
+
         return res.status(405).json({
             success: false,
             error: "Method not allowed."
@@ -94,6 +100,7 @@ module.exports = async function handler(req, res) {
 
     if (!apiKey) {
         console.error("RESEND_API_KEY is missing.");
+
         return res.status(500).json({
             success: false,
             error: "Email service is not configured."
@@ -112,7 +119,7 @@ module.exports = async function handler(req, res) {
             });
         }
 
-        // Honeypot: silently reject automated submissions.
+        // Honeypot spam protection.
         if (clean(body.website, 200)) {
             return res.status(200).json({ success: true });
         }
@@ -150,35 +157,97 @@ module.exports = async function handler(req, res) {
 
         const fields = `
             <table style="width:100%;border-collapse:collapse;font-size:13px">
-                ${detail("Name", name)}
-                ${detail("Email", email)}
+                ${detail("Customer name", name)}
+                ${detail("Email address", email)}
                 ${detail("Telephone", phone)}
                 ${detail("Preferred contact", preferred)}
                 ${detail("Matter type", matter)}
                 ${detail("Issuing authority", authority)}
-                ${detail("Reference", reference)}
+                ${detail("Reference number", reference)}
                 ${detail("Date received", received)}
                 ${detail("Response deadline", deadline)}
-                ${detail("Court hearing", hearing)}
+                ${detail("Court hearing date", hearing)}
                 ${detail("Offence date", offence)}
                 ${detail("Current position", position)}
-                ${detail("Urgent deadline", urgent)}
+                ${detail("Urgency", urgent)}
             </table>
 
-            <h3 style="margin-top:28px">Visitor's explanation</h3>
+            <h3 style="margin-top:28px">Customer's explanation</h3>
+
             <div style="background:#f5f5f3;padding:18px;white-space:pre-wrap">
                 ${escapeHTML(message)}
             </div>
         `;
 
+        const adminText = `
+NEW WEBSITE ENQUIRY RECEIVED
+
+You have received a new request from ${name}.
+
+CUSTOMER DETAILS
+
+Name: ${name}
+Email: ${email}
+Telephone: ${phone}
+Preferred contact: ${preferred}
+
+MATTER DETAILS
+
+Matter type: ${matter}
+Issuing authority: ${authority}
+Reference number: ${reference}
+Date received: ${received}
+Response deadline: ${deadline}
+Court hearing date: ${hearing}
+Offence date: ${offence}
+Current position: ${position}
+Urgency: ${urgent}
+
+CUSTOMER EXPLANATION
+
+${message}
+
+Reply directly to this email to contact the customer.
+
+Driving Offence Solutions
+WhatsApp: ${WHATSAPP_NUMBER}
+        `;
+
+        // ADMIN NOTIFICATION
         const officeEmail = {
             from: FROM_EMAIL,
             to: [OFFICE_EMAIL],
             reply_to: email,
-            subject: `New website enquiry: ${matter} â€” ${name}`,
-            html: emailLayout("New website enquiry", fields)
+            subject: `NEW ENQUIRY: ${name} — ${matter}`,
+            html: emailLayout(
+                "You have received a new request",
+                `
+                    <p style="font-size:16px">
+                        You have received a new website enquiry from
+                        <strong>${escapeHTML(name)}</strong>.
+                    </p>
+
+                    <p>
+                        A visitor has submitted a new motoring offence
+                        enquiry through the Driving Offence Solutions website.
+                    </p>
+
+                    <h3>Customer information</h3>
+
+                    ${fields}
+
+                    <hr style="border:0;border-top:1px solid #ddd;margin:25px 0">
+
+                    <p style="font-size:12px;color:#666">
+                        This is an automated notification. Reply directly
+                        to this email to respond to the customer.
+                    </p>
+                `
+            ),
+            text: adminText
         };
 
+        // VISITOR ACKNOWLEDGEMENT
         const visitorEmail = {
             from: FROM_EMAIL,
             to: [email],
@@ -207,17 +276,39 @@ module.exports = async function handler(req, res) {
                     </p>
 
                     <p>
-                        If your matter is urgent, please telephone
-                        the office on +44 7480 214872.
+                        If your matter is urgent, you can contact us
+                        through WhatsApp at
+                        <a href="https://wa.me/447480214872">
+                            +44 7480 214872
+                        </a>.
                     </p>
 
-                    <p>Regards,<br>
-                    Driving Offence Solutions</p>
+                    <p>
+                        Regards,<br>
+                        Driving Offence Solutions
+                    </p>
                 `
-            )
+            ),
+            text: `
+Hello ${name},
+
+Thank you for contacting Driving Offence Solutions.
+
+Your enquiry has been received by our office. The information
+you submitted will be reviewed.
+
+Submitting an enquiry does not extend or suspend any court
+or legal deadline. Please continue to observe the dates and
+instructions on your documents.
+
+WhatsApp: ${WHATSAPP_NUMBER}
+
+Regards,
+Driving Offence Solutions
+            `
         };
 
-        // Send both messages.
+        // Send both emails.
         const results = await Promise.all([
             sendEmail(apiKey, officeEmail),
             sendEmail(apiKey, visitorEmail)
