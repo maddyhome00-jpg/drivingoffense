@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,118 +12,486 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
 <style>
-:root {
+:root{
   --ink:#171717;
   --muted:#777;
-  --line:#e8e6e2;
+  --line:#e9e7e2;
   --paper:#f6f5f2;
   --white:#fff;
   --green:#28734c;
   --red:#a63d2d;
-  --shadow:0 18px 60px #00000012;
+  --shadow:0 15px 45px #00000012;
+  --radius:8px;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:14px "DM Sans",sans-serif}
+html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font:14px "DM Sans",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.hidden{display:none!important}
 button:disabled{opacity:.55;cursor:not-allowed}
+.hidden{display:none!important}
 a{color:inherit}
-#loginScreen{min-height:100vh;display:grid;place-items:center;padding:22px}
-.login-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);padding:38px;box-shadow:var(--shadow)}
-.logo{width:48px;height:48px;background:#111;color:white;display:grid;place-items:center;font-weight:700}
-.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#888;font-weight:700}
+button,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid #777;
+  outline-offset:2px;
+}
+
+/* LOGIN */
+#loginScreen{
+  min-height:100vh;
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:22px;
+}
+.login-card{
+  width:min(440px,100%);
+  background:white;
+  border:1px solid var(--line);
+  padding:38px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  width:48px;height:48px;
+  background:#111;color:white;
+  display:grid;place-items:center;
+  font-weight:700;
+  flex-shrink:0;
+}
+.eyebrow{
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#888;
+  font-weight:700;
+}
 .login-card .logo{margin-bottom:28px}
-.login-card h1,.page-heading h1{font:42px/1.05 "DM Serif Display",serif}
+.login-card h1,.page-heading h1{
+  font:42px/1.05 "DM Serif Display",serif;
+}
 .login-card h1{margin:14px 0}
 .login-card p{color:var(--muted);line-height:1.8}
-.btn{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:12px 17px;font-weight:700;transition:.2s}
+#loginMessage{
+  margin-top:18px;
+  color:var(--red);
+  font-size:12px;
+  line-height:1.7;
+  overflow-wrap:anywhere;
+}
+
+/* BUTTONS AND FIELDS */
+.btn{
+  min-height:44px;
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:white;
+  padding:11px 17px;
+  font-weight:700;
+  border-radius:4px;
+  transition:background .2s;
+}
 .btn:hover{background:#333}
-.btn.light{background:#fff;color:var(--ink);border-color:var(--line)}
-.btn.danger{background:#fff;color:var(--red);border-color:#e8c9c3}
-.btn.small{padding:8px 11px;font-size:12px}
-#loginMessage{margin-top:18px;color:var(--red);font-size:12px;line-height:1.7;overflow-wrap:anywhere}
-.shell{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
-.sidebar{background:#151515;color:#fff;padding:25px 17px;display:flex;flex-direction:column;min-height:100vh}
-.brand{display:flex;align-items:center;gap:11px;padding:0 7px 28px;border-bottom:1px solid #ffffff20}
-.brand .logo{width:40px;height:40px;flex-shrink:0}
-.brand strong{display:block;font-size:12px}
-.brand small{display:block;color:#999;font-size:9px;letter-spacing:1.4px;margin-top:5px}
-.nav-label{font-size:9px;color:#777;letter-spacing:1.8px;font-weight:700;padding:25px 10px 10px}
-.nav-btn{width:100%;border:0;background:transparent;color:#aaa;text-align:left;padding:13px 11px;display:flex;align-items:center;gap:12px;margin:2px 0;border-radius:2px}
-.nav-btn:hover,.nav-btn.active{background:#ffffff12;color:#fff}
-.nav-btn.active{border-left:2px solid #fff}
-.nav-icon{width:19px;text-align:center;font-size:16px}
-.sidebar-bottom{margin-top:auto;border-top:1px solid #ffffff20;padding-top:15px}
-.admin-mini{display:flex;align-items:center;gap:10px;padding:12px 6px;color:#ccc;font-size:11px;overflow-wrap:anywhere}
-.avatar{width:32px;height:32px;border-radius:50%;background:#555;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.main{min-width:0}
-.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 35px;gap:12px}
-.topbar-title{font-weight:700}
-.topbar-right{display:flex;align-items:center;gap:15px;color:var(--muted);font-size:11px}
-.live-dot{width:7px;height:7px;background:#3a9b65;border-radius:50%;display:inline-block;margin-right:7px}
-.content{padding:34px 35px;max-width:1500px;margin:auto}
-.page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:26px}
-.page-heading h1{margin:9px 0 0}
-.page-heading p{color:var(--muted);margin:9px 0 0;line-height:1.6}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:26px}
-.stat{background:#fff;border:1px solid var(--line);padding:20px;min-width:0}
-.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
-.stat-value{font:34px "DM Serif Display",serif;margin:14px 0 4px}
-.stat-note{font-size:10px;color:#999}
-.panel{background:#fff;border:1px solid var(--line);min-width:0}
-.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.panel-head h2{font-size:14px;margin:0}
-.filters{display:flex;gap:9px;flex-wrap:wrap;padding:14px 17px;border-bottom:1px solid var(--line)}
-.field{width:100%;border:1px solid #dedbd5;background:#fff;padding:11px 12px;min-width:0;color:#222;outline:none;border-radius:0}
+.btn.light{background:white;color:var(--ink);border-color:var(--line)}
+.btn.danger{background:white;color:var(--red);border-color:#e8c9c3}
+.btn.small{min-height:36px;padding:8px 12px;font-size:12px}
+.field{
+  display:block;
+  width:100%;
+  min-width:0;
+  min-height:46px;
+  border:1px solid #dedbd5;
+  background:white;
+  padding:12px 13px;
+  color:#222;
+  outline:none;
+  border-radius:4px;
+  font-size:16px;
+}
 .field:focus{border-color:#555}
-.search{flex:1;min-width:180px}
-select.field{width:auto;min-width:140px}
+textarea.field{min-height:150px;resize:vertical;line-height:1.7}
+label{
+  display:block;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.5px;
+  margin:16px 0 7px;
+}
+
+/* APP LAYOUT */
+.shell{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:245px minmax(0,1fr);
+}
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:#151515;
+  color:white;
+  padding:25px 17px;
+  display:flex;
+  flex-direction:column;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 7px 28px;
+  border-bottom:1px solid #ffffff20;
+}
+.brand .logo{width:40px;height:40px}
+.brand strong{display:block;font-size:12px}
+.brand small{
+  display:block;
+  color:#999;
+  font-size:9px;
+  letter-spacing:1.4px;
+  margin-top:5px;
+}
+.nav-label{
+  font-size:9px;
+  color:#777;
+  letter-spacing:1.8px;
+  font-weight:700;
+  padding:25px 10px 10px;
+}
+.nav-btn{
+  width:100%;
+  min-height:46px;
+  border:0;
+  background:transparent;
+  color:#aaa;
+  text-align:left;
+  padding:12px 11px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:2px 0;
+  border-radius:4px;
+}
+.nav-btn:hover,.nav-btn.active{background:#ffffff12;color:white}
+.nav-btn.active{border-left:2px solid white}
+.nav-icon{width:20px;text-align:center;font-size:17px}
+.nav-text{font-size:13px}
+.sidebar-bottom{
+  margin-top:auto;
+  border-top:1px solid #ffffff20;
+  padding-top:15px;
+}
+.admin-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 6px;
+  color:#ccc;
+  font-size:11px;
+  overflow-wrap:anywhere;
+}
+.avatar{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#555;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+.main{min-width:0}
+.topbar{
+  height:70px;
+  background:white;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  gap:12px;
+}
+.topbar-title{font-weight:700;font-size:14px}
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  color:var(--muted);
+  font-size:11px;
+}
+.live-dot{
+  width:7px;height:7px;
+  background:#3a9b65;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:7px;
+}
+.content{
+  padding:34px 35px;
+  max-width:1500px;
+  margin:auto;
+}
+.page-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:26px;
+}
+.page-heading h1{margin:9px 0 0}
+.page-heading p{
+  color:var(--muted);
+  margin:9px 0 0;
+  line-height:1.6;
+}
+
+/* DASHBOARD */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+  margin-bottom:26px;
+}
+.stat{
+  background:white;
+  border:1px solid var(--line);
+  padding:20px;
+  min-width:0;
+  border-radius:5px;
+}
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  color:var(--muted);
+  font-size:11px;
+}
+.stat-value{
+  font:34px "DM Serif Display",serif;
+  margin:14px 0 4px;
+}
+.stat-note{font-size:10px;color:#999;line-height:1.5}
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  min-width:0;
+  border-radius:5px;
+  overflow:hidden;
+}
+.panel-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.panel-head h2{font-size:14px;margin:0}
+
+/* DESKTOP TABLES */
+.table-wrap{width:100%;overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:650px}
-.table-wrap{overflow-x:auto}
-th{text-align:left;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:#888;padding:14px 16px;background:#faf9f7;white-space:nowrap}
-td{padding:15px 16px;border-top:1px solid var(--line);font-size:12px;vertical-align:middle}
+th{
+  text-align:left;
+  font-size:9px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#888;
+  padding:14px 16px;
+  background:#faf9f7;
+  white-space:nowrap;
+}
+td{
+  padding:15px 16px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  vertical-align:middle;
+}
 tbody tr[data-id]{cursor:pointer}
 tbody tr[data-id]:hover{background:#faf9f7}
 .person{font-weight:700}
-.subtext{color:#999;font-size:10px;margin-top:4px;overflow-wrap:anywhere}
-.pill{display:inline-block;padding:5px 8px;border-radius:2px;background:#f0efec;color:#555;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.subtext{
+  color:#999;
+  font-size:10px;
+  margin-top:4px;
+  overflow-wrap:anywhere;
+}
+.pill{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:3px;
+  background:#f0efec;
+  color:#555;
+  font-size:9px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  white-space:nowrap;
+}
 .pill.new{background:#f8eee8;color:#9b4b28}
 .pill.reviewing{background:#edf1f7;color:#435d83}
 .pill.replied{background:#eaf4ed;color:#28734c}
 .pill.closed{background:#eee;color:#666}
 .pill.awaiting_client{background:#fbf4df;color:#876a1c}
-.empty{padding:45px 18px;text-align:center;color:#888}
+.empty,.loading{
+  padding:40px 18px;
+  text-align:center;
+  color:#888;
+}
 .empty strong{display:block;color:#222;margin-bottom:7px}
-.loading{padding:30px;text-align:center;color:#888}
-.notice{background:#f7f6f3;border-left:3px solid #aaa;padding:13px 15px;color:#666;font-size:11px;line-height:1.7;margin:14px 0}
-.overlay{position:fixed;inset:0;background:#0009;z-index:20;display:flex;justify-content:flex-end}
-.drawer{height:100%;width:min(680px,100%);background:#fff;overflow:auto;box-shadow:var(--shadow);overscroll-behavior:contain}
-.drawer-head{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:17px 22px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+
+/* FILTERS */
+.filters{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  padding:14px 17px;
+  border-bottom:1px solid var(--line);
+}
+.search{flex:1;min-width:180px}
+select.field{width:auto;min-width:140px}
+
+/* CASE DRAWER */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:50;
+  display:flex;
+  justify-content:flex-end;
+}
+.drawer{
+  height:100%;
+  width:min(680px,100%);
+  background:white;
+  overflow:auto;
+  box-shadow:var(--shadow);
+  overscroll-behavior:contain;
+}
+.drawer-head{
+  position:sticky;
+  top:0;
+  background:white;
+  border-bottom:1px solid var(--line);
+  padding:17px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:2;
+}
 .drawer-head h2{font:26px "DM Serif Display",serif;margin:0}
-.icon-btn{border:1px solid var(--line);background:#fff;width:38px;height:38px;font-size:20px}
+.icon-btn{
+  border:1px solid var(--line);
+  background:white;
+  width:42px;height:42px;
+  font-size:22px;
+  border-radius:4px;
+}
 .drawer-body{padding:23px}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-bottom:20px}
-.detail-label{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:#999;margin-bottom:6px}
-.detail-value{font-size:13px;overflow-wrap:anywhere;line-height:1.6}
-.detail-section{border-top:1px solid var(--line);padding:20px 0}
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+  margin-bottom:20px;
+}
+.detail-label{
+  font-size:9px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#999;
+  margin-bottom:6px;
+}
+.detail-value{
+  font-size:13px;
+  overflow-wrap:anywhere;
+  line-height:1.6;
+}
+.detail-section{
+  border-top:1px solid var(--line);
+  padding:20px 0;
+}
 .detail-section h3{font-size:13px;margin-bottom:13px}
-.message-box{background:#f7f6f3;padding:17px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
-.action-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-.reply-box{border:1px solid var(--line);padding:18px;margin-top:12px}
-.reply-box label,.compose-form label{display:block;font-size:10px;font-weight:700;margin:13px 0 7px}
-.reply-box textarea,.compose-form textarea{min-height:150px;resize:vertical;line-height:1.7}
-.reply-tools{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:13px;flex-wrap:wrap}
+.message-box{
+  background:#f7f6f3;
+  padding:17px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  border-radius:4px;
+}
+.action-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:14px 0;
+}
+.reply-box{
+  border:1px solid var(--line);
+  padding:18px;
+  margin-top:12px;
+  border-radius:5px;
+}
+.reply-tools{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-top:13px;
+  flex-wrap:wrap;
+}
+
+/* EMAIL COMPOSER */
 .compose-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
-.compose-form{background:#fff;border:1px solid var(--line);padding:22px;max-width:850px}
+.compose-form{
+  background:white;
+  border:1px solid var(--line);
+  padding:22px;
+  max-width:850px;
+  border-radius:5px;
+}
 .compose-form h2{font:27px "DM Serif Display",serif;margin:0 0 6px}
 .compose-form>p{color:var(--muted);font-size:12px;line-height:1.7}
-.email-template{border:1px solid var(--line);padding:18px;margin-top:15px;background:#faf9f7}
+.email-template{
+  border:1px solid var(--line);
+  padding:18px;
+  margin-top:15px;
+  background:#faf9f7;
+  border-radius:4px;
+}
 .email-template strong{font-size:12px}
-.email-template p{font-size:12px;line-height:1.8;color:#555;margin:9px 0 0}
-.toast{position:fixed;right:20px;bottom:20px;background:#171717;color:#fff;padding:14px 18px;box-shadow:var(--shadow);z-index:50;max-width:min(380px,calc(100% - 40px));font-size:12px;line-height:1.6}
-@media(max-width:1000px){
+.email-template p{
+  font-size:12px;
+  line-height:1.8;
+  color:#555;
+  margin:9px 0 0;
+}
+.notice{
+  background:#f7f6f3;
+  border-left:3px solid #aaa;
+  padding:13px 15px;
+  color:#666;
+  font-size:11px;
+  line-height:1.7;
+  margin:14px 0;
+}
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#171717;
+  color:white;
+  padding:14px 18px;
+  box-shadow:var(--shadow);
+  z-index:100;
+  max-width:min(380px,calc(100% - 40px));
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* TABLET */
+@media(max-width:1000px) and (min-width:651px){
   .shell{grid-template-columns:76px minmax(0,1fr)}
   .sidebar{padding:20px 9px}
   .brand{justify-content:center;padding:0 0 23px}
@@ -133,61 +502,367 @@ tbody tr[data-id]:hover{background:#faf9f7}
   .content{padding:27px 20px}
   .topbar{padding:0 20px}
 }
+
+/* ===================================
+   MOBILE APP EXPERIENCE
+   =================================== */
 @media(max-width:650px){
-  body{font-size:13px}
-  .shell{display:block;padding-bottom:65px}
-  .sidebar{
-    position:fixed;left:0;right:0;bottom:0;top:auto;height:65px;min-height:0;
-    z-index:15;display:flex;flex-direction:row;align-items:center;
-    padding:5px 7px calc(5px + env(safe-area-inset-bottom));
-    border-top:1px solid #333;box-shadow:0 -5px 20px #00000012
+
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
   }
-  .brand{display:none}
-  .sidebar nav{display:flex;flex:1;justify-content:space-around;min-width:0}
-  .nav-btn{width:auto;min-width:0;height:48px;flex:1;display:flex;flex-direction:column;gap:3px;padding:5px 2px;margin:0;text-align:center;border:0;font-size:9px}
-  .nav-btn.active{border-left:0;border-top:2px solid white}
-  .nav-icon{font-size:17px;width:auto}
-  .nav-text{display:block!important;font-size:9px;white-space:nowrap}
-  .nav-label{display:none}
-  .sidebar-bottom{margin:0;padding:0;border:0}
-  .sidebar-bottom .admin-mini{display:none}
-  .sidebar-bottom .nav-btn{width:49px;flex:none}
-  .sidebar-bottom .nav-text{display:block!important}
-  .topbar{height:58px;padding:0 14px}
+
+  body{font-size:14px}
+
+  .shell{
+    display:block;
+    width:100%;
+    min-height:100vh;
+    min-height:100dvh;
+    padding-bottom:calc(78px + env(safe-area-inset-bottom));
+  }
+
+  .main{width:100%;min-width:0}
+
+  /* Compact app header */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    height:62px;
+    width:100%;
+    padding:0 17px;
+    background:#fff;
+  }
+
+  .topbar-title{font-size:14px}
   .topbar-right{gap:7px;font-size:10px}
   #topEmail{display:none}
-  .content{padding:22px 13px}
-  .page-heading{align-items:flex-start;flex-direction:column;margin-bottom:19px}
-  .page-heading h1{font-size:34px}
+
+  /* Main content */
+  .content{
+    width:100%;
+    padding:23px 15px 30px;
+    margin:0;
+  }
+
+  .page-heading{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:16px;
+    margin-bottom:22px;
+  }
+
+  .page-heading h1{
+    font-size:clamp(34px,9vw,42px);
+    line-height:1.05;
+  }
+
+  .page-heading p{
+    font-size:13px;
+    line-height:1.7;
+  }
+
   .page-heading .btn{width:100%}
-  .stats{gap:8px;margin-bottom:18px}
-  .stat{padding:13px}
-  .stat-value{font-size:29px;margin:10px 0 3px}
-  .stat-note{font-size:9px;line-height:1.5}
+
+  /* Dashboard cards */
+  .stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:22px;
+  }
+
+  .stat{
+    padding:15px 13px;
+    min-height:112px;
+    border-radius:6px;
+  }
+
   .stat-top{font-size:10px}
-  .panel-head{padding:14px}
-  .filters{padding:12px;display:grid;grid-template-columns:1fr 1fr}
-  .search{grid-column:1/-1;min-width:0}
-  select.field{width:100%;min-width:0}
-  table{min-width:620px}
-  .overlay{align-items:flex-end}
-  .drawer{width:100%;height:94dvh;border-radius:12px 12px 0 0}
-  .drawer-head{padding:13px 16px}
-  .drawer-body{padding:17px 15px 35px}
-  .detail-grid{grid-template-columns:1fr 1fr;gap:14px}
-  .reply-box{padding:13px}
-  .compose-form{padding:16px}
-  .compose-form .btn{width:100%}
+  .stat-value{font-size:31px;margin:13px 0 5px}
+  .stat-note{font-size:10px;line-height:1.5}
+
+  .panel{border-radius:6px}
+  .panel-head{padding:15px}
+  .panel-head h2{font-size:13px}
+
+  /* Mobile table becomes stacked record cards */
+  .table-wrap{overflow:visible}
+  table{
+    width:100%;
+    min-width:0;
+    border-collapse:separate;
+    border-spacing:0;
+  }
+
+  table thead{display:none}
+
+  table tbody{
+    display:block;
+    width:100%;
+    padding:9px 11px;
+  }
+
+  table tbody tr[data-id]{
+    display:block;
+    width:100%;
+    margin:0 0 10px;
+    padding:10px 12px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    cursor:pointer;
+  }
+
+  table tbody tr[data-id]:active{background:#f7f6f3}
+
+  table tbody td{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    width:100%;
+    padding:7px 0;
+    border:0;
+    font-size:12px;
+    text-align:right;
+    overflow-wrap:anywhere;
+  }
+
+  table tbody td:first-child{
+    display:block;
+    text-align:left;
+    padding-bottom:10px;
+    margin-bottom:5px;
+    border-bottom:1px solid var(--line);
+  }
+
+  table tbody td:first-child .person{font-size:13px}
+  table tbody td:first-child .subtext{font-size:10px}
+
+  table tbody td:not(:first-child)::before{
+    content:attr(data-label);
+    flex-shrink:0;
+    text-align:left;
+    color:#999;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.7px;
+    text-transform:uppercase;
+  }
+
+  table tbody td[colspan]{
+    display:block;
+    text-align:center;
+    padding:25px 12px;
+  }
+
+  table tbody td[colspan]::before{display:none}
+
+  /* Filters */
+  .filters{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:9px;
+    padding:13px;
+  }
+
+  .filters .field,
+  .filters select.field,
+  .filters .search{
+    width:100%;
+    min-width:0;
+  }
+
+  /* Bottom app navigation */
+  .sidebar{
+    position:fixed;
+    top:auto;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:calc(70px + env(safe-area-inset-bottom));
+    min-height:0;
+    z-index:40;
+    padding:5px 5px env(safe-area-inset-bottom);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    background:#151515;
+    border-top:1px solid #333;
+    box-shadow:0 -5px 20px #00000015;
+  }
+
+  .sidebar .brand,
+  .sidebar .nav-label,
+  .sidebar .admin-mini{
+    display:none;
+  }
+
+  .sidebar nav{
+    display:flex;
+    flex:1;
+    width:100%;
+    min-width:0;
+    justify-content:space-around;
+    align-items:center;
+  }
+
+  .nav-btn{
+    flex:1;
+    min-width:0;
+    height:56px;
+    min-height:56px;
+    margin:0;
+    padding:6px 2px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    border:0;
+    border-radius:5px;
+    text-align:center;
+  }
+
+  .nav-btn.active{
+    border:0;
+    background:#ffffff15;
+  }
+
+  .nav-icon{
+    width:auto;
+    font-size:18px;
+    line-height:1;
+  }
+
+  .nav-text{
+    display:block!important;
+    font-size:9px;
+    line-height:1.2;
+    white-space:nowrap;
+  }
+
+  .sidebar-bottom{
+    margin:0;
+    padding:0;
+    border:0;
+  }
+
+  .sidebar-bottom .nav-btn{
+    width:53px;
+    flex:none;
+  }
+
+  .sidebar-bottom .nav-text{
+    display:block!important;
+  }
+
+  /* Full-screen case details */
+  .overlay{
+    align-items:flex-end;
+    justify-content:center;
+    padding:0;
+  }
+
+  .drawer{
+    width:100%;
+    max-width:100%;
+    height:96dvh;
+    height:96vh;
+    border-radius:17px 17px 0 0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+
+  .drawer-head{
+    position:sticky;
+    top:0;
+    padding:14px 16px;
+    min-height:60px;
+  }
+
+  .drawer-head h2{font-size:23px}
+
+  .drawer-body{padding:19px 16px 35px}
+
+  .drawer-body>h2{font-size:29px!important}
+
+  .detail-grid{
+    grid-template-columns:1fr 1fr;
+    gap:18px 12px;
+  }
+
+  .detail-value{font-size:13px}
+
+  .detail-section{padding:18px 0}
+
+  .action-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .action-row .btn,
+  .action-row select{
+    width:100%!important;
+  }
+
+  .reply-box{padding:14px}
+  .reply-tools{display:flex;flex-direction:column;align-items:stretch}
   .reply-tools .btn{width:100%}
-  .toast{right:12px;bottom:77px}
-  .login-card{padding:27px 22px}
+
+  /* Email composer */
+  .compose-form{
+    width:100%;
+    max-width:none;
+    padding:17px;
+    border-radius:6px;
+  }
+
+  .compose-form h2{font-size:25px}
+  .compose-form .btn{width:100%}
+
+  .email-template{padding:14px}
+  .notice{font-size:11px}
+
+  /* Toast above bottom navigation */
+  .toast{
+    left:12px;
+    right:12px;
+    bottom:calc(82px + env(safe-area-inset-bottom));
+    max-width:none;
+    border-radius:5px;
+  }
+
+  /* Login */
+  .login-card{
+    width:100%;
+    max-width:440px;
+    padding:28px 22px;
+  }
+
   .login-card h1{font-size:37px}
+  .login-card p{font-size:13px}
 }
+
+/* Very small phones */
 @media(max-width:370px){
+  .content{padding-left:11px;padding-right:11px}
+  .stats{gap:7px}
+  .stat{padding:12px 9px}
+  .stat-top{font-size:9px}
+  .stat-note{font-size:9px}
   .detail-grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr}
-  .stat{padding:11px}
   .nav-text{font-size:8px}
+  .sidebar-bottom .nav-btn{width:47px}
 }
 </style>
 </head>
@@ -202,10 +877,10 @@ tbody tr[data-id]:hover{background:#faf9f7}
     <p>Sign in with your authorised administrator email and password to access client enquiries, case records and correspondence.</p>
 
     <form id="loginForm">
-      <label for="loginEmail" style="display:block;font-size:10px;font-weight:700;margin:18px 0 7px">EMAIL ADDRESS</label>
+      <label for="loginEmail">EMAIL ADDRESS</label>
       <input class="field" id="loginEmail" type="email" autocomplete="username" required placeholder="admin@example.com">
 
-      <label for="loginPassword" style="display:block;font-size:10px;font-weight:700;margin:15px 0 7px">PASSWORD</label>
+      <label for="loginPassword">PASSWORD</label>
       <input class="field" id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password">
 
       <button class="btn" id="loginBtn" type="submit" style="width:100%;margin-top:20px">Sign in</button>
@@ -217,6 +892,7 @@ tbody tr[data-id]:hover{background:#faf9f7}
 </section>
 
 <div id="appShell" class="shell hidden">
+
   <aside class="sidebar">
     <div class="brand">
       <div class="logo">DOS</div>
@@ -228,17 +904,25 @@ tbody tr[data-id]:hover{background:#faf9f7}
 
     <nav>
       <div class="nav-label">WORKSPACE</div>
+
       <button class="nav-btn active" id="navDashboard">
-        <span class="nav-icon">▦</span><span class="nav-text">Overview</span>
+        <span class="nav-icon">▦</span>
+        <span class="nav-text">Overview</span>
       </button>
+
       <button class="nav-btn" id="navEnquiries">
-        <span class="nav-icon">▤</span><span class="nav-text">Enquiries</span>
+        <span class="nav-icon">▤</span>
+        <span class="nav-text">Enquiries</span>
       </button>
+
       <button class="nav-btn" id="navCompose">
-        <span class="nav-icon">✉</span><span class="nav-text">Compose</span>
+        <span class="nav-icon">✉</span>
+        <span class="nav-text">Compose</span>
       </button>
+
       <button class="nav-btn" id="navEmails">
-        <span class="nav-icon">↗</span><span class="nav-text">Email history</span>
+        <span class="nav-icon">↗</span>
+        <span class="nav-text">Email history</span>
       </button>
     </nav>
 
@@ -247,13 +931,16 @@ tbody tr[data-id]:hover{background:#faf9f7}
         <div class="avatar" id="adminAvatar">A</div>
         <span id="adminName">Administrator</span>
       </div>
+
       <button class="nav-btn" id="logoutBtn">
-        <span class="nav-icon">↪</span><span class="nav-text">Sign out</span>
+        <span class="nav-icon">↪</span>
+        <span class="nav-text">Sign out</span>
       </button>
     </div>
   </aside>
 
   <main class="main">
+
     <header class="topbar">
       <div class="topbar-title" id="topTitle">Overview</div>
       <div class="topbar-right">
@@ -264,7 +951,9 @@ tbody tr[data-id]:hover{background:#faf9f7}
 
     <section class="content">
 
+      <!-- DASHBOARD -->
       <div id="dashboardView">
+
         <div class="page-heading">
           <div>
             <div class="eyebrow">Your practice at a glance</div>
@@ -280,16 +969,19 @@ tbody tr[data-id]:hover{background:#faf9f7}
             <div class="stat-value" id="statTotal">—</div>
             <div class="stat-note">All received enquiries</div>
           </div>
+
           <div class="stat">
             <div class="stat-top"><span>New enquiries</span><span>02</span></div>
             <div class="stat-value" id="statNew">—</div>
             <div class="stat-note">Awaiting initial review</div>
           </div>
+
           <div class="stat">
             <div class="stat-top"><span>In progress</span><span>03</span></div>
             <div class="stat-value" id="statOpen">—</div>
             <div class="stat-note">Being reviewed or awaiting client</div>
           </div>
+
           <div class="stat">
             <div class="stat-top"><span>Closed</span><span>04</span></div>
             <div class="stat-value" id="statClosed">—</div>
@@ -302,18 +994,24 @@ tbody tr[data-id]:hover{background:#faf9f7}
             <h2>Recent enquiries</h2>
             <button class="btn light small" id="viewAllBtn">View all →</button>
           </div>
+
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Client</th><th>Matter</th><th>Received</th><th>Status</th></tr></thead>
+              <thead>
+                <tr><th>Client</th><th>Matter</th><th>Received</th><th>Status</th></tr>
+              </thead>
               <tbody id="recentRows">
                 <tr><td colspan="4" class="loading">Loading enquiries…</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+
       </div>
 
+      <!-- ENQUIRIES -->
       <div id="enquiriesView" class="hidden">
+
         <div class="page-heading">
           <div>
             <div class="eyebrow">Client records</div>
@@ -325,7 +1023,10 @@ tbody tr[data-id]:hover{background:#faf9f7}
 
         <div class="panel">
           <div class="filters">
-            <input class="field search" id="searchInput" placeholder="Search name, email, reference or offence…">
+
+            <input class="field search" id="searchInput"
+              placeholder="Search name, email, reference or offence…">
+
             <select class="field" id="statusFilter">
               <option value="">All statuses</option>
               <option value="new">New</option>
@@ -334,22 +1035,37 @@ tbody tr[data-id]:hover{background:#faf9f7}
               <option value="replied">Replied</option>
               <option value="closed">Closed</option>
             </select>
+
             <select class="field" id="matterFilter">
               <option value="">All matter types</option>
             </select>
+
           </div>
+
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Client</th><th>Enquiry type</th><th>Reference</th><th>Received</th><th>Status</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Enquiry type</th>
+                  <th>Reference</th>
+                  <th>Received</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
               <tbody id="enquiryRows">
                 <tr><td colspan="5" class="loading">Loading…</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+
       </div>
 
+      <!-- COMPOSE -->
       <div id="composeView" class="hidden">
+
         <div class="page-heading">
           <div>
             <div class="eyebrow">Practice correspondence</div>
@@ -360,6 +1076,7 @@ tbody tr[data-id]:hover{background:#faf9f7}
 
         <div class="compose-layout">
           <form class="compose-form" id="composeForm">
+
             <h2>New message</h2>
             <p>Your message will be sent through the practice's Resend integration.</p>
 
@@ -382,11 +1099,14 @@ tbody tr[data-id]:hover{background:#faf9f7}
             </div>
 
             <button class="btn" id="composeSendBtn" type="submit">Send email →</button>
+
           </form>
         </div>
       </div>
 
+      <!-- EMAIL HISTORY -->
       <div id="emailsView" class="hidden">
+
         <div class="page-heading">
           <div>
             <div class="eyebrow">Client correspondence</div>
@@ -399,29 +1119,44 @@ tbody tr[data-id]:hover{background:#faf9f7}
         <div class="panel">
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Recipient</th><th>Subject</th><th>Related case</th><th>Sent</th><th>Delivery ID</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Recipient</th>
+                  <th>Subject</th>
+                  <th>Related case</th>
+                  <th>Sent</th>
+                  <th>Delivery ID</th>
+                </tr>
+              </thead>
+
               <tbody id="emailRows">
                 <tr><td colspan="5" class="loading">Loading email history…</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+
         <div class="notice">
           Email history is recorded after the secure sending endpoint accepts a message. Acceptance by Resend does not guarantee inbox delivery.
         </div>
+
       </div>
 
     </section>
   </main>
 </div>
 
+<!-- CASE DETAILS -->
 <div id="caseOverlay" class="overlay hidden">
   <aside class="drawer">
+
     <div class="drawer-head">
       <h2>Enquiry details</h2>
       <button class="icon-btn" id="closeDrawer" aria-label="Close enquiry">×</button>
     </div>
+
     <div class="drawer-body" id="caseContent"></div>
+
   </aside>
 </div>
 
@@ -429,16 +1164,28 @@ tbody tr[data-id]:hover{background:#faf9f7}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
 import {
-  getAuth, signInWithEmailAndPassword, sendPasswordResetEmail,
-  onAuthStateChanged, signOut
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
 import {
-  getFirestore, collection, doc, getDoc, getDocs, query,
-  orderBy, limit, updateDoc, serverTimestamp
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  updateDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
-/* Firebase web configuration. This is not a private server secret. */
+/* FIREBASE CONFIGURATION */
 const firebaseConfig = {
   apiKey: "AIzaSyB-LMT7YDCpEqOhhx6LlLWxGjSAMFOghns",
   authDomain: "driving-offence-e7def.firebaseapp.com",
@@ -453,6 +1200,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const ADMIN_EMAIL = "info@drivingoffencesolution.co.uk";
+
 let currentUser = null;
 let allEnquiries = [];
 let activeCase = null;
@@ -460,6 +1209,7 @@ let toastTimer = null;
 
 const $ = id => document.getElementById(id);
 
+/* SAFE HTML OUTPUT */
 const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({
   "&":"&amp;",
   "<":"&lt;",
@@ -468,20 +1218,32 @@ const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({
   "'":"&#39;"
 }[c]));
 
+/* NOTIFICATIONS */
 function showToast(message){
   $("toast").textContent = message;
   $("toast").classList.remove("hidden");
+
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>$("toast").classList.add("hidden"),4500);
+
+  toastTimer = setTimeout(()=>{
+    $("toast").classList.add("hidden");
+  },4500);
 }
 
+/* DATE FORMATTING */
 function dateText(value){
   if(!value) return "—";
+
   const date = value?.toDate ? value.toDate() : new Date(value);
+
   return isNaN(date.getTime()) ? "—" :
-    date.toLocaleString("en-GB",{dateStyle:"medium",timeStyle:"short"});
+    date.toLocaleString("en-GB",{
+      dateStyle:"medium",
+      timeStyle:"short"
+    });
 }
 
+/* STATUS LABELS */
 function statusLabel(value){
   return ({
     new:"New",
@@ -494,9 +1256,11 @@ function statusLabel(value){
 
 function statusPill(value){
   const status = value || "new";
+
   return `<span class="pill ${safe(status)}">${safe(statusLabel(status))}</span>`;
 }
 
+/* DETAIL FIELD */
 function field(label,value){
   return `<div>
     <div class="detail-label">${safe(label)}</div>
@@ -504,68 +1268,87 @@ function field(label,value){
   </div>`;
 }
 
-/* Email and password authentication. There is deliberately no sign-up flow. */
+/* =================================
+   AUTHENTICATION
+   ================================= */
+
 $("loginForm").addEventListener("submit",async event=>{
   event.preventDefault();
+
   const email = $("loginEmail").value.trim();
   const password = $("loginPassword").value;
   const button = $("loginBtn");
+
   $("loginMessage").textContent = "";
+  $("loginMessage").style.color = "var(--red)";
+
   button.disabled = true;
   button.textContent = "Signing in…";
 
   try{
     await signInWithEmailAndPassword(auth,email,password);
+
   }catch(error){
+
     const messages = {
       "auth/invalid-credential":"The email address or password is incorrect.",
       "auth/invalid-email":"Enter a valid email address.",
       "auth/too-many-requests":"Too many attempts. Please wait and try again later.",
       "auth/user-disabled":"This administrator account has been disabled."
     };
+
     $("loginMessage").textContent = messages[error.code] || error.message;
+
   }finally{
     button.disabled = false;
     button.textContent = "Sign in";
   }
 });
 
-/* Send a password-reset link to an existing Firebase Authentication user. */
+/* PASSWORD RESET */
 $("forgotPasswordBtn").addEventListener("click",async()=>{
   const email = $("loginEmail").value.trim();
 
   if(!email){
-    $("loginMessage").textContent = "Enter your administrator email address first, then select Forgot password.";
+    $("loginMessage").textContent =
+      "Enter your administrator email address first, then select Forgot password.";
+
     $("loginEmail").focus();
     return;
   }
 
   const button = $("forgotPasswordBtn");
+
   button.disabled = true;
   button.textContent = "Sending reset link…";
   $("loginMessage").textContent = "";
 
   try{
     await sendPasswordResetEmail(auth,email);
+
     $("loginMessage").style.color = "var(--green)";
-    $("loginMessage").textContent = "If an account exists for this email, Firebase will send a password-reset link. Check your inbox and spam folder.";
+    $("loginMessage").textContent =
+      "If an account exists for this email, Firebase will send a password-reset link. Check your inbox and spam folder.";
+
   }catch(error){
+
     $("loginMessage").style.color = "var(--red)";
+
     const messages = {
       "auth/invalid-email":"Enter a valid email address.",
       "auth/user-not-found":"No administrator account was found for that email address.",
       "auth/too-many-requests":"Too many reset requests. Please wait and try again."
     };
+
     $("loginMessage").textContent = messages[error.code] || error.message;
+
   }finally{
     button.disabled = false;
     button.textContent = "Forgot password?";
   }
 });
 
-/* Only the authorised practice email can enter the dashboard. */
-const ADMIN_EMAIL = "info@drivingoffencesolution.co.uk";
-
+/* VERIFY ADMIN EMAIL */
 onAuthStateChanged(auth,async user=>{
   currentUser = user;
 
@@ -578,15 +1361,19 @@ onAuthStateChanged(auth,async user=>{
   if((user.email || "").trim().toLowerCase() !== ADMIN_EMAIL){
     $("loginScreen").classList.remove("hidden");
     $("appShell").classList.add("hidden");
+
     $("loginMessage").textContent =
       "Access denied. Sign in using info@drivingoffencesolution.co.uk.";
+
     await signOut(auth);
     return;
   }
 
   $("loginMessage").textContent = "";
+
   $("loginScreen").classList.add("hidden");
   $("appShell").classList.remove("hidden");
+
   $("adminName").textContent = user.displayName || user.email || "Administrator";
   $("topEmail").textContent = user.email || "";
   $("adminAvatar").textContent = (user.email || "A").charAt(0).toUpperCase();
@@ -594,14 +1381,20 @@ onAuthStateChanged(auth,async user=>{
   await loadEnquiries();
 });
 
-/* Load website enquiries */
+/* =================================
+   ENQUIRY DATA
+   ================================= */
+
 async function loadEnquiries(){
+
   $("recentRows").innerHTML =
-    `<tr><td colspan="4" class="loading">Loading…</td></tr>`;
+    `<tr><td colspan="4" class="loading">Loading enquiries…</td></tr>`;
+
   $("enquiryRows").innerHTML =
-    `<tr><td colspan="5" class="loading">Loading…</td></tr>`;
+    `<tr><td colspan="5" class="loading">Loading enquiries…</td></tr>`;
 
   try{
+
     const q = query(
       collection(db,"enquiries"),
       orderBy("createdAt","desc"),
@@ -609,24 +1402,39 @@ async function loadEnquiries(){
     );
 
     const snap = await getDocs(q);
-    allEnquiries = snap.docs.map(d=>({id:d.id,...d.data()}));
+
+    allEnquiries = snap.docs.map(d=>({
+      id:d.id,
+      ...d.data()
+    }));
 
     renderDashboard();
     renderEnquiries();
     populateMatterFilter();
 
   }catch(error){
+
     $("recentRows").innerHTML =
       `<tr><td colspan="4" class="empty">Could not load enquiries: ${safe(error.message)}</td></tr>`;
+
     $("enquiryRows").innerHTML =
-      `<tr><td colspan="5" class="empty">Check Firestore rules, collection name and indexes. ${safe(error.message)}</td></tr>`;
+      `<tr><td colspan="5" class="empty">Could not load enquiries: ${safe(error.message)}</td></tr>`;
   }
 }
 
+/* DASHBOARD STATISTICS */
 function renderDashboard(){
+
   const total = allEnquiries.length;
-  const fresh = allEnquiries.filter(x=>(x.status||"new")==="new").length;
-  const closed = allEnquiries.filter(x=>x.status==="closed").length;
+
+  const fresh = allEnquiries.filter(x=>
+    (x.status || "new") === "new"
+  ).length;
+
+  const closed = allEnquiries.filter(x=>
+    x.status === "closed"
+  ).length;
+
   const open = allEnquiries.filter(x=>
     ["reviewing","awaiting_client"].includes(x.status)
   ).length;
@@ -644,9 +1452,9 @@ function renderDashboard(){
         <div class="person">${safe(x.fullName || x.name || "Unnamed client")}</div>
         <div class="subtext">${safe(x.email || "")}</div>
       </td>
-      <td>${safe(x.matterType || x.offenceType || "General enquiry")}</td>
-      <td>${dateText(x.createdAt)}</td>
-      <td>${statusPill(x.status)}</td>
+      <td data-label="Matter">${safe(x.matterType || x.offenceType || "General enquiry")}</td>
+      <td data-label="Received">${dateText(x.createdAt)}</td>
+      <td data-label="Status">${statusPill(x.status)}</td>
     </tr>
   `).join("") :
   `<tr><td colspan="4" class="empty"><strong>No enquiries yet</strong>New website submissions will appear here.</td></tr>`;
@@ -656,7 +1464,9 @@ function renderDashboard(){
   });
 }
 
+/* MATTER FILTER */
 function populateMatterFilter(){
+
   const values = [...new Set(
     allEnquiries.map(x=>x.matterType || x.offenceType).filter(Boolean)
   )].sort();
@@ -671,20 +1481,30 @@ function populateMatterFilter(){
   select.value = current;
 }
 
+/* ENQUIRY LIST */
 function renderEnquiries(){
+
   const term = $("searchInput").value.trim().toLowerCase();
   const status = $("statusFilter").value;
   const matter = $("matterFilter").value;
 
   const filtered = allEnquiries.filter(x=>{
+
     const haystack = [
-      x.fullName,x.name,x.email,x.phone,x.reference,
-      x.matterType,x.offenceType,x.message,x.authority
+      x.fullName,
+      x.name,
+      x.email,
+      x.phone,
+      x.reference,
+      x.matterType,
+      x.offenceType,
+      x.message,
+      x.authority
     ].join(" ").toLowerCase();
 
     return (!term || haystack.includes(term)) &&
-      (!status || (x.status||"new")===status) &&
-      (!matter || (x.matterType||x.offenceType)===matter);
+      (!status || (x.status || "new") === status) &&
+      (!matter || (x.matterType || x.offenceType) === matter);
   });
 
   $("enquiryRows").innerHTML = filtered.length ? filtered.map(x=>`
@@ -693,10 +1513,10 @@ function renderEnquiries(){
         <div class="person">${safe(x.fullName || x.name || "Unnamed client")}</div>
         <div class="subtext">${safe(x.email || "")}</div>
       </td>
-      <td>${safe(x.matterType || x.offenceType || "General")}</td>
-      <td>${safe(x.reference || "—")}</td>
-      <td>${dateText(x.createdAt)}</td>
-      <td>${statusPill(x.status)}</td>
+      <td data-label="Matter">${safe(x.matterType || x.offenceType || "General")}</td>
+      <td data-label="Reference">${safe(x.reference || "—")}</td>
+      <td data-label="Received">${dateText(x.createdAt)}</td>
+      <td data-label="Status">${statusPill(x.status)}</td>
     </tr>
   `).join("") :
   `<tr><td colspan="5" class="empty"><strong>No matching enquiries</strong>Try changing your search or filters.</td></tr>`;
@@ -706,32 +1526,42 @@ function renderEnquiries(){
   });
 }
 
-/* Open a case record */
+/* =================================
+   CASE DETAILS
+   ================================= */
+
 function openCase(id){
+
   const item = allEnquiries.find(x=>x.id===id);
   if(!item) return;
 
   activeCase = item;
 
   $("caseContent").innerHTML = `
+
     <div class="eyebrow">Client enquiry · ${safe(item.id)}</div>
+
     <h2 style="font:34px 'DM Serif Display';margin:10px 0 7px">
       ${safe(item.fullName || item.name || "Unnamed client")}
     </h2>
+
     ${statusPill(item.status)}
 
     <div class="action-row">
       <button class="btn" id="replyCaseBtn">✉ &nbsp; Reply to client</button>
+
       <select class="field" id="caseStatus" style="width:auto">
         ${["new","reviewing","awaiting_client","replied","closed"].map(s=>
-          `<option value="${s}" ${(item.status||"new")===s?"selected":""}>${statusLabel(s)}</option>`
+          `<option value="${s}" ${(item.status || "new")===s?"selected":""}>${statusLabel(s)}</option>`
         ).join("")}
       </select>
+
       <button class="btn light" id="saveStatusBtn">Save status</button>
     </div>
 
     <div class="detail-section">
       <h3>Contact information</h3>
+
       <div class="detail-grid">
         ${field("Email",item.email)}
         ${field("Phone",item.phone)}
@@ -742,6 +1572,7 @@ function openCase(id){
 
     <div class="detail-section">
       <h3>Case information</h3>
+
       <div class="detail-grid">
         ${field("Matter type",item.matterType || item.offenceType)}
         ${field("Issuing authority",item.authority)}
@@ -752,6 +1583,7 @@ function openCase(id){
         ${field("Offence date",item.offenceDate)}
         ${field("Urgent",item.urgent ? "Yes" : "No")}
       </div>
+
       ${field("Current position",item.currentPosition)}
     </div>
 
@@ -762,16 +1594,20 @@ function openCase(id){
 
     <div class="detail-section">
       <h3>Reply to this enquiry</h3>
+
       <div class="reply-box">
+
         <label for="replyTo">TO</label>
-        <input class="field" id="replyTo" type="email" value="${safe(item.email || "")}" required>
+        <input class="field" id="replyTo" type="email"
+          value="${safe(item.email || "")}" required>
 
         <label for="replySubject">SUBJECT</label>
         <input class="field" id="replySubject" maxlength="180"
           value="Re: Your enquiry to Driving Offence Solutions" required>
 
         <label for="replyMessage">MESSAGE</label>
-        <textarea class="field" id="replyMessage" placeholder="Write your response to the client…" required></textarea>
+        <textarea class="field" id="replyMessage"
+          placeholder="Write your response to the client…" required></textarea>
 
         <div class="notice">
           Sent through the practice's verified Resend sender address. The recipient's address will not be used as the sender.
@@ -781,22 +1617,30 @@ function openCase(id){
           <span class="subtext">Professional practice email</span>
           <button class="btn" id="sendReplyBtn">Send email →</button>
         </div>
+
       </div>
     </div>
   `;
 
   $("caseOverlay").classList.remove("hidden");
-  $("replyCaseBtn").addEventListener("click",()=>$("replyMessage").focus());
+
+  $("replyCaseBtn").addEventListener("click",()=>
+    $("replyMessage").focus()
+  );
+
   $("saveStatusBtn").addEventListener("click",saveCaseStatus);
   $("sendReplyBtn").addEventListener("click",sendReply);
 }
 
+/* SAVE CASE STATUS */
 async function saveCaseStatus(){
+
   if(!activeCase) return;
 
   const status = $("caseStatus").value;
 
   try{
+
     await updateDoc(doc(db,"enquiries",activeCase.id),{
       status,
       updatedAt:serverTimestamp(),
@@ -806,22 +1650,33 @@ async function saveCaseStatus(){
     activeCase.status = status;
 
     const index = allEnquiries.findIndex(x=>x.id===activeCase.id);
-    if(index>=0) allEnquiries[index].status = status;
+
+    if(index>=0){
+      allEnquiries[index].status = status;
+    }
 
     renderDashboard();
     renderEnquiries();
+
     showToast("Case status updated.");
+
     openCase(activeCase.id);
 
   }catch(error){
+
     showToast("Could not update status: " + error.message);
   }
 }
 
-/* All email sending goes through the private server endpoint.
-   Never place a Resend secret API key in this browser file. */
+/* =================================
+   SECURE EMAIL SENDING
+   ================================= */
+
 async function sendPracticeEmail({to,subject,message,enquiryId=null}){
-  if(!currentUser) throw new Error("You must be signed in.");
+
+  if(!currentUser){
+    throw new Error("You must be signed in.");
+  }
 
   const token = await currentUser.getIdToken(true);
 
@@ -831,11 +1686,20 @@ async function sendPracticeEmail({to,subject,message,enquiryId=null}){
       "Content-Type":"application/json",
       "Authorization":"Bearer " + token
     },
-    body:JSON.stringify({action:"admin-email",to,subject,message,enquiryId})
+    body:JSON.stringify({
+      action:"admin-email",
+      to,
+      subject,
+      message,
+      enquiryId
+    })
   });
 
   let result = {};
-  try{ result = await response.json(); }catch{}
+
+  try{
+    result = await response.json();
+  }catch{}
 
   if(!response.ok){
     throw new Error(result.error || "The email could not be sent.");
@@ -844,7 +1708,9 @@ async function sendPracticeEmail({to,subject,message,enquiryId=null}){
   return result;
 }
 
+/* REPLY TO CLIENT */
 async function sendReply(){
+
   const to = $("replyTo").value.trim();
   const subject = $("replySubject").value.trim();
   const message = $("replyMessage").value.trim();
@@ -855,33 +1721,45 @@ async function sendReply(){
   }
 
   const button = $("sendReplyBtn");
+
   button.disabled = true;
   button.textContent = "Sending…";
 
   try{
+
     await sendPracticeEmail({
-      to,subject,message,enquiryId:activeCase.id
+      to,
+      subject,
+      message,
+      enquiryId:activeCase.id
     });
 
     $("replyMessage").value = "";
+
     showToast("Email accepted by the sending service.");
+
     await loadEnquiries();
 
   }catch(error){
+
     showToast(error.message);
+
   }finally{
+
     button.disabled = false;
     button.textContent = "Send email →";
   }
 }
 
-/* General email composer */
+/* GENERAL EMAIL COMPOSER */
 $("composeForm").addEventListener("submit",async event=>{
+
   event.preventDefault();
 
   const to = $("composeTo").value.trim();
   const subject = $("composeSubject").value.trim();
   const message = $("composeMessage").value.trim();
+
   const button = $("composeSendBtn");
 
   if(!to || !subject || !message){
@@ -893,25 +1771,42 @@ $("composeForm").addEventListener("submit",async event=>{
   button.textContent = "Sending…";
 
   try{
-    await sendPracticeEmail({to,subject,message,enquiryId:null});
+
+    await sendPracticeEmail({
+      to,
+      subject,
+      message,
+      enquiryId:null
+    });
+
     $("composeForm").reset();
+
     showToast("Email accepted by the sending service.");
+
     await loadEmails();
 
   }catch(error){
+
     showToast(error.message);
+
   }finally{
+
     button.disabled = false;
     button.textContent = "Send email →";
   }
 });
 
-/* Email history */
+/* =================================
+   EMAIL HISTORY
+   ================================= */
+
 async function loadEmails(){
+
   $("emailRows").innerHTML =
     `<tr><td colspan="5" class="loading">Loading email history…</td></tr>`;
 
   try{
+
     const snap = await getDocs(query(
       collection(db,"emailLogs"),
       orderBy("sentAt","desc"),
@@ -919,26 +1814,36 @@ async function loadEmails(){
     ));
 
     $("emailRows").innerHTML = snap.empty ?
+
       `<tr><td colspan="5" class="empty">No sent emails recorded yet.</td></tr>` :
+
       snap.docs.map(d=>{
+
         const x = d.data();
+
         return `<tr>
-          <td>${safe(x.to)}</td>
-          <td>${safe(x.subject)}</td>
-          <td>${safe(x.enquiryId || "—")}</td>
-          <td>${dateText(x.sentAt)}</td>
-          <td>${safe(x.resendId || "—")}</td>
+          <td data-label="Recipient">${safe(x.to)}</td>
+          <td data-label="Subject">${safe(x.subject)}</td>
+          <td data-label="Related case">${safe(x.enquiryId || "—")}</td>
+          <td data-label="Sent">${dateText(x.sentAt)}</td>
+          <td data-label="Delivery ID">${safe(x.resendId || "—")}</td>
         </tr>`;
+
       }).join("");
 
   }catch(error){
+
     $("emailRows").innerHTML =
       `<tr><td colspan="5" class="empty">Could not load email history: ${safe(error.message)}</td></tr>`;
   }
 }
 
-/* Navigation */
+/* =================================
+   NAVIGATION
+   ================================= */
+
 function showView(view){
+
   ["dashboardView","enquiriesView","composeView","emailsView"]
     .forEach(id=>$(id).classList.add("hidden"));
 
@@ -951,7 +1856,10 @@ function showView(view){
     emails:"navEmails"
   };
 
-  Object.values(navMap).forEach(id=>$(id).classList.remove("active"));
+  Object.values(navMap).forEach(id=>
+    $(id).classList.remove("active")
+  );
+
   $(navMap[view]).classList.add("active");
 
   $("topTitle").textContent = {
@@ -961,7 +1869,15 @@ function showView(view){
     emails:"Email history"
   }[view];
 
-  if(view==="emails") loadEmails();
+  if(view==="emails"){
+    loadEmails();
+  }
+
+  if(view==="enquiries"){
+    renderEnquiries();
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 $("navDashboard").addEventListener("click",()=>showView("dashboard"));
@@ -970,6 +1886,7 @@ $("navCompose").addEventListener("click",()=>showView("compose"));
 $("navEmails").addEventListener("click",()=>showView("emails"));
 
 $("viewAllBtn").addEventListener("click",()=>showView("enquiries"));
+
 $("refreshBtn").addEventListener("click",loadEnquiries);
 $("refreshEnquiries").addEventListener("click",loadEnquiries);
 $("refreshEmails").addEventListener("click",loadEmails);
@@ -978,9 +1895,10 @@ $("searchInput").addEventListener("input",renderEnquiries);
 $("statusFilter").addEventListener("change",renderEnquiries);
 $("matterFilter").addEventListener("change",renderEnquiries);
 
-$("closeDrawer").addEventListener("click",()=>
-  $("caseOverlay").classList.add("hidden")
-);
+/* CLOSE CASE PANEL */
+$("closeDrawer").addEventListener("click",()=>{
+  $("caseOverlay").classList.add("hidden");
+});
 
 $("caseOverlay").addEventListener("click",event=>{
   if(event.target===$("caseOverlay")){
@@ -988,7 +1906,16 @@ $("caseOverlay").addEventListener("click",event=>{
   }
 });
 
+/* ESCAPE KEY */
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    $("caseOverlay").classList.add("hidden");
+  }
+});
+
+/* LOG OUT */
 $("logoutBtn").addEventListener("click",()=>signOut(auth));
+
 </script>
 </body>
 </html>
