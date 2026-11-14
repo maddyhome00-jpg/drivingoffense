@@ -563,7 +563,9 @@ $("forgotPasswordBtn").addEventListener("click",async()=>{
   }
 });
 
-/* Verify the signed-in user against the admins collection. */
+/* Only the authorised practice email can enter the dashboard. */
+const ADMIN_EMAIL = "info@drivingoffencesolution.co.uk";
+
 onAuthStateChanged(auth,async user=>{
   currentUser = user;
 
@@ -573,40 +575,23 @@ onAuthStateChanged(auth,async user=>{
     return;
   }
 
-  $("loginMessage").textContent = "Verifying administrator access…";
-
-  try{
-    const adminSnap = await getDoc(doc(db,"admins",user.uid));
-
-    if(!adminSnap.exists() ||
-       adminSnap.data().active !== true ||
-       adminSnap.data().role !== "admin"){
-      $("loginScreen").classList.remove("hidden");
-      $("appShell").classList.add("hidden");
-
-      $("loginMessage").innerHTML =
-        `This account is not approved for administration.<br><br>
-        Firebase UID:<br><strong>${safe(user.uid)}</strong><br><br>
-        An authorised project owner must create an admins document with this exact document ID, role "admin", and active true.`;
-
-      await signOut(auth);
-      return;
-    }
-
-    $("loginScreen").classList.add("hidden");
-    $("appShell").classList.remove("hidden");
-    $("adminName").textContent = user.displayName || user.email || "Administrator";
-    $("topEmail").textContent = user.email || "";
-    $("adminAvatar").textContent = (user.email || "A").charAt(0).toUpperCase();
-
-    await loadEnquiries();
-
-  }catch(error){
+  if((user.email || "").trim().toLowerCase() !== ADMIN_EMAIL){
     $("loginScreen").classList.remove("hidden");
     $("appShell").classList.add("hidden");
     $("loginMessage").textContent =
-      "Unable to verify administrator access: " + error.message;
+      "Access denied. Sign in using info@drivingoffencesolution.co.uk.";
+    await signOut(auth);
+    return;
   }
+
+  $("loginMessage").textContent = "";
+  $("loginScreen").classList.add("hidden");
+  $("appShell").classList.remove("hidden");
+  $("adminName").textContent = user.displayName || user.email || "Administrator";
+  $("topEmail").textContent = user.email || "";
+  $("adminAvatar").textContent = (user.email || "A").charAt(0).toUpperCase();
+
+  await loadEnquiries();
 });
 
 /* Load website enquiries */
