@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1731,209 +1731,164 @@ button, a {
     </div>
 </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    // MOBILE NAVIGATION
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
-    const toggle = document.querySelector(".menu-toggle");
-    const navigation = document.querySelector(".navigation");
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyB-LMT7YDCpEqOhhx6LlLWxGjSAMFOghns",
+    authDomain: "driving-offence-e7def.firebaseapp.com",
+    projectId: "driving-offence-e7def",
+    storageBucket: "driving-offence-e7def.firebasestorage.app",
+    messagingSenderId: "420147130242",
+    appId: "1:420147130242:web:d89db6e68e8c7f380ce99b",
+    measurementId: "G-3PDR0VHSQ9"
+};
 
-    if (toggle && navigation) {
-        toggle.addEventListener("click", function () {
-            const open = toggle.getAttribute("aria-expanded") === "true";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-            toggle.setAttribute("aria-expanded", String(!open));
-            toggle.setAttribute(
-                "aria-label",
-                open ? "Open navigation" : "Close navigation"
-            );
+// MOBILE NAVIGATION
+const toggle = document.querySelector(".menu-toggle");
+const navigation = document.querySelector(".navigation");
 
-            navigation.classList.toggle("open", !open);
-        });
-
-        navigation.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", function () {
-                navigation.classList.remove("open");
-                toggle.setAttribute("aria-expanded", "false");
-                toggle.setAttribute("aria-label", "Open navigation");
-            });
-        });
-    }
-
-    // FAQ ACCORDION
-
-    document.querySelectorAll(".faq-question").forEach(function (button) {
-        button.addEventListener("click", function () {
-            const item = button.closest(".faq-item");
-            const isOpen = item.classList.contains("open");
-
-            item.classList.toggle("open", !isOpen);
-            button.setAttribute("aria-expanded", String(!isOpen));
-            button.querySelector("span:last-child").textContent =
-                isOpen ? "+" : "âˆ’";
-        });
+if (toggle && navigation) {
+    toggle.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!open));
+        toggle.setAttribute("aria-label", open ? "Open navigation" : "Close navigation");
+        navigation.classList.toggle("open", !open);
     });
 
-    // CONTACT FORM VALIDATION AND SECURE EMAIL ENDPOINT
-
-    const form = document.getElementById("contactForm");
-    const status = document.getElementById("formStatus");
-
-    if (form && status) {
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            const requiredFields = [
-                document.getElementById("fullName"),
-                document.getElementById("email"),
-                document.getElementById("matterType"),
-                document.getElementById("message")
-            ];
-
-            let valid = true;
-
-            requiredFields.forEach(function (field) {
-                const error = field.parentElement.querySelector(".field-error");
-                let fieldValid = field.checkValidity();
-
-                if (field.id === "message") {
-                    fieldValid = field.value.trim().length >= 20;
-                }
-
-                field.classList.toggle("invalid", !fieldValid);
-
-                if (error) {
-                    error.classList.toggle("visible", !fieldValid);
-                }
-
-                if (!fieldValid) {
-                    valid = false;
-                }
-            });
-
-            const consent = document.getElementById("privacyConsent");
-
-            if (!consent.checked) {
-                valid = false;
-                consent.focus();
-            }
-
-            if (!valid) {
-                status.className = "error";
-                status.textContent =
-                    "Please check the required fields and privacy consent before submitting.";
-                return;
-            }
-
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonHTML = submitButton.innerHTML;
-            const data = new FormData(form);
-
-            const fields = {
-                name: String(data.get("fullName") || "").trim(),
-                email: String(data.get("email") || "").trim(),
-                phone: String(data.get("phone") || "").trim(),
-                preferred: String(data.get("preferredContact") || "").trim(),
-                matter: String(data.get("matterType") || "").trim(),
-                authority: String(data.get("authority") || "").trim(),
-                reference: String(data.get("reference") || "").trim(),
-                received: String(data.get("dateReceived") || "").trim(),
-                deadline: String(data.get("responseDeadline") || "").trim(),
-                hearing: String(data.get("hearingDate") || "").trim(),
-                offence: String(data.get("offenceDate") || "").trim(),
-                position: String(data.get("currentPosition") || "").trim(),
-                urgent: String(data.get("urgent") || "Unsure").trim(),
-                message: String(data.get("message") || "").trim(),
-                privacyConsent: consent.checked,
-                website: String(data.get("website") || "").trim()
-            };
-
-            submitButton.disabled = true;
-            submitButton.innerHTML =
-                '<span class="button-spinner" aria-hidden="true"></span> Sending enquiryâ€¦';
-
-            status.className = "";
-            status.style.display = "block";
-            status.textContent =
-                "Sending your enquiry securely. Please keep this page open.";
-
-            try {
-                const response = await fetch("/api/send-enquiry", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(fields)
-                });
-
-                const result = await response.json().catch(function () {
-                    return {};
-                });
-
-                if (!response.ok || !result.success) {
-                    throw new Error(
-                        result.error ||
-                        "Your enquiry could not be sent. Please telephone the office or email us directly."
-                    );
-                }
-
-                form.reset();
-
-                form.querySelectorAll(".invalid").forEach(function (field) {
-                    field.classList.remove("invalid");
-                });
-
-                form.querySelectorAll(".field-error.visible").forEach(function (error) {
-                    error.classList.remove("visible");
-                });
-
-                status.className = "success";
-                status.textContent =
-                    "Thank you. Your enquiry has been submitted successfully. " +
-                    "The office will review it and respond using the contact details " +
-                    "you provided. If a court or response deadline is close, telephone " +
-                    "the office as well; submitting this form does not pause a deadline.";
-
-            } catch (error) {
-                status.className = "error";
-                status.textContent =
-                    error.message ||
-                    "Something went wrong while sending your enquiry. Please try again or contact the office directly.";
-
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonHTML;
-            }
+    navigation.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navigation.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open navigation");
         });
+    });
+}
 
-        // REMOVE VALIDATION ERRORS WHEN THE VISITOR CORRECTS A FIELD
-
-        form.querySelectorAll("input, select, textarea").forEach(function (field) {
-            field.addEventListener("input", function () {
-                field.classList.remove("invalid");
-
-                const error = field.parentElement.querySelector(".field-error");
-
-                if (error) {
-                    error.classList.remove("visible");
-                }
-            });
-
-            field.addEventListener("change", function () {
-                field.classList.remove("invalid");
-
-                const error = field.parentElement.querySelector(".field-error");
-
-                if (error) {
-                    error.classList.remove("visible");
-                }
-            });
-        });
-    }
-
+// FAQ ACCORDION
+document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const open = item.classList.toggle("open");
+        button.setAttribute("aria-expanded", String(open));
+        button.querySelector("span:last-child").textContent = open ? "−" : "+";
+    });
 });
+
+// FIRESTORE ENQUIRY SUBMISSION
+const form = document.getElementById("contactForm");
+const statusBox = document.getElementById("formStatus");
+
+if (form && statusBox) {
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        const data = new FormData(form);
+
+        // Spam trap: silently reject bots that fill this field.
+        if (String(data.get("website") || "").trim()) return;
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButton = submitButton.innerHTML;
+
+        const enquiry = {
+            name: String(data.get("fullName") || "").trim(),
+            email: String(data.get("email") || "").trim(),
+            phone: String(data.get("phone") || "").trim(),
+            preferredContact: String(data.get("preferredContact") || "").trim(),
+            matterType: String(data.get("matterType") || "").trim(),
+            authority: String(data.get("authority") || "").trim(),
+            reference: String(data.get("reference") || "").trim(),
+            dateReceived: String(data.get("dateReceived") || "").trim(),
+            responseDeadline: String(data.get("responseDeadline") || "").trim(),
+            hearingDate: String(data.get("hearingDate") || "").trim(),
+            offenceDate: String(data.get("offenceDate") || "").trim(),
+            currentPosition: String(data.get("currentPosition") || "").trim(),
+            urgent: String(data.get("urgent") || "Unsure").trim(),
+            message: String(data.get("message") || "").trim(),
+            privacyConsent: document.getElementById("privacyConsent").checked,
+            status: "new",
+            createdAt: serverTimestamp()
+        };
+
+        if (
+            !enquiry.name ||
+            !enquiry.email ||
+            !enquiry.matterType ||
+            enquiry.message.length < 20 ||
+            !enquiry.privacyConsent
+        ) {
+            statusBox.className = "error";
+            statusBox.textContent = "Please check your required information and try again.";
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.innerHTML =
+            '<span class="button-spinner" aria-hidden="true"></span> Saving enquiry...';
+
+        statusBox.className = "";
+        statusBox.style.display = "block";
+        statusBox.textContent = "Submitting your enquiry securely. Please wait.";
+
+        try {
+            // Firestore creates a unique document ID automatically.
+            const docRef = await addDoc(collection(db, "enquiries"), enquiry);
+
+            form.reset();
+
+            form.querySelectorAll(".invalid").forEach(field => {
+                field.classList.remove("invalid");
+            });
+
+            form.querySelectorAll(".field-error.visible").forEach(error => {
+                error.classList.remove("visible");
+            });
+
+            statusBox.className = "success";
+            statusBox.textContent =
+                "Your enquiry has been saved successfully. Your reference is " +
+                docRef.id +
+                ". Please keep this reference. If a deadline is close, telephone the office as well.";
+
+        } catch (error) {
+            console.error("Firestore submission error:", error);
+
+            statusBox.className = "error";
+            statusBox.textContent =
+                error.code === "permission-denied"
+                ? "Your enquiry could not be saved because database permissions are blocking it. Please contact the office directly."
+                : "We could not save your enquiry. Please try again or contact the office directly.";
+
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButton;
+        }
+    });
+
+    // Clear field errors when the visitor corrects information.
+    form.querySelectorAll("input, select, textarea").forEach(field => {
+        field.addEventListener("input", () => {
+            field.classList.remove("invalid");
+            field.parentElement.querySelector(".field-error")?.classList.remove("visible");
+        });
+    });
+}
 </script>
+
 
 </body>
 </html>
