@@ -8,20 +8,20 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --ink:#191919;
   --muted:#77736d;
-  --line:#e9e6e0;
-  --paper:#f5f4f1;
+  --line:#e7e5e0;
+  --paper:#f4f4f2;
   --white:#fff;
   --green:#28734c;
   --red:#a63d2d;
   --gold:#94733c;
   --shadow:0 12px 35px rgba(20,20,20,.055);
-  --radius:7px;
+  --radius:12px;
 }
 *{box-sizing:border-box}
 html,body{
@@ -41,36 +41,39 @@ button,input,select,textarea{
 button{cursor:pointer}
 button:disabled{opacity:.6;cursor:wait}
 .hidden{display:none!important}
-svg{display:block;width:18px;height:18px;flex:none}
+svg{display:block;width:19px;height:19px;flex:none}
 .icon-stroke{
   fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;
 }
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+button:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible{
   outline:2px solid #777;outline-offset:2px;
 }
 
-/* GLOBAL LOADING INDICATORS */
+/* LOADING ANIMATIONS */
 .spinner{
   width:17px;height:17px;border:2px solid currentColor;
   border-right-color:transparent;border-radius:50%;
   display:inline-block;vertical-align:middle;
   animation:spin .7s linear infinite;
 }
-.spinner.large{width:25px;height:25px;border-width:2px}
+.spinner.large{width:27px;height:27px;border-width:2px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
 .skeleton{
   position:relative;overflow:hidden;background:#eeece7;
-  border-radius:5px;
+  border-radius:6px;
 }
 .skeleton:after{
-  content:"";position:absolute;inset:0;transform:translateX(-100%);
+  content:"";position:absolute;inset:0;
+  transform:translateX(-100%);
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
   animation:shimmer 1.35s infinite;
 }
 @keyframes shimmer{100%{transform:translateX(100%)}}
-.skeleton-line{height:9px;border-radius:20px}
-.skeleton-number{height:29px;width:48%;margin:15px 0 8px}
+.skeleton-line{height:10px;border-radius:20px}
+.skeleton-number{height:32px;width:48%;margin:15px 0 8px}
 .skeleton-row{
   display:grid;grid-template-columns:1.3fr 1fr .8fr .6fr;
   gap:18px;align-items:center;padding:17px 20px;
@@ -80,47 +83,91 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .loading-state{
   min-height:170px;display:flex;align-items:center;
   justify-content:center;flex-direction:column;gap:12px;
-  color:var(--muted);font-size:12px;
+  color:var(--muted);font-size:13px;
 }
 .loading-state p{margin:0}
-.loading-state small{font-size:10px;color:#999}
+.loading-state small{font-size:11px;color:#999}
 .btn .spinner{width:15px;height:15px}
 
-/* LOGIN */
+/* LOGIN SCREEN */
 #loginScreen{
   min-height:100vh;min-height:100dvh;
-  display:grid;place-items:center;padding:22px;
+  display:grid;place-items:center;padding:25px;
+  background:
+    radial-gradient(ellipse at 50% 0%,#e8ebef 0%,transparent 60%),
+    #f0f2f4;
 }
 .login-card{
-  width:min(420px,100%);background:var(--white);
-  border:1px solid var(--line);padding:36px;
-  box-shadow:var(--shadow);border-radius:8px;
+  position:relative;
+  width:min(470px,100%);
+  background:white;
+  border:1px solid #e3e6e9;
+  padding:42px;
+  border-radius:17px;
+  box-shadow:0 24px 70px rgba(16,24,40,.12);
+  overflow:hidden;
+}
+.login-card:before{
+  content:"";position:absolute;inset:0 0 auto;
+  height:5px;background:#171717;
 }
 .logo{
-  width:44px;height:44px;background:#171717;color:white;
-  display:grid;place-items:center;font-weight:700;
-  letter-spacing:-1px;font-size:13px;flex:none;
+  width:50px;height:50px;background:#171717;color:white;
+  display:grid;place-items:center;font-weight:800;
+  letter-spacing:-1px;font-size:14px;flex:none;
+  border-radius:10px;
 }
 .eyebrow{
-  font-size:9px;letter-spacing:1.8px;text-transform:uppercase;
-  color:#89857e;font-weight:700;
+  font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:#89857e;font-weight:800;
 }
-.login-card .logo{margin-bottom:25px}
+.login-card .logo{margin-bottom:29px}
 .login-card h1,.page-heading h1{
-  font:39px/1.06 "DM Serif Display",serif;
+  font:40px/1.07 "DM Serif Display",serif;
 }
-.login-card h1{margin:13px 0}
-.login-card p{color:var(--muted);line-height:1.75;font-size:13px}
+.login-card h1{margin:15px 0 12px}
+.login-card p{
+  color:var(--muted);line-height:1.8;
+  font-size:14px;margin-bottom:27px;
+}
+#loginForm{margin-top:22px}
+label{
+  display:block;font-size:10px;font-weight:800;
+  letter-spacing:.8px;color:#68645e;margin:18px 0 8px;
+}
+.field{
+  display:block;width:100%;min-width:0;min-height:52px;
+  border:1px solid #dedbd5;background:white;
+  padding:13px 15px;color:#222;outline:none;
+  border-radius:8px;font-size:16px;
+  transition:border-color .18s,box-shadow .18s;
+}
+.field:focus{
+  border-color:#555;
+  box-shadow:0 0 0 3px rgba(0,0,0,.055);
+}
+#loginEmail,#loginPassword{
+  height:56px;background:#fbfcfd;
+}
+#loginBtn{
+  width:100%;height:56px;margin-top:25px;
+  border-radius:9px;font-size:15px;font-weight:800;
+  box-shadow:0 7px 16px rgba(20,24,28,.13);
+}
+#forgotPasswordBtn{
+  width:100%;height:50px;margin-top:10px;
+  border-radius:9px;font-size:14px;font-weight:700;
+}
 #loginMessage{
-  margin-top:16px;color:var(--red);font-size:12px;
-  line-height:1.7;overflow-wrap:anywhere;
+  margin-top:17px;color:var(--red);
+  font-size:12px;line-height:1.7;overflow-wrap:anywhere;
 }
 
-/* BUTTONS AND INPUTS */
+/* BUTTONS */
 .btn{
-  min-height:42px;border:1px solid var(--ink);
-  background:var(--ink);color:white;padding:10px 15px;
-  font-weight:600;font-size:12px;border-radius:4px;
+  min-height:47px;border:1px solid var(--ink);
+  background:var(--ink);color:white;padding:11px 18px;
+  font-weight:700;font-size:13px;border-radius:8px;
   transition:background .18s,border-color .18s,transform .18s;
   display:inline-flex;align-items:center;justify-content:center;gap:9px;
 }
@@ -129,142 +176,150 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .btn.light{background:white;color:var(--ink);border-color:var(--line)}
 .btn.light:hover{background:#f8f7f4}
 .btn.danger{background:white;color:var(--red);border-color:#e8c9c3}
-.btn.small{min-height:34px;padding:7px 11px;font-size:11px}
-.field{
-  display:block;width:100%;min-width:0;min-height:43px;
-  border:1px solid #dedbd5;background:white;padding:11px 12px;
-  color:#222;outline:none;border-radius:4px;font-size:16px;
-  transition:border-color .18s,box-shadow .18s;
-}
-.field:focus{border-color:#777;box-shadow:0 0 0 3px rgba(0,0,0,.045)}
-textarea.field{min-height:145px;resize:vertical;line-height:1.7}
-label{
-  display:block;font-size:9px;font-weight:700;letter-spacing:.65px;
-  color:#68645e;margin:15px 0 7px;
-}
+.btn.small{min-height:39px;padding:8px 13px;font-size:12px}
 
 /* APPLICATION FRAME */
 .shell{
   min-height:100vh;display:grid;
-  grid-template-columns:225px minmax(0,1fr);
+  grid-template-columns:245px minmax(0,1fr);
   max-width:1800px;margin:0 auto;
 }
 .sidebar{
-  position:sticky;top:0;height:100vh;background:#171717;color:white;
-  padding:23px 15px;display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;
+  background:#171717;color:white;
+  padding:25px 17px;
+  display:flex;flex-direction:column;
 }
 .brand{
-  display:flex;align-items:center;gap:10px;
-  padding:0 6px 23px;border-bottom:1px solid #ffffff1c;
+  display:flex;align-items:center;gap:11px;
+  padding:0 7px 27px;border-bottom:1px solid #ffffff20;
 }
-.brand .logo{width:38px;height:38px}
-.brand strong{display:block;font-size:11px;letter-spacing:-.1px}
+.brand .logo{width:43px;height:43px}
+.brand strong{display:block;font-size:12px}
 .brand small{
-  display:block;color:#999;font-size:8px;
+  display:block;color:#999;font-size:9px;
   letter-spacing:1.5px;margin-top:5px;
 }
 .nav-label{
-  font-size:8px;color:#777;letter-spacing:1.7px;font-weight:700;
-  padding:23px 10px 9px;
+  font-size:9px;color:#777;letter-spacing:1.8px;
+  font-weight:800;padding:25px 10px 10px;
 }
 .nav-btn{
-  width:100%;min-height:42px;border:0;background:transparent;
-  color:#aaa;text-align:left;padding:10px 10px;
-  display:flex;align-items:center;gap:11px;margin:2px 0;
-  border-radius:4px;transition:background .18s,color .18s;
+  width:100%;min-height:47px;border:0;
+  background:transparent;color:#aaa;text-align:left;
+  padding:12px 11px;display:flex;align-items:center;
+  gap:12px;margin:2px 0;border-radius:7px;
+  transition:background .18s,color .18s;
 }
-.nav-btn:hover,.nav-btn.active{background:#ffffff12;color:white}
+.nav-btn:hover,.nav-btn.active{
+  background:#ffffff12;color:white;
+}
 .nav-btn.active{box-shadow:inset 2px 0 #fff}
-.nav-icon{width:19px;display:grid;place-items:center}
-.nav-text{font-size:12px}
+.nav-icon{width:21px;display:grid;place-items:center}
+.nav-text{font-size:13px}
 .sidebar-bottom{
-  margin-top:auto;border-top:1px solid #ffffff1c;padding-top:13px;
+  margin-top:auto;border-top:1px solid #ffffff20;padding-top:15px;
 }
 .admin-mini{
-  display:flex;align-items:center;gap:9px;padding:10px 5px;
-  color:#ccc;font-size:10px;overflow-wrap:anywhere;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 6px;color:#ccc;font-size:11px;
+  overflow-wrap:anywhere;
 }
 .avatar{
-  width:31px;height:31px;border-radius:50%;background:#414141;
-  display:grid;place-items:center;flex-shrink:0;font-weight:700;
-  font-size:11px;
+  width:36px;height:36px;border-radius:50%;
+  background:#414141;display:grid;place-items:center;
+  flex-shrink:0;font-weight:700;font-size:12px;
 }
+
+/* TOP BAR */
 .main{min-width:0}
 .topbar{
-  height:62px;background:white;border-bottom:1px solid var(--line);
+  height:68px;background:white;
+  border-bottom:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 30px;gap:12px;
+  padding:0 35px;gap:12px;
 }
-.topbar-title{font-weight:700;font-size:12px}
+.topbar-title{font-weight:800;font-size:14px}
 .topbar-right{
   display:flex;align-items:center;gap:15px;
-  color:var(--muted);font-size:10px;
+  color:var(--muted);font-size:11px;
 }
 .live-dot{
-  width:7px;height:7px;background:#3a9b65;border-radius:50%;
-  display:inline-block;margin-right:7px;
+  width:8px;height:8px;background:#3a9b65;
+  border-radius:50%;display:inline-block;margin-right:7px;
 }
 .content{
-  width:100%;max-width:1180px;
-  padding:29px 30px 45px;margin:0 auto;
+  width:100%;max-width:1260px;
+  padding:38px 38px 48px;margin:0 auto;
 }
 .page-heading{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:16px;margin-bottom:22px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:18px;
+  margin-bottom:28px;
 }
-.page-heading h1{font-size:36px;margin:8px 0 0}
-.page-heading p{color:var(--muted);margin:7px 0 0;font-size:12px;line-height:1.6}
+.page-heading h1{font-size:43px;margin:10px 0 0}
+.page-heading p{
+  color:var(--muted);margin:10px 0 0;
+  font-size:15px;line-height:1.65;
+}
 
-/* STATISTICS */
+/* DASHBOARD STATISTICS */
 .stats{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:11px;margin-bottom:21px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;margin-bottom:26px;
 }
 .stat{
-  background:white;border:1px solid var(--line);padding:16px 17px;
-  min-width:0;border-radius:6px;box-shadow:0 2px 7px #00000003;
+  background:white;border:1px solid var(--line);
+  padding:23px 22px;min-width:0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(16,24,40,.025);
 }
 .stat-top{
-  display:flex;justify-content:space-between;gap:8px;
-  color:var(--muted);font-size:10px;
+  display:flex;justify-content:space-between;
+  gap:8px;color:var(--muted);font-size:13px;
+  font-weight:600;
 }
-.stat-index{font-size:9px;color:#aaa;letter-spacing:.8px}
-.stat-value{font:31px "DM Serif Display",serif;margin:13px 0 3px}
-.stat-note{font-size:9px;color:#999;line-height:1.5}
+.stat-index{font-size:10px;color:#aaa;letter-spacing:1px}
+.stat-value{font:40px "DM Serif Display",serif;margin:16px 0 6px}
+.stat-note{font-size:12px;color:#9299a0;line-height:1.5}
 
 /* PANELS AND TABLES */
 .panel{
   background:white;border:1px solid var(--line);
-  min-width:0;border-radius:6px;overflow:hidden;
-  box-shadow:0 2px 8px #00000003;
+  min-width:0;border-radius:13px;overflow:hidden;
+  box-shadow:0 2px 9px rgba(16,24,40,.025);
 }
 .panel-head{
-  padding:15px 18px;border-bottom:1px solid var(--line);
-  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:21px 23px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;
 }
-.panel-head h2{font-size:12px;margin:0;font-weight:700}
-.panel-subtitle{font-size:10px;color:#999;margin-top:4px}
+.panel-head h2{font-size:16px;margin:0;font-weight:800}
+.panel-subtitle{font-size:13px;color:#999;margin-top:5px}
 .table-wrap{width:100%;overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:630px}
 th{
-  text-align:left;font-size:8px;letter-spacing:1px;
-  text-transform:uppercase;color:#888;padding:12px 15px;
-  background:#faf9f7;white-space:nowrap;
+  text-align:left;font-size:10px;letter-spacing:1px;
+  text-transform:uppercase;color:#888;
+  padding:14px 16px;background:#faf9f7;white-space:nowrap;
 }
 td{
-  padding:13px 15px;border-top:1px solid var(--line);
-  font-size:11px;vertical-align:middle;
+  padding:16px;border-top:1px solid var(--line);
+  font-size:13px;vertical-align:middle;
 }
 tbody tr[data-id]{cursor:pointer}
 tbody tr[data-id]:hover{background:#faf9f7}
-.person{font-weight:700;font-size:11px}
+.person{font-weight:800;font-size:14px}
 .subtext{
-  color:#999;font-size:9px;margin-top:4px;overflow-wrap:anywhere;
+  color:#999;font-size:12px;margin-top:5px;
+  overflow-wrap:anywhere;
 }
 .pill{
-  display:inline-block;padding:5px 8px;border-radius:3px;
-  background:#f0efec;color:#555;font-size:8px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;
+  display:inline-block;padding:6px 10px;border-radius:5px;
+  background:#f0efec;color:#555;font-size:10px;
+  font-weight:800;text-transform:uppercase;
+  letter-spacing:.5px;white-space:nowrap;
 }
 .pill.new{background:#f8eee8;color:#9b4b28}
 .pill.reviewing{background:#edf1f7;color:#435d83}
@@ -272,17 +327,17 @@ tbody tr[data-id]:hover{background:#faf9f7}
 .pill.closed{background:#eee;color:#666}
 .pill.awaiting_client{background:#fbf4df;color:#876a1c}
 .empty,.loading{
-  padding:35px 18px;text-align:center;color:#888;font-size:11px;
+  padding:35px 18px;text-align:center;color:#888;font-size:12px;
 }
-.empty strong{display:block;color:#222;margin-bottom:6px;font-size:12px}
+.empty strong{display:block;color:#222;margin-bottom:7px;font-size:14px}
 
 /* FILTERS */
 .filters{
-  display:flex;gap:8px;flex-wrap:wrap;
-  padding:12px 15px;border-bottom:1px solid var(--line);
+  display:flex;gap:9px;flex-wrap:wrap;
+  padding:14px 17px;border-bottom:1px solid var(--line);
 }
 .search{flex:1;min-width:180px}
-select.field{width:auto;min-width:135px}
+select.field{width:auto;min-width:140px}
 
 /* CASE DRAWER */
 .overlay{
@@ -291,243 +346,342 @@ select.field{width:auto;min-width:135px}
   backdrop-filter:blur(2px);
 }
 .drawer{
-  height:100%;width:min(620px,100%);background:white;
-  overflow:auto;box-shadow:var(--shadow);overscroll-behavior:contain;
+  height:100%;width:min(680px,100%);
+  background:white;overflow:auto;box-shadow:var(--shadow);
+  overscroll-behavior:contain;
 }
 .drawer-head{
-  position:sticky;top:0;background:white;border-bottom:1px solid var(--line);
-  padding:15px 20px;display:flex;justify-content:space-between;
-  align-items:center;z-index:2;
+  position:sticky;top:0;background:white;
+  border-bottom:1px solid var(--line);
+  padding:17px 22px;display:flex;
+  justify-content:space-between;align-items:center;z-index:2;
 }
-.drawer-head h2{font:23px "DM Serif Display",serif;margin:0}
+.drawer-head h2{font:26px "DM Serif Display",serif;margin:0}
 .icon-btn{
-  border:1px solid var(--line);background:white;width:38px;height:38px;
-  display:grid;place-items:center;border-radius:4px;
+  border:1px solid var(--line);background:white;
+  width:42px;height:42px;display:grid;
+  place-items:center;border-radius:7px;
 }
-.drawer-body{padding:20px}
+.drawer-body{padding:23px}
 .detail-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:15px;margin-bottom:18px;
+  gap:17px;margin-bottom:20px;
 }
 .detail-label{
-  font-size:8px;letter-spacing:1px;text-transform:uppercase;
-  color:#999;margin-bottom:5px;
+  font-size:9px;letter-spacing:1.2px;
+  text-transform:uppercase;color:#999;margin-bottom:6px;
 }
-.detail-value{font-size:12px;overflow-wrap:anywhere;line-height:1.6}
-.detail-section{border-top:1px solid var(--line);padding:18px 0}
-.detail-section h3{font-size:12px;margin:0 0 12px}
+.detail-value{
+  font-size:13px;overflow-wrap:anywhere;line-height:1.6;
+}
+.detail-section{border-top:1px solid var(--line);padding:20px 0}
+.detail-section h3{font-size:13px;margin:0 0 13px}
 .message-box{
-  background:#f7f6f3;padding:15px;line-height:1.8;
-  white-space:pre-wrap;overflow-wrap:anywhere;border-radius:4px;
-  font-size:12px;
+  background:#f7f6f3;padding:17px;line-height:1.8;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+  border-radius:7px;font-size:13px;
 }
-.action-row{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
-.reply-box{border:1px solid var(--line);padding:15px;margin-top:10px;border-radius:5px}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.reply-box{
+  border:1px solid var(--line);padding:18px;
+  margin-top:12px;border-radius:9px;
+}
 .reply-tools{
-  display:flex;justify-content:space-between;gap:10px;
-  align-items:center;margin-top:12px;flex-wrap:wrap;
+  display:flex;justify-content:space-between;
+  gap:10px;align-items:center;margin-top:13px;flex-wrap:wrap;
 }
 
 /* EMAIL COMPOSER */
-.compose-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.compose-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
 .compose-form{
-  background:white;border:1px solid var(--line);padding:20px;
-  max-width:760px;border-radius:6px;box-shadow:var(--shadow);
+  background:white;border:1px solid var(--line);
+  padding:23px;max-width:850px;border-radius:10px;
+  box-shadow:var(--shadow);
 }
-.compose-form h2{font:24px "DM Serif Display",serif;margin:0 0 6px}
-.compose-form>p{color:var(--muted);font-size:11px;line-height:1.7}
+.compose-form h2{font:27px "DM Serif Display",serif;margin:0 0 6px}
+.compose-form>p{color:var(--muted);font-size:13px;line-height:1.7}
+textarea.field{min-height:150px;resize:vertical;line-height:1.7}
 .email-template{
-  border:1px solid var(--line);padding:15px;margin-top:13px;
-  background:#faf9f7;border-radius:4px;
+  border:1px solid var(--line);padding:18px;
+  margin-top:15px;background:#faf9f7;border-radius:7px;
 }
-.email-template strong{font-size:11px}
-.email-template p{font-size:11px;line-height:1.8;color:#555;margin:8px 0 0}
+.email-template strong{font-size:13px}
+.email-template p{font-size:12px;line-height:1.8;color:#555;margin:9px 0 0}
 .notice{
-  background:#f7f6f3;border-left:2px solid #aaa;padding:11px 13px;
-  color:#666;font-size:10px;line-height:1.7;margin:13px 0;
+  background:#f7f6f3;border-left:3px solid #aaa;
+  padding:13px 15px;color:#666;font-size:11px;
+  line-height:1.7;margin:14px 0;
 }
 
 /* TOASTS */
 .toast{
-  position:fixed;right:20px;bottom:20px;background:#191919;color:white;
-  padding:13px 16px;box-shadow:var(--shadow);z-index:100;
-  max-width:min(380px,calc(100% - 40px));font-size:11px;line-height:1.6;
-  border-radius:5px;
+  position:fixed;right:20px;bottom:20px;
+  background:#191919;color:white;padding:14px 18px;
+  box-shadow:var(--shadow);z-index:100;
+  max-width:min(380px,calc(100% - 40px));
+  font-size:12px;line-height:1.6;border-radius:8px;
 }
 .toast.success{background:#225b3c}
 .toast.error{background:#8e3027}
 
 /* TABLET */
 @media(max-width:1000px) and (min-width:651px){
-  .shell{grid-template-columns:70px minmax(0,1fr)}
-  .sidebar{padding:18px 8px}
-  .brand{justify-content:center;padding:0 0 20px}
+  .shell{grid-template-columns:76px minmax(0,1fr)}
+  .sidebar{padding:20px 9px}
+  .brand{justify-content:center;padding:0 0 23px}
   .brand-text,.nav-label,.nav-text,.admin-mini span{display:none}
-  .nav-btn{justify-content:center;padding:13px 4px}
+  .nav-btn{justify-content:center;padding:14px 4px}
   .admin-mini{justify-content:center}
-  .content{padding:24px 20px}
-  .topbar{padding:0 20px}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .content{padding:27px 20px}
+  .topbar{padding:0 20px}
 }
 
-/* MOBILE */
+/* PROFESSIONAL MOBILE EXPERIENCE */
 @media(max-width:650px){
-  body{font-size:13px}
+  body{font-size:15px;background:#f2f4f6}
   .shell{
-    display:block;width:100%;min-height:100vh;min-height:100dvh;
-    padding-bottom:calc(70px + env(safe-area-inset-bottom));
+    display:block;width:100%;
+    min-height:100vh;min-height:100dvh;
+    padding-bottom:calc(88px + env(safe-area-inset-bottom));
   }
   .main{width:100%;min-width:0}
   .topbar{
-    position:sticky;top:0;z-index:20;height:54px;
-    width:100%;padding:0 13px;background:#fff;
+    position:sticky;top:0;z-index:20;
+    height:62px;padding:0 19px;background:#fff;
+    border-bottom:1px solid #edf0f2;
+    box-shadow:0 2px 8px rgba(16,24,40,.035);
   }
-  .topbar-title{font-size:12px}
-  .topbar-right{gap:7px;font-size:9px}
+  .topbar-title{font-size:15px;font-weight:800}
+  .topbar-right{font-size:11px;gap:9px}
+  .live-dot{width:8px;height:8px}
   #topEmail{display:none}
-  .content{width:100%;max-width:100%;padding:17px 13px 25px;margin:0}
+  .content{padding:27px 18px 36px}
   .page-heading{
-    display:flex;flex-direction:row;align-items:center;
-    gap:10px;margin-bottom:16px;
+    display:flex;flex-direction:column;
+    align-items:stretch;gap:16px;margin-bottom:24px;
   }
-  .page-heading h1{font-size:27px;line-height:1.1}
-  .page-heading p{font-size:11px;line-height:1.55}
-  .page-heading .btn{min-height:36px;padding:8px 10px;font-size:10px}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:15px}
-  .stat{padding:12px 11px;min-height:91px;border-radius:5px}
-  .stat-top{font-size:9px}
-  .stat-value{font-size:25px;margin:10px 0 3px}
-  .stat-note{font-size:8px;line-height:1.4}
-  .panel{border-radius:5px}
-  .panel-head{padding:12px}
-  .panel-head h2{font-size:11px}
-  .table-wrap{overflow:visible}
-  table{width:100%;min-width:0;border-collapse:separate;border-spacing:0}
+  .page-heading h1{font-size:36px;line-height:1.08;margin-top:12px}
+  .page-heading p{font-size:15px;line-height:1.65;margin-top:10px}
+  .page-heading .btn{width:100%;min-height:52px;font-size:15px}
+
+  /* Larger, clearer statistics */
+  .stats{
+    grid-template-columns:1fr;gap:12px;margin-bottom:22px;
+  }
+  .stat{
+    min-height:0;padding:20px;
+    border-radius:13px;
+    display:grid;grid-template-columns:1fr auto;
+    align-items:center;column-gap:12px;
+  }
+  .stat-top{
+    grid-column:1;grid-row:1;
+    font-size:14px;align-items:center;
+  }
+  .stat-value{
+    grid-column:1;grid-row:2;
+    font-size:40px;line-height:1;
+    margin:12px 0 7px;
+  }
+  .stat-note{
+    grid-column:1;grid-row:3;
+    font-size:13px;line-height:1.5;
+  }
+  .stat-index{font-size:11px;letter-spacing:1px}
+
+  /* Recent enquiries */
+  .panel{border-radius:14px}
+  .panel-head{
+    padding:18px;align-items:center;
+  }
+  .panel-head h2{font-size:16px}
+  .panel-subtitle{font-size:13px}
+  .panel-head .btn{
+    min-height:44px;padding:9px 13px;font-size:13px;
+  }
+  .table-wrap{padding:0 10px 10px;overflow:visible}
+  table{border-spacing:0 9px}
+  table tbody{display:block;width:100%;padding:0 2px}
   table thead{display:none}
-  table tbody{display:block;width:100%;padding:7px}
   table tbody tr[data-id]{
-    display:block;width:100%;margin:0 0 8px;padding:8px 10px;
-    background:#fff;border:1px solid var(--line);border-radius:5px;
+    display:block;width:100%;margin:0 0 10px;
+    padding:17px 16px;background:#fff;
+    border:1px solid #e2e6ea;border-radius:12px;
+    box-shadow:0 3px 12px rgba(16,24,40,.045);
   }
   table tbody td{
-    display:flex;justify-content:space-between;align-items:flex-start;
-    gap:9px;width:100%;padding:5px 0;border:0;font-size:10px;
-    text-align:right;overflow-wrap:anywhere;
+    display:flex;justify-content:space-between;
+    align-items:flex-start;gap:12px;
+    font-size:14px;line-height:1.5;
+    padding:8px 0;border:0;text-align:right;
+    overflow-wrap:anywhere;
   }
   table tbody td:first-child{
-    display:block;text-align:left;padding-bottom:8px;margin-bottom:3px;
-    border-bottom:1px solid var(--line);
+    display:block;text-align:left;
+    padding-bottom:13px;margin-bottom:5px;
+    border-bottom:1px solid #edf0f2;
   }
-  table tbody td:first-child .person{font-size:11px}
-  table tbody td:first-child .subtext{font-size:9px}
+  table tbody td:first-child .person{
+    font-size:17px;font-weight:800;
+  }
+  table tbody td:first-child .subtext{
+    font-size:13px;margin-top:6px;color:#737d87;
+  }
   table tbody td:not(:first-child)::before{
-    content:attr(data-label);flex-shrink:0;text-align:left;color:#999;
-    font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    content:attr(data-label);
+    font-size:10px;letter-spacing:.8px;
+    color:#8b949d;font-weight:800;
+    text-align:left;flex:none;text-transform:uppercase;
   }
-  table tbody td[colspan]{display:block;text-align:center;padding:20px 8px}
+  table tbody td[colspan]{
+    display:block;font-size:14px;padding:28px 12px;
+  }
   table tbody td[colspan]::before{display:none}
-  .filters{display:grid;grid-template-columns:1fr;gap:7px;padding:10px}
-  .filters .field,.filters select.field,.filters .search{width:100%;min-width:0}
 
+  /* Search and filters */
+  .filters{display:grid;grid-template-columns:1fr;gap:10px;padding:14px}
+  .filters .field,.filters select.field,.filters .search{
+    width:100%;min-width:0;min-height:50px;
+  }
+
+  /* Bottom navigation */
   .sidebar{
-    position:fixed;top:auto;left:0;right:0;bottom:0;width:100%;
-    height:calc(62px + env(safe-area-inset-bottom));min-height:0;
-    z-index:40;padding:3px 5px env(safe-area-inset-bottom);
+    position:fixed;top:auto;left:0;right:0;bottom:0;
+    width:100%;height:calc(76px + env(safe-area-inset-bottom));
+    min-height:0;z-index:40;
+    padding:7px 7px calc(7px + env(safe-area-inset-bottom));
     display:flex;flex-direction:row;align-items:center;
-    background:#171717;border-top:1px solid #333;
-    box-shadow:0 -4px 15px #00000012;
+    background:#151719;border-top:1px solid #303438;
+    box-shadow:0 -8px 24px rgba(16,24,40,.13);
   }
   .sidebar .brand,.sidebar .nav-label,.sidebar .admin-mini{display:none}
   .sidebar nav{
     display:flex;flex:1;width:100%;min-width:0;
-    justify-content:space-around;align-items:center;
+    justify-content:space-around;align-items:center;gap:4px;
   }
   .nav-btn{
-    flex:1;min-width:0;height:51px;min-height:51px;margin:0;
-    padding:4px 2px;display:flex;flex-direction:column;
-    justify-content:center;align-items:center;gap:4px;
-    border:0;border-radius:5px;text-align:center;
+    flex:1;min-width:0;height:61px;min-height:61px;
+    margin:0;padding:7px 2px;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    gap:5px;border:0;border-radius:10px;text-align:center;
   }
-  .nav-btn.active{border:0;background:#ffffff15;box-shadow:none}
+  .nav-btn.active{border:0;background:#303438;box-shadow:none}
   .nav-icon{width:auto}
-  .nav-icon svg{width:17px;height:17px}
-  .nav-text{display:block!important;font-size:8px;line-height:1.2;white-space:nowrap}
+  .nav-icon svg{width:21px;height:21px}
+  .nav-text{
+    display:block!important;font-size:10px;
+    line-height:1.2;font-weight:600;
+    color:#d5d9dd;white-space:nowrap;
+  }
   .sidebar-bottom{margin:0;padding:0;border:0}
-  .sidebar-bottom .nav-btn{width:44px;flex:none}
-  .sidebar-bottom .nav-text{display:block!important}
+  .sidebar-bottom .nav-btn{width:54px;flex:none}
 
+  /* Case details drawer */
   .overlay{align-items:flex-end;justify-content:center;padding:0}
   .drawer{
-    width:100%;max-width:100%;height:94dvh;height:94vh;
-    border-radius:13px 13px 0 0;overflow-y:auto;
-    overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom);
+    width:100%;max-width:100%;height:95dvh;height:95vh;
+    border-radius:18px 18px 0 0;overflow-y:auto;
+    padding-bottom:env(safe-area-inset-bottom);
+    overscroll-behavior:contain;
   }
-  .drawer-head{position:sticky;top:0;padding:11px 13px;min-height:52px}
-  .drawer-head h2{font-size:20px}
-  .drawer-body{padding:15px 13px 25px}
-  .drawer-body>h2{font-size:24px!important}
-  .detail-grid{grid-template-columns:1fr 1fr;gap:13px 9px}
-  .detail-value{font-size:11px}
-  .detail-section{padding:14px 0}
-  .action-row{display:grid;grid-template-columns:1fr;gap:7px}
-  .action-row .btn,.action-row select{width:100%!important}
-  .reply-box{padding:11px}
-  .reply-tools{display:flex;flex-direction:column;align-items:stretch}
-  .reply-tools .btn{width:100%}
-  .compose-form{width:100%;max-width:none;padding:13px;border-radius:5px}
-  .compose-form h2{font-size:21px}
-  .compose-form .btn{width:100%}
-  .email-template{padding:11px}
-  .notice{font-size:9px}
+  .drawer-head{padding:15px 18px;min-height:62px}
+  .drawer-head h2{font-size:23px}
+  .drawer-body{padding:21px 18px 34px}
+  .drawer-body>h2{font-size:28px!important}
+  .detail-grid{grid-template-columns:1fr 1fr;gap:18px 13px}
+  .detail-value{font-size:14px}
+  .detail-section{padding:19px 0}
+  .action-row{display:grid;grid-template-columns:1fr;gap:10px}
+  .action-row .btn,.action-row select{
+    width:100%!important;min-height:50px;
+  }
+  .reply-box{padding:15px;border-radius:12px}
+  .reply-tools{gap:10px}
+  .reply-tools .btn{width:100%;min-height:50px}
+
+  /* Email composer */
+  .compose-form{padding:19px;border-radius:13px}
+  .compose-form h2{font-size:26px}
+  .compose-form .btn{width:100%;min-height:52px}
+  .email-template{padding:16px;border-radius:10px}
+  .notice{font-size:12px}
+
   .toast{
-    left:10px;right:10px;
-    bottom:calc(70px + env(safe-area-inset-bottom));
-    max-width:none;border-radius:5px;
+    left:14px;right:14px;
+    bottom:calc(88px + env(safe-area-inset-bottom));
+    border-radius:10px;font-size:13px;
   }
-  .login-card{width:100%;max-width:420px;padding:24px 18px}
-  .login-card h1{font-size:29px}
-  .login-card p{font-size:11px;line-height:1.7}
-  .skeleton-row{grid-template-columns:1fr 1fr;gap:10px;padding:13px}
+
+  /* Login screen on phones */
+  #loginScreen{padding:22px 17px;place-items:center}
+  .login-card{
+    max-width:460px;width:100%;
+    padding:34px 25px 28px;border-radius:17px;
+  }
+  .login-card .logo{
+    width:52px;height:52px;margin-bottom:25px;
+  }
+  .login-card h1{font-size:35px;margin:15px 0 11px}
+  .login-card p{font-size:14px;line-height:1.7;margin-bottom:23px}
+  #loginForm{margin-top:20px}
+  #loginEmail,#loginPassword{height:55px}
+  #loginBtn{height:55px}
 }
 
-/* Form text remains at least 16px to prevent iOS input zoom. */
-input,select,textarea{font-size:16px!important;max-width:100%}
 @media(max-width:370px){
-  .content{padding-left:10px;padding-right:10px}
-  .stats{gap:7px}
-  .stat{padding:10px 8px}
-  .detail-grid{grid-template-columns:1fr}
-  .nav-text{font-size:7px}
-  .sidebar-bottom .nav-btn{width:40px}
+  .content{padding-left:14px;padding-right:14px}
+  .login-card{padding-left:20px;padding-right:20px}
+  .page-heading h1{font-size:32px}
+  .nav-text{font-size:9px}
+}
+
+/* Keep controls at 16px to prevent iPhone Safari zoom */
+input,select,textarea{
+  font-size:16px!important;max-width:100%;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <section id="loginScreen">
   <div class="login-card">
     <div class="logo">DOS</div>
     <div class="eyebrow">Private administration</div>
     <h1>Welcome back.</h1>
-    <p>Sign in with your authorised administrator email and password to access client enquiries, case records and correspondence.</p>
+    <p>
+      Sign in with your authorised administrator email and password
+      to access client enquiries, case records and correspondence.
+    </p>
 
     <form id="loginForm">
       <label for="loginEmail">EMAIL ADDRESS</label>
-      <input class="field" id="loginEmail" type="email" autocomplete="username" required placeholder="admin@example.com">
+      <input class="field" id="loginEmail" type="email"
+        autocomplete="username" required placeholder="admin@example.com">
 
       <label for="loginPassword">PASSWORD</label>
-      <input class="field" id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password">
+      <input class="field" id="loginPassword" type="password"
+        autocomplete="current-password" required placeholder="Your password">
 
-      <button class="btn" id="loginBtn" type="submit" style="width:100%;margin-top:18px">Sign in</button>
+      <button class="btn" id="loginBtn" type="submit">
+        Sign in
+      </button>
     </form>
 
-    <button class="btn light" id="forgotPasswordBtn" type="button" style="width:100%;margin-top:9px">Forgot password?</button>
+    <button class="btn light" id="forgotPasswordBtn" type="button">
+      Forgot password?
+    </button>
+
     <div id="loginMessage" role="alert" aria-live="polite"></div>
   </div>
 </section>
 
+<!-- ADMIN APPLICATION -->
 <div id="appShell" class="shell hidden">
+
   <aside class="sidebar">
     <div class="brand">
       <div class="logo">DOS</div>
@@ -542,28 +696,42 @@ input,select,textarea{font-size:16px!important;max-width:100%}
 
       <button class="nav-btn active" id="navDashboard">
         <span class="nav-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="icon-stroke" x="3" y="3" width="7" height="7" rx="1"/><rect class="icon-stroke" x="14" y="3" width="7" height="7" rx="1"/><rect class="icon-stroke" x="3" y="14" width="7" height="7" rx="1"/><rect class="icon-stroke" x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect class="icon-stroke" x="3" y="3" width="7" height="7" rx="1"/>
+            <rect class="icon-stroke" x="14" y="3" width="7" height="7" rx="1"/>
+            <rect class="icon-stroke" x="3" y="14" width="7" height="7" rx="1"/>
+            <rect class="icon-stroke" x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
         </span>
         <span class="nav-text">Overview</span>
       </button>
 
       <button class="nav-btn" id="navEnquiries">
         <span class="nav-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M8 6h13M8 12h13M8 18h13"/><path class="icon-stroke" d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="icon-stroke" d="M8 6h13M8 12h13M8 18h13"/>
+            <path class="icon-stroke" d="M3 6h.01M3 12h.01M3 18h.01"/>
+          </svg>
         </span>
         <span class="nav-text">Enquiries</span>
       </button>
 
       <button class="nav-btn" id="navCompose">
         <span class="nav-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="icon-stroke" x="3" y="5" width="18" height="14" rx="2"/><path class="icon-stroke" d="m3 7 9 6 9-6"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect class="icon-stroke" x="3" y="5" width="18" height="14" rx="2"/>
+            <path class="icon-stroke" d="m3 7 9 6 9-6"/>
+          </svg>
         </span>
         <span class="nav-text">Compose</span>
       </button>
 
       <button class="nav-btn" id="navEmails">
         <span class="nav-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M4 4h16v16H4z"/><path class="icon-stroke" d="M8 8h8M8 12h8M8 16h5"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="icon-stroke" d="M4 4h16v16H4z"/>
+            <path class="icon-stroke" d="M8 8h8M8 12h8M8 16h5"/>
+          </svg>
         </span>
         <span class="nav-text">Email history</span>
       </button>
@@ -574,9 +742,13 @@ input,select,textarea{font-size:16px!important;max-width:100%}
         <div class="avatar" id="adminAvatar">A</div>
         <span id="adminName">Administrator</span>
       </div>
+
       <button class="nav-btn" id="logoutBtn">
         <span class="nav-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M10 17l5-5-5-5M15 12H3"/><path class="icon-stroke" d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="icon-stroke" d="M10 17l5-5-5-5M15 12H3"/>
+            <path class="icon-stroke" d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/>
+          </svg>
         </span>
         <span class="nav-text">Sign out</span>
       </button>
@@ -594,6 +766,7 @@ input,select,textarea{font-size:16px!important;max-width:100%}
 
     <section class="content">
 
+      <!-- OVERVIEW -->
       <div id="dashboardView">
         <div class="page-heading">
           <div>
@@ -601,30 +774,45 @@ input,select,textarea{font-size:16px!important;max-width:100%}
             <h1>Good to see you.</h1>
             <p>Here is what's happening with your enquiries.</p>
           </div>
+
           <button class="btn" id="refreshBtn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/><path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/>
+              <path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/>
+            </svg>
             Refresh
           </button>
         </div>
 
         <div class="stats">
           <div class="stat">
-            <div class="stat-top"><span>Total enquiries</span><span class="stat-index">01</span></div>
+            <div class="stat-top">
+              <span>Total enquiries</span><span class="stat-index">01</span>
+            </div>
             <div class="stat-value" id="statTotal">—</div>
             <div class="stat-note">All received enquiries</div>
           </div>
+
           <div class="stat">
-            <div class="stat-top"><span>New enquiries</span><span class="stat-index">02</span></div>
+            <div class="stat-top">
+              <span>New enquiries</span><span class="stat-index">02</span>
+            </div>
             <div class="stat-value" id="statNew">—</div>
             <div class="stat-note">Awaiting initial review</div>
           </div>
+
           <div class="stat">
-            <div class="stat-top"><span>In progress</span><span class="stat-index">03</span></div>
+            <div class="stat-top">
+              <span>In progress</span><span class="stat-index">03</span>
+            </div>
             <div class="stat-value" id="statOpen">—</div>
             <div class="stat-note">Being reviewed or awaiting client</div>
           </div>
+
           <div class="stat">
-            <div class="stat-top"><span>Closed</span><span class="stat-index">04</span></div>
+            <div class="stat-top">
+              <span>Closed</span><span class="stat-index">04</span>
+            </div>
             <div class="stat-value" id="statClosed">—</div>
             <div class="stat-note">Marked as completed</div>
           </div>
@@ -638,15 +826,27 @@ input,select,textarea{font-size:16px!important;max-width:100%}
             </div>
             <button class="btn light small" id="viewAllBtn">
               View all
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="icon-stroke" d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
             </button>
           </div>
+
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Client</th><th>Matter</th><th>Received</th><th>Status</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Client</th><th>Matter</th>
+                  <th>Received</th><th>Status</th>
+                </tr>
+              </thead>
               <tbody id="recentRows">
                 <tr><td colspan="4">
-                  <div class="loading-state"><span class="spinner large"></span><p>Loading recent enquiries</p><small>Retrieving your latest client records</small></div>
+                  <div class="loading-state">
+                    <span class="spinner large"></span>
+                    <p>Loading recent enquiries</p>
+                    <small>Retrieving your latest client records</small>
+                  </div>
                 </td></tr>
               </tbody>
             </table>
@@ -654,6 +854,7 @@ input,select,textarea{font-size:16px!important;max-width:100%}
         </div>
       </div>
 
+      <!-- ENQUIRIES -->
       <div id="enquiriesView" class="hidden">
         <div class="page-heading">
           <div>
@@ -661,15 +862,21 @@ input,select,textarea{font-size:16px!important;max-width:100%}
             <h1>Enquiries.</h1>
             <p>Search, review and manage incoming matters.</p>
           </div>
+
           <button class="btn" id="refreshEnquiries">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/><path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/>
+              <path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/>
+            </svg>
             Refresh
           </button>
         </div>
 
         <div class="panel">
           <div class="filters">
-            <input class="field search" id="searchInput" placeholder="Search name, email, reference or offence…">
+            <input class="field search" id="searchInput"
+              placeholder="Search name, email, reference or offence…">
+
             <select class="field" id="statusFilter">
               <option value="">All statuses</option>
               <option value="new">New</option>
@@ -678,16 +885,26 @@ input,select,textarea{font-size:16px!important;max-width:100%}
               <option value="replied">Replied</option>
               <option value="closed">Closed</option>
             </select>
+
             <select class="field" id="matterFilter">
               <option value="">All matter types</option>
             </select>
           </div>
+
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Client</th><th>Enquiry type</th><th>Reference</th><th>Received</th><th>Status</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Client</th><th>Enquiry type</th>
+                  <th>Reference</th><th>Received</th><th>Status</th>
+                </tr>
+              </thead>
               <tbody id="enquiryRows">
                 <tr><td colspan="5">
-                  <div class="loading-state"><span class="spinner large"></span><p>Loading enquiries</p></div>
+                  <div class="loading-state">
+                    <span class="spinner large"></span>
+                    <p>Loading enquiries</p>
+                  </div>
                 </td></tr>
               </tbody>
             </table>
@@ -695,6 +912,7 @@ input,select,textarea{font-size:16px!important;max-width:100%}
         </div>
       </div>
 
+      <!-- COMPOSE EMAIL -->
       <div id="composeView" class="hidden">
         <div class="page-heading">
           <div>
@@ -710,31 +928,42 @@ input,select,textarea{font-size:16px!important;max-width:100%}
             <p>Your message will be sent through the practice's Resend integration.</p>
 
             <label for="composeTo">TO — RECIPIENT EMAIL</label>
-            <input class="field" id="composeTo" type="email" required placeholder="client@example.com">
+            <input class="field" id="composeTo" type="email"
+              required placeholder="client@example.com">
 
             <label for="composeSubject">SUBJECT</label>
-            <input class="field" id="composeSubject" required maxlength="180" placeholder="Subject of your email">
+            <input class="field" id="composeSubject" required
+              maxlength="180" placeholder="Subject of your email">
 
             <label for="composeMessage">MESSAGE</label>
-            <textarea class="field" id="composeMessage" required minlength="2" placeholder="Write your message here…"></textarea>
+            <textarea class="field" id="composeMessage" required
+              minlength="2" placeholder="Write your message here…"></textarea>
 
             <div class="email-template">
               <strong>Professional email format</strong>
-              <p>Your email will include the practice identity, a clean message layout and a professional sign-off. The visitor's email will be used as the recipient, never as the sender.</p>
+              <p>
+                Your email will include the practice identity, a clean
+                message layout and a professional sign-off. The visitor's
+                email will be used as the recipient, never as the sender.
+              </p>
             </div>
 
             <div class="notice">
-              Only send correspondence to recipients you are authorised to contact. Avoid including unnecessary sensitive personal information.
+              Only send correspondence to recipients you are authorised
+              to contact. Avoid including unnecessary sensitive personal information.
             </div>
 
             <button class="btn" id="composeSendBtn" type="submit">
               Send email
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="icon-stroke" d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
             </button>
           </form>
         </div>
       </div>
 
+      <!-- EMAIL HISTORY -->
       <div id="emailsView" class="hidden">
         <div class="page-heading">
           <div>
@@ -742,8 +971,12 @@ input,select,textarea{font-size:16px!important;max-width:100%}
             <h1>Email history.</h1>
             <p>Messages recorded by the administration system.</p>
           </div>
+
           <button class="btn" id="refreshEmails">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/><path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path class="icon-stroke" d="M20 7v5h-5M4 17v-5h5"/>
+              <path class="icon-stroke" d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/>
+            </svg>
             Refresh
           </button>
         </div>
@@ -751,10 +984,18 @@ input,select,textarea{font-size:16px!important;max-width:100%}
         <div class="panel">
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Recipient</th><th>Subject</th><th>Related case</th><th>Sent</th><th>Delivery ID</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Recipient</th><th>Subject</th>
+                  <th>Related case</th><th>Sent</th><th>Delivery ID</th>
+                </tr>
+              </thead>
               <tbody id="emailRows">
                 <tr><td colspan="5">
-                  <div class="loading-state"><span class="spinner large"></span><p>Loading email history</p></div>
+                  <div class="loading-state">
+                    <span class="spinner large"></span>
+                    <p>Loading email history</p>
+                  </div>
                 </td></tr>
               </tbody>
             </table>
@@ -762,7 +1003,8 @@ input,select,textarea{font-size:16px!important;max-width:100%}
         </div>
 
         <div class="notice">
-          Email history is recorded after the secure sending endpoint accepts a message. Acceptance by Resend does not guarantee inbox delivery.
+          Email history is recorded after the secure sending endpoint accepts
+          a message. Acceptance by Resend does not guarantee inbox delivery.
         </div>
       </div>
 
@@ -770,12 +1012,15 @@ input,select,textarea{font-size:16px!important;max-width:100%}
   </main>
 </div>
 
+<!-- CASE DETAILS DRAWER -->
 <div id="caseOverlay" class="overlay hidden">
   <aside class="drawer">
     <div class="drawer-head">
       <h2>Enquiry details</h2>
       <button class="icon-btn" id="closeDrawer" aria-label="Close enquiry">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-stroke" d="m6 6 12 12M18 6 6 18"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path class="icon-stroke" d="m6 6 12 12M18 6 6 18"/>
+        </svg>
       </button>
     </div>
     <div class="drawer-body" id="caseContent"></div>
@@ -784,8 +1029,9 @@ input,select,textarea{font-size:16px!important;max-width:100%}
 
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-<!-- PART 2: paste the JavaScript below this line -->
+<!-- PART 2 STARTS HERE: JAVASCRIPT -->
  <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
@@ -808,7 +1054,9 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
-/* FIREBASE */
+
+/* FIREBASE CONFIGURATION */
+
 const firebaseConfig = {
   apiKey: "AIzaSyB-LMT7YDCpEqOhhx6LlLWxGjSAMFOghns",
   authDomain: "driving-offence-e7def.firebaseapp.com",
@@ -832,7 +1080,9 @@ let toastTimer = null;
 
 const $ = id => document.getElementById(id);
 
+
 /* SAFE HTML */
+
 const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({
   "&": "&amp;",
   "<": "&lt;",
@@ -841,14 +1091,23 @@ const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({
   "'": "&#39;"
 }[c]));
 
-/* LOADING BUTTON HELPER */
+
+/* BUTTON LOADING */
+
 function setButtonLoading(button, loading, label = "Please wait…") {
   if (!button) return;
 
   if (loading) {
+    if (button.dataset.loading === "true") return;
+
     button.dataset.originalHtml = button.innerHTML;
+    button.dataset.loading = "true";
     button.disabled = true;
-    button.innerHTML = `<span class="spinner" aria-hidden="true"></span>${safe(label)}`;
+
+    button.innerHTML = `
+      <span class="spinner" aria-hidden="true"></span>
+      ${safe(label)}
+    `;
   } else {
     button.disabled = false;
 
@@ -856,18 +1115,27 @@ function setButtonLoading(button, loading, label = "Please wait…") {
       button.innerHTML = button.dataset.originalHtml;
       delete button.dataset.originalHtml;
     }
+
+    delete button.dataset.loading;
   }
 }
 
+
 /* TOAST NOTIFICATIONS */
+
 function showToast(message, type = "normal") {
   const toast = $("toast");
 
   toast.textContent = message;
   toast.className = "toast";
 
-  if (type === "success") toast.classList.add("success");
-  if (type === "error") toast.classList.add("error");
+  if (type === "success") {
+    toast.classList.add("success");
+  }
+
+  if (type === "error") {
+    toast.classList.add("error");
+  }
 
   clearTimeout(toastTimer);
 
@@ -876,20 +1144,25 @@ function showToast(message, type = "normal") {
   }, 4200);
 }
 
+
 /* DATE FORMATTING */
+
 function dateText(value) {
   if (!value) return "—";
 
   const date = value?.toDate ? value.toDate() : new Date(value);
 
-  return isNaN(date.getTime()) ? "—" :
-    date.toLocaleString("en-GB", {
-      dateStyle: "medium",
-      timeStyle: "short"
-    });
+  return isNaN(date.getTime())
+    ? "—"
+    : date.toLocaleString("en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
 }
 
+
 /* STATUS LABELS */
+
 function statusLabel(value) {
   return ({
     new: "New",
@@ -900,43 +1173,49 @@ function statusLabel(value) {
   })[value] || "New";
 }
 
+
 function statusPill(value) {
   const status = value || "new";
 
-  return `<span class="pill ${safe(status)}">${safe(statusLabel(status))}</span>`;
+  return `
+    <span class="pill ${safe(status)}">
+      ${safe(statusLabel(status))}
+    </span>
+  `;
 }
+
 
 /* DETAIL FIELD */
+
 function field(label, value) {
-  return `<div>
-    <div class="detail-label">${safe(label)}</div>
-    <div class="detail-value">${safe(value || "Not provided")}</div>
-  </div>`;
+  return `
+    <div>
+      <div class="detail-label">${safe(label)}</div>
+      <div class="detail-value">${safe(value || "Not provided")}</div>
+    </div>
+  `;
 }
+
 
 /* LOADING ROWS */
+
 function loadingRows(columns, message) {
-  return `<tr><td colspan="${columns}">
-    <div class="loading-state">
-      <span class="spinner large"></span>
-      <p>${safe(message)}</p>
-      <small>Please wait a moment</small>
-    </div>
-  </td></tr>`;
+  return `
+    <tr>
+      <td colspan="${columns}">
+        <div class="loading-state">
+          <span class="spinner large"></span>
+          <p>${safe(message)}</p>
+          <small>Please wait a moment</small>
+        </div>
+      </td>
+    </tr>
+  `;
 }
 
-function skeletonRows(count = 4) {
-  return Array.from({ length: count }, () => `
-    <div class="skeleton-row">
-      <div class="skeleton skeleton-cell"></div>
-      <div class="skeleton skeleton-cell"></div>
-      <div class="skeleton skeleton-cell"></div>
-      <div class="skeleton skeleton-cell"></div>
-    </div>
-  `).join("");
-}
 
 /* LOGIN */
+
 $("loginForm").addEventListener("submit", async event => {
   event.preventDefault();
 
@@ -945,6 +1224,7 @@ $("loginForm").addEventListener("submit", async event => {
   const button = $("loginBtn");
 
   $("loginMessage").textContent = "";
+  $("loginMessage").style.color = "var(--red)";
 
   setButtonLoading(button, true, "Authenticating…");
 
@@ -953,10 +1233,17 @@ $("loginForm").addEventListener("submit", async event => {
 
   } catch (error) {
     const messages = {
-      "auth/invalid-credential": "The email address or password is incorrect.",
-      "auth/invalid-email": "Enter a valid email address.",
-      "auth/too-many-requests": "Too many attempts. Please wait and try again later.",
-      "auth/user-disabled": "This administrator account has been disabled."
+      "auth/invalid-credential":
+        "The email address or password is incorrect.",
+
+      "auth/invalid-email":
+        "Enter a valid email address.",
+
+      "auth/too-many-requests":
+        "Too many attempts. Please wait and try again later.",
+
+      "auth/user-disabled":
+        "This administrator account has been disabled."
     };
 
     $("loginMessage").textContent =
@@ -967,7 +1254,9 @@ $("loginForm").addEventListener("submit", async event => {
   }
 });
 
+
 /* PASSWORD RESET */
+
 $("forgotPasswordBtn").addEventListener("click", async () => {
   const email = $("loginEmail").value.trim();
 
@@ -982,22 +1271,28 @@ $("forgotPasswordBtn").addEventListener("click", async () => {
   const button = $("forgotPasswordBtn");
 
   setButtonLoading(button, true, "Sending reset link…");
+
   $("loginMessage").textContent = "";
+  $("loginMessage").style.color = "var(--red)";
 
   try {
     await sendPasswordResetEmail(auth, email);
 
     $("loginMessage").style.color = "var(--green)";
+
     $("loginMessage").textContent =
       "If an account exists for this email, Firebase will send a password-reset link. Check your inbox and spam folder.";
 
   } catch (error) {
-    $("loginMessage").style.color = "var(--red)";
-
     const messages = {
-      "auth/invalid-email": "Enter a valid email address.",
-      "auth/user-not-found": "No administrator account was found for that email address.",
-      "auth/too-many-requests": "Too many reset requests. Please wait and try again."
+      "auth/invalid-email":
+        "Enter a valid email address.",
+
+      "auth/user-not-found":
+        "No administrator account was found for that email address.",
+
+      "auth/too-many-requests":
+        "Too many reset requests. Please wait and try again."
     };
 
     $("loginMessage").textContent =
@@ -1008,7 +1303,9 @@ $("forgotPasswordBtn").addEventListener("click", async () => {
   }
 });
 
+
 /* ADMIN AUTHENTICATION */
+
 onAuthStateChanged(auth, async user => {
   currentUser = user;
 
@@ -1045,10 +1342,15 @@ onAuthStateChanged(auth, async user => {
   await loadEnquiries();
 });
 
+
 /* LOAD ENQUIRIES */
+
 async function loadEnquiries() {
-  $("recentRows").innerHTML = loadingRows(4, "Loading recent enquiries");
-  $("enquiryRows").innerHTML = loadingRows(5, "Loading enquiries");
+  $("recentRows").innerHTML =
+    loadingRows(4, "Loading recent enquiries");
+
+  $("enquiryRows").innerHTML =
+    loadingRows(5, "Loading enquiries");
 
   try {
     const q = query(
@@ -1071,17 +1373,31 @@ async function loadEnquiries() {
   } catch (error) {
     console.error("Enquiry loading error:", error);
 
-    $("recentRows").innerHTML =
-      `<tr><td colspan="4" class="empty"><strong>Unable to load enquiries</strong>${safe(error.message)}</td></tr>`;
+    $("recentRows").innerHTML = `
+      <tr>
+        <td colspan="4" class="empty">
+          <strong>Unable to load enquiries</strong>
+          ${safe(error.message)}
+        </td>
+      </tr>
+    `;
 
-    $("enquiryRows").innerHTML =
-      `<tr><td colspan="5" class="empty"><strong>Unable to load enquiries</strong>Please check your connection and Firestore permissions.</td></tr>`;
+    $("enquiryRows").innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          <strong>Unable to load enquiries</strong>
+          Please check your connection and Firestore permissions.
+        </td>
+      </tr>
+    `;
 
     showToast("Unable to retrieve enquiries.", "error");
   }
 }
 
+
 /* DASHBOARD */
+
 function renderDashboard() {
   const total = allEnquiries.length;
 
@@ -1104,28 +1420,51 @@ function renderDashboard() {
 
   const rows = allEnquiries.slice(0, 7);
 
-  $("recentRows").innerHTML = rows.length ? rows.map(x => `
-    <tr data-id="${safe(x.id)}">
-      <td>
-        <div class="person">${safe(x.fullName || x.name || "Unnamed client")}</div>
-        <div class="subtext">${safe(x.email || "")}</div>
-      </td>
-      <td data-label="Matter">${safe(x.matterType || x.offenceType || "General enquiry")}</td>
-      <td data-label="Received">${dateText(x.createdAt)}</td>
-      <td data-label="Status">${statusPill(x.status)}</td>
-    </tr>
-  `).join("") :
-  `<tr><td colspan="4" class="empty"><strong>No enquiries yet</strong>New website submissions will appear here.</td></tr>`;
+  $("recentRows").innerHTML = rows.length
+    ? rows.map(x => `
+      <tr data-id="${safe(x.id)}">
+        <td>
+          <div class="person">
+            ${safe(x.fullName || x.name || "Unnamed client")}
+          </div>
+          <div class="subtext">${safe(x.email || "")}</div>
+        </td>
+
+        <td data-label="Matter">
+          ${safe(x.matterType || x.offenceType || "General enquiry")}
+        </td>
+
+        <td data-label="Received">
+          ${dateText(x.createdAt)}
+        </td>
+
+        <td data-label="Status">
+          ${statusPill(x.status)}
+        </td>
+      </tr>
+    `).join("")
+    : `
+      <tr>
+        <td colspan="4" class="empty">
+          <strong>No enquiries yet</strong>
+          New website submissions will appear here.
+        </td>
+      </tr>
+    `;
 
   $("recentRows").querySelectorAll("tr[data-id]").forEach(row => {
     row.addEventListener("click", () => openCase(row.dataset.id));
   });
 }
 
+
 /* MATTER FILTER */
+
 function populateMatterFilter() {
   const values = [...new Set(
-    allEnquiries.map(x => x.matterType || x.offenceType).filter(Boolean)
+    allEnquiries
+      .map(x => x.matterType || x.offenceType)
+      .filter(Boolean)
   )].sort();
 
   const select = $("matterFilter");
@@ -1133,12 +1472,16 @@ function populateMatterFilter() {
 
   select.innerHTML =
     `<option value="">All matter types</option>` +
-    values.map(v => `<option value="${safe(v)}">${safe(v)}</option>`).join("");
+    values.map(v =>
+      `<option value="${safe(v)}">${safe(v)}</option>`
+    ).join("");
 
   select.value = current;
 }
 
+
 /* ENQUIRY TABLE */
+
 function renderEnquiries() {
   const term = $("searchInput").value.trim().toLowerCase();
   const status = $("statusFilter").value;
@@ -1162,43 +1505,62 @@ function renderEnquiries() {
       (!matter || (x.matterType || x.offenceType) === matter);
   });
 
-  $("enquiryRows").innerHTML = filtered.length ? filtered.map(x => `
-    <tr data-id="${safe(x.id)}">
-      <td>
-        <div class="person">${safe(x.fullName || x.name || "Unnamed client")}</div>
-        <div class="subtext">${safe(x.email || "")}</div>
-      </td>
-      <td data-label="Matter">${safe(x.matterType || x.offenceType || "General")}</td>
-      <td data-label="Reference">${safe(x.reference || "—")}</td>
-      <td data-label="Received">${dateText(x.createdAt)}</td>
-      <td data-label="Status">${statusPill(x.status)}</td>
-    </tr>
-  `).join("") :
-  `<tr><td colspan="5" class="empty"><strong>No matching enquiries</strong>Try changing your search or filters.</td></tr>`;
+  $("enquiryRows").innerHTML = filtered.length
+    ? filtered.map(x => `
+      <tr data-id="${safe(x.id)}">
+        <td>
+          <div class="person">
+            ${safe(x.fullName || x.name || "Unnamed client")}
+          </div>
+          <div class="subtext">${safe(x.email || "")}</div>
+        </td>
+
+        <td data-label="Matter">
+          ${safe(x.matterType || x.offenceType || "General")}
+        </td>
+
+        <td data-label="Reference">
+          ${safe(x.reference || "—")}
+        </td>
+
+        <td data-label="Received">
+          ${dateText(x.createdAt)}
+        </td>
+
+        <td data-label="Status">
+          ${statusPill(x.status)}
+        </td>
+      </tr>
+    `).join("")
+    : `
+      <tr>
+        <td colspan="5" class="empty">
+          <strong>No matching enquiries</strong>
+          Try changing your search or filters.
+        </td>
+      </tr>
+    `;
 
   $("enquiryRows").querySelectorAll("tr[data-id]").forEach(row => {
     row.addEventListener("click", () => openCase(row.dataset.id));
   });
 }
 
+
 /* OPEN CASE */
+
 function openCase(id) {
   const item = allEnquiries.find(x => x.id === id);
   if (!item) return;
 
   activeCase = item;
 
-  $("caseContent").innerHTML = `
-    <div class="loading-state">
-      <span class="spinner large"></span>
-      <p>Opening client record</p>
-    </div>
-  `;
-
   $("caseOverlay").classList.remove("hidden");
 
   $("caseContent").innerHTML = `
-    <div class="eyebrow">Client enquiry · ${safe(item.id)}</div>
+    <div class="eyebrow">
+      Client enquiry · ${safe(item.id)}
+    </div>
 
     <h2 style="font:30px 'DM Serif Display';margin:9px 0 7px">
       ${safe(item.fullName || item.name || "Unnamed client")}
@@ -1221,11 +1583,14 @@ function openCase(id) {
         ).join("")}
       </select>
 
-      <button class="btn light" id="saveStatusBtn">Save status</button>
+      <button class="btn light" id="saveStatusBtn">
+        Save status
+      </button>
     </div>
 
     <div class="detail-section">
       <h3>Contact information</h3>
+
       <div class="detail-grid">
         ${field("Email", item.email)}
         ${field("Phone", item.phone)}
@@ -1236,6 +1601,7 @@ function openCase(id) {
 
     <div class="detail-section">
       <h3>Case information</h3>
+
       <div class="detail-grid">
         ${field("Matter type", item.matterType || item.offenceType)}
         ${field("Issuing authority", item.authority)}
@@ -1246,6 +1612,7 @@ function openCase(id) {
         ${field("Offence date", item.offenceDate)}
         ${field("Urgent", item.urgent ? "Yes" : "No")}
       </div>
+
       ${field("Current position", item.currentPosition)}
     </div>
 
@@ -1259,19 +1626,23 @@ function openCase(id) {
 
       <div class="reply-box">
         <label for="replyTo">TO</label>
+
         <input class="field" id="replyTo" type="email"
           value="${safe(item.email || "")}" required>
 
         <label for="replySubject">SUBJECT</label>
+
         <input class="field" id="replySubject" maxlength="180"
           value="Re: Your enquiry to Driving Offence Solutions" required>
 
         <label for="replyMessage">MESSAGE</label>
+
         <textarea class="field" id="replyMessage"
           placeholder="Write your response to the client…" required></textarea>
 
         <div class="notice">
-          Sent through the practice's verified Resend sender address. The recipient's address will not be used as the sender.
+          Sent through the practice's verified Resend sender address.
+          The recipient's address will not be used as the sender.
         </div>
 
         <div class="reply-tools">
@@ -1290,35 +1661,39 @@ function openCase(id) {
   $("sendReplyBtn").addEventListener("click", sendReply);
 }
 
-/* SAVE STATUS */
+
+/* SAVE CASE STATUS */
+
 async function saveCaseStatus() {
   if (!activeCase) return;
 
   const status = $("caseStatus").value;
   const button = $("saveStatusBtn");
+  const caseId = activeCase.id;
 
   setButtonLoading(button, true, "Saving…");
 
   try {
-    await updateDoc(doc(db, "enquiries", activeCase.id), {
+    await updateDoc(doc(db, "enquiries", caseId), {
       status,
       updatedAt: serverTimestamp(),
       updatedBy: currentUser.uid
     });
 
-    activeCase.status = status;
-
-    const index = allEnquiries.findIndex(x => x.id === activeCase.id);
+    const index = allEnquiries.findIndex(x => x.id === caseId);
 
     if (index >= 0) {
       allEnquiries[index].status = status;
     }
 
+    activeCase.status = status;
+
     renderDashboard();
     renderEnquiries();
 
     showToast("Case status updated successfully.", "success");
-    openCase(activeCase.id);
+
+    openCase(caseId);
 
   } catch (error) {
     showToast("Could not update status: " + error.message, "error");
@@ -1330,8 +1705,15 @@ async function saveCaseStatus() {
   }
 }
 
+
 /* SECURE EMAIL SENDING */
-async function sendPracticeEmail({ to, subject, message, enquiryId = null }) {
+
+async function sendPracticeEmail({
+  to,
+  subject,
+  message,
+  enquiryId = null
+}) {
   if (!currentUser) {
     throw new Error("You must be signed in.");
   }
@@ -1340,10 +1722,12 @@ async function sendPracticeEmail({ to, subject, message, enquiryId = null }) {
 
   const response = await fetch("/api/send-enquiry", {
     method: "POST",
+
     headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + token
     },
+
     body: JSON.stringify({
       action: "admin-email",
       to,
@@ -1366,14 +1750,19 @@ async function sendPracticeEmail({ to, subject, message, enquiryId = null }) {
   return result;
 }
 
+
 /* REPLY TO CLIENT */
+
 async function sendReply() {
   const to = $("replyTo").value.trim();
   const subject = $("replySubject").value.trim();
   const message = $("replyMessage").value.trim();
 
   if (!to || !subject || !message) {
-    showToast("Complete the recipient, subject and message first.", "error");
+    showToast(
+      "Complete the recipient, subject and message first.",
+      "error"
+    );
     return;
   }
 
@@ -1391,7 +1780,10 @@ async function sendReply() {
 
     $("replyMessage").value = "";
 
-    showToast("Email accepted by the sending service.", "success");
+    showToast(
+      "Email accepted by the sending service.",
+      "success"
+    );
 
     await loadEnquiries();
 
@@ -1405,7 +1797,9 @@ async function sendReply() {
   }
 }
 
+
 /* COMPOSE EMAIL */
+
 $("composeForm").addEventListener("submit", async event => {
   event.preventDefault();
 
@@ -1432,7 +1826,10 @@ $("composeForm").addEventListener("submit", async event => {
 
     $("composeForm").reset();
 
-    showToast("Email accepted by the sending service.", "success");
+    showToast(
+      "Email accepted by the sending service.",
+      "success"
+    );
 
     await loadEmails();
 
@@ -1444,9 +1841,12 @@ $("composeForm").addEventListener("submit", async event => {
   }
 });
 
+
 /* EMAIL HISTORY */
+
 async function loadEmails() {
-  $("emailRows").innerHTML = loadingRows(5, "Loading email history");
+  $("emailRows").innerHTML =
+    loadingRows(5, "Loading email history");
 
   try {
     const snap = await getDocs(query(
@@ -1455,34 +1855,53 @@ async function loadEmails() {
       limit(100)
     ));
 
-    $("emailRows").innerHTML = snap.empty ?
+    $("emailRows").innerHTML = snap.empty
+      ? `
+        <tr>
+          <td colspan="5" class="empty">
+            <strong>No sent emails yet</strong>
+            Your recorded correspondence will appear here.
+          </td>
+        </tr>
+      `
+      : snap.docs.map(d => {
+          const x = d.data();
 
-      `<tr><td colspan="5" class="empty"><strong>No sent emails yet</strong>Your recorded correspondence will appear here.</td></tr>` :
-
-      snap.docs.map(d => {
-        const x = d.data();
-
-        return `<tr>
-          <td data-label="Recipient">${safe(x.to)}</td>
-          <td data-label="Subject">${safe(x.subject)}</td>
-          <td data-label="Related case">${safe(x.enquiryId || "—")}</td>
-          <td data-label="Sent">${dateText(x.sentAt)}</td>
-          <td data-label="Delivery ID">${safe(x.resendId || "—")}</td>
-        </tr>`;
-      }).join("");
+          return `
+            <tr>
+              <td data-label="Recipient">${safe(x.to)}</td>
+              <td data-label="Subject">${safe(x.subject)}</td>
+              <td data-label="Related case">${safe(x.enquiryId || "—")}</td>
+              <td data-label="Sent">${dateText(x.sentAt)}</td>
+              <td data-label="Delivery ID">${safe(x.resendId || "—")}</td>
+            </tr>
+          `;
+        }).join("");
 
   } catch (error) {
     console.error("Email history error:", error);
 
-    $("emailRows").innerHTML =
-      `<tr><td colspan="5" class="empty"><strong>Unable to load email history</strong>${safe(error.message)}</td></tr>`;
+    $("emailRows").innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          <strong>Unable to load email history</strong>
+          ${safe(error.message)}
+        </td>
+      </tr>
+    `;
   }
 }
 
+
 /* NAVIGATION */
+
 function showView(view) {
-  ["dashboardView", "enquiriesView", "composeView", "emailsView"]
-    .forEach(id => $(id).classList.add("hidden"));
+  [
+    "dashboardView",
+    "enquiriesView",
+    "composeView",
+    "emailsView"
+  ].forEach(id => $(id).classList.add("hidden"));
 
   $(view + "View").classList.remove("hidden");
 
@@ -1512,6 +1931,7 @@ function showView(view) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+
 $("navDashboard").addEventListener("click", () => showView("dashboard"));
 $("navEnquiries").addEventListener("click", () => showView("enquiries"));
 $("navCompose").addEventListener("click", () => showView("compose"));
@@ -1519,49 +1939,63 @@ $("navEmails").addEventListener("click", () => showView("emails"));
 
 $("viewAllBtn").addEventListener("click", () => showView("enquiries"));
 
+
 /* REFRESH BUTTONS */
+
 $("refreshBtn").addEventListener("click", async () => {
   const button = $("refreshBtn");
+
   setButtonLoading(button, true, "Refreshing…");
 
   try {
     await loadEnquiries();
     showToast("Dashboard refreshed.", "success");
+
   } finally {
     setButtonLoading(button, false);
   }
 });
 
+
 $("refreshEnquiries").addEventListener("click", async () => {
   const button = $("refreshEnquiries");
+
   setButtonLoading(button, true, "Refreshing…");
 
   try {
     await loadEnquiries();
     showToast("Enquiries refreshed.", "success");
+
   } finally {
     setButtonLoading(button, false);
   }
 });
 
+
 $("refreshEmails").addEventListener("click", async () => {
   const button = $("refreshEmails");
+
   setButtonLoading(button, true, "Refreshing…");
 
   try {
     await loadEmails();
     showToast("Email history refreshed.", "success");
+
   } finally {
     setButtonLoading(button, false);
   }
 });
 
+
 /* FILTER EVENTS */
+
 $("searchInput").addEventListener("input", renderEnquiries);
 $("statusFilter").addEventListener("change", renderEnquiries);
 $("matterFilter").addEventListener("change", renderEnquiries);
 
+
 /* CLOSE CASE DRAWER */
+
 $("closeDrawer").addEventListener("click", () => {
   $("caseOverlay").classList.add("hidden");
 });
@@ -1572,17 +2006,22 @@ $("caseOverlay").addEventListener("click", event => {
   }
 });
 
+
 /* ESCAPE KEY */
+
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") {
     $("caseOverlay").classList.add("hidden");
   }
 });
 
+
 /* LOG OUT */
+
 $("logoutBtn").addEventListener("click", async () => {
   try {
     await signOut(auth);
+
   } catch (error) {
     showToast("Unable to sign out: " + error.message, "error");
   }
