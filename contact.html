@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +6,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <title>Contact Us | Driving Offence Solutions</title>
-<meta name="description" content="Contact Driving Offence Solutions about speeding notices, motoring penalties, court summonses, driving bans, fines and enforcement correspondence. Request an initial assessment.">
+<meta name="description" content="Contact Driving Offence Solutions about speeding notices, motoring penalties, court summonses, driving bans and other motoring matters. Request an initial assessment.">
 
 <link rel="canonical" href="https://www.drivingoffencesolution.co.uk/contact.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,19 +59,6 @@ button, a {
 .container {
     width: min(1200px, calc(100% - 48px));
     margin: auto;
-}
-
-.skip-link {
-    position: absolute;
-    top: -60px;
-    left: 15px;
-    background: white;
-    padding: 12px;
-    z-index: 999;
-}
-
-.skip-link:focus {
-    top: 10px;
 }
 
 /* TOP BAR */
@@ -236,13 +222,6 @@ button, a {
     letter-spacing: -1.5px;
 }
 
-.section-summary {
-    max-width: 480px;
-    color: #666;
-    font-size: 13px;
-    line-height: 1.9;
-}
-
 .button {
     min-height: 52px;
     display: inline-flex;
@@ -347,7 +326,7 @@ button, a {
     margin-right: 9px;
 }
 
-/* CONTACT INTRO */
+/* INTRODUCTION */
 
 .contact-intro {
     display: grid;
@@ -363,7 +342,7 @@ button, a {
     margin-bottom: 17px;
 }
 
-/* MAIN CONTACT AREA */
+/* CONTACT FORM AREA */
 
 .contact-area {
     background: #f5f5f3;
@@ -376,8 +355,6 @@ button, a {
     gap: 55px;
     align-items: start;
 }
-
-/* FORM */
 
 .form-panel {
     background: white;
@@ -482,21 +459,6 @@ button, a {
     line-height: 1.7;
 }
 
-.form-group .invalid {
-    border-color: #a32929;
-}
-
-.field-error {
-    display: none;
-    font-size: 10px;
-    color: #a32929;
-    margin-top: 5px;
-}
-
-.field-error.visible {
-    display: block;
-}
-
 .radio-options {
     display: flex;
     gap: 20px;
@@ -563,8 +525,6 @@ button, a {
     margin-top: 17px;
 }
 
-/* FORM SUBMISSION FEEDBACK */
-
 .form-honeypot {
     position: absolute !important;
     left: -10000px !important;
@@ -588,33 +548,33 @@ button, a {
     display: block;
     border-color: #b8c9bb;
     background: #f1f6f1;
-    color: #244b2b;
+    color: #23452b;
 }
 
 #formStatus.error {
     display: block;
-    border-color: #d8b8b8;
-    background: #fbf2f2;
-    color: #8b2929;
+    border-color: #d8aaaa;
+    background: #fff3f3;
+    color: #8a2525;
 }
 
-.form-submit .button-spinner {
+.button-spinner {
     display: inline-block;
     width: 13px;
     height: 13px;
-    margin-right: 9px;
-    border: 2px solid rgba(255,255,255,.35);
-    border-top-color: #fff;
+    border: 2px solid rgba(255,255,255,.4);
+    border-top-color: white;
     border-radius: 50%;
-    animation: dos-spin .7s linear infinite;
+    animation: spin .7s linear infinite;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
-@keyframes dos-spin {
+@keyframes spin {
     to { transform: rotate(360deg); }
 }
 
-/* CONTACT SIDEBAR */
+/* SIDEBAR */
 
 .contact-sidebar {
     background: white;
@@ -622,7 +582,7 @@ button, a {
 }
 
 .sidebar-block {
-    padding: 30px;
+    padding: 34px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -632,86 +592,40 @@ button, a {
 
 .sidebar-block h3 {
     font-family: var(--serif);
-    font-size: 25px;
+    font-size: 29px;
     font-weight: 400;
-    line-height: 1.3;
-    margin-bottom: 12px;
+    line-height: 1.25;
+    margin-bottom: 15px;
 }
 
 .sidebar-block p {
     color: #666;
     font-size: 12px;
     line-height: 1.9;
+    margin-bottom: 13px;
 }
 
-.sidebar-link {
-    display: block;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border);
+.sidebar-block a {
+    font-size: 12px;
+    font-weight: 700;
 }
 
-.sidebar-link:last-child {
-    border-bottom: 0;
+.sidebar-contact-link {
+    display: inline-block;
+    border-bottom: 1px solid #111;
+    padding-bottom: 4px;
 }
 
-.sidebar-link strong {
-    display: block;
-    font-size: 14px;
-}
-
-.sidebar-link small {
-    display: block;
-    color: #777;
-    font-size: 10px;
-    margin-top: 3px;
-}
-
-.urgent-box {
-    background: #111;
-    color: white;
-}
-
-.urgent-box .eyebrow {
-    color: #aaa;
-}
-
-.urgent-box p {
-    color: #ddd;
-}
-
-/* INFORMATION SECTIONS */
-
-.documents-section {
-    background: white;
-}
-
-.documents-grid {
-    display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    gap: 80px;
-}
-
-.documents-copy p {
-    color: #666;
-    font-size: 13px;
-    line-height: 1.9;
-    margin-top: 18px;
-}
-
-.documents-list {
-    border-top: 1px solid var(--border);
-}
-
-.documents-list div {
+.office-hours {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 17px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 11px;
 }
 
-.documents-list span:last-child {
+.office-hours span:last-child {
     color: #777;
     text-align: right;
 }
@@ -719,20 +633,20 @@ button, a {
 /* FAQ */
 
 .faq-section {
-    background: #f5f5f3;
+    padding: 90px 0;
 }
 
 .faq-layout {
     display: grid;
     grid-template-columns: .8fr 1.2fr;
-    gap: 80px;
+    gap: 90px;
 }
 
-.faq-intro p {
-    color: #666;
-    font-size: 13px;
-    line-height: 1.9;
-    margin-top: 18px;
+.faq-heading h2 {
+    font-family: var(--serif);
+    font-size: clamp(35px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.2;
 }
 
 .faq-list {
@@ -745,30 +659,30 @@ button, a {
 
 .faq-question {
     width: 100%;
-    border: 0;
-    background: transparent;
+    min-height: 65px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
     text-align: left;
-    padding: 20px 0;
+    border: 0;
+    background: transparent;
     cursor: pointer;
     font-size: 12px;
     font-weight: 700;
 }
 
 .faq-question span:last-child {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 400;
 }
 
 .faq-answer {
     display: none;
-    padding: 0 35px 20px 0;
     color: #666;
     font-size: 12px;
     line-height: 1.9;
+    padding: 0 30px 22px 0;
 }
 
 .faq-item.open .faq-answer {
@@ -780,89 +694,99 @@ button, a {
 .contact-cta {
     background: #111;
     color: white;
-    padding: 75px 0;
+    padding: 65px 0;
 }
 
 .contact-cta-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 35px;
+    gap: 30px;
 }
 
 .contact-cta h2 {
     font-family: var(--serif);
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(32px, 4vw, 45px);
     font-weight: 400;
     line-height: 1.2;
 }
 
-.contact-cta p {
+.contact-cta p:not(.eyebrow) {
     color: #ccc;
     font-size: 12px;
-    line-height: 1.9;
     margin-top: 12px;
-    max-width: 500px;
 }
 
 /* FOOTER */
 
 .footer {
-    background: #111;
-    color: white;
-    padding: 55px 0 25px;
+    background: #f5f5f3;
+    padding: 65px 0 25px;
 }
 
 .footer-main {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 55px;
+    gap: 50px;
     padding-bottom: 45px;
+    border-bottom: 1px solid var(--border);
 }
 
 .footer-brand p {
-    color: #aaa;
+    max-width: 300px;
+    color: #666;
     font-size: 11px;
     line-height: 1.9;
-    max-width: 320px;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .footer-heading {
     font-size: 10px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: #aaa;
     margin-bottom: 17px;
 }
 
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
 .footer-links a {
-    display: block;
-    color: #ddd;
     font-size: 11px;
-    margin: 10px 0;
+    color: #555;
 }
 
 .footer-links a:hover {
-    color: white;
+    color: #111;
 }
 
 .footer-bottom {
-    border-top: 1px solid #333;
-    padding-top: 22px;
+    padding-top: 24px;
     display: flex;
-    justify-content: space-between;
-    gap: 25px;
-    color: #888;
-    font-size: 10px;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-bottom p,
+.footer-bottom span {
+    font-size: 9px;
+    color: #777;
     line-height: 1.8;
 }
 
 /* RESPONSIVE */
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     .navigation {
         gap: 14px;
+    }
+
+    .brand {
+        min-width: auto;
     }
 
     .contact-grid {
@@ -875,18 +799,18 @@ button, a {
     }
 
     .sidebar-block {
+        border-bottom: 0;
         border-right: 1px solid var(--border);
     }
 
-    .documents-grid,
-    .faq-layout {
-        gap: 45px;
+    .sidebar-block:last-child {
+        border-right: 0;
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 720px) {
     .container {
-        width: min(100% - 34px, 1200px);
+        width: min(100% - 32px, 1200px);
     }
 
     .header {
@@ -898,17 +822,17 @@ button, a {
     }
 
     .navigation {
+        display: none;
         position: absolute;
         top: 72px;
         left: 0;
         right: 0;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
         background: white;
         border-bottom: 1px solid var(--border);
-        padding: 10px 22px 20px;
+        padding: 15px 24px 25px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
     }
 
     .navigation.open {
@@ -916,18 +840,16 @@ button, a {
     }
 
     .navigation a {
-        min-height: 48px;
-        border-bottom: 1px solid #eee;
+        min-height: 42px;
     }
 
     .navigation .nav-button {
         justify-content: center;
-        margin-top: 12px;
     }
 
     .contact-hero-image {
         inset: 0;
-        opacity: .4;
+        opacity: .35;
     }
 
     .contact-hero-inner {
@@ -936,18 +858,17 @@ button, a {
     }
 
     .contact-intro,
-    .documents-grid,
     .faq-layout {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 
     .section {
-        padding: 65px 0;
+        padding: 60px 0;
     }
 
     .contact-area {
-        padding: 60px 0;
+        padding: 55px 0;
     }
 
     .form-panel {
@@ -960,11 +881,12 @@ button, a {
     }
 
     .contact-sidebar {
-        display: block;
+        grid-template-columns: 1fr;
     }
 
     .sidebar-block {
         border-right: 0;
+        border-bottom: 1px solid var(--border);
     }
 
     .contact-cta-inner {
@@ -980,21 +902,9 @@ button, a {
     .footer-brand {
         grid-column: 1 / -1;
     }
-
-    .footer-bottom {
-        flex-direction: column;
-    }
 }
 
 @media (max-width: 420px) {
-    .topbar {
-        font-size: 9px;
-    }
-
-    .brand {
-        min-width: 0;
-    }
-
     .brand-name strong {
         font-size: 13px;
     }
@@ -1003,9 +913,16 @@ button, a {
         font-size: 8px;
     }
 
-    .hero-meta {
-        gap: 12px;
-        flex-direction: column;
+    .form-panel {
+        padding: 22px 16px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: auto;
     }
 }
 </style>
@@ -1013,17 +930,12 @@ button, a {
 
 <body>
 
-<a href="#main" class="skip-link">Skip to content</a>
-
 <!-- TOP BAR -->
 
 <div class="topbar">
     <div class="container topbar-inner">
-        <span>LEEDS · MOTORING NOTICE ADVICE</span>
-        <span>
-            Monday–Friday, 9am–6pm &nbsp; | &nbsp;
-            <a href="https://wa.me/447480214872">+44 7480 214872</a>
-        </span>
+        <span>DRIVING OFFENCE SOLUTIONS</span>
+        <a href="https://wa.me/447480214872">+44 7480 214872</a>
     </div>
 </div>
 
@@ -1031,6 +943,7 @@ button, a {
 
 <header class="header">
     <div class="container header-inner">
+
         <a href="index.html" class="brand">
             <span class="brand-symbol">DOS</span>
             <span class="brand-name">
@@ -1039,16 +952,7 @@ button, a {
             </span>
         </a>
 
-        <button class="menu-toggle"
-                aria-label="Open navigation"
-                aria-expanded="false"
-                aria-controls="navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav class="navigation" id="navigation" aria-label="Main navigation">
+        <nav class="navigation" aria-label="Main navigation">
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
             <a href="court.html">Court &amp; bans</a>
@@ -1056,10 +960,17 @@ button, a {
             <a href="contact.html">Contact</a>
             <a href="contact.html" class="nav-button">Request an assessment</a>
         </nav>
+
+        <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
     </div>
 </header>
 
-<main id="main">
+<main>
 
 <!-- HERO -->
 
@@ -1067,13 +978,17 @@ button, a {
     <div class="contact-hero-image"></div>
 
     <div class="container contact-hero-inner">
-        <p class="eyebrow light">CONTACT / INITIAL ENQUIRY</p>
+        <p class="eyebrow light">CONTACT THE OFFICE</p>
 
-        <h1>Tell us what<br><em>has arrived.</em></h1>
+        <h1>
+            Let's understand<br>
+            <em>your situation.</em>
+        </h1>
 
         <p class="description">
-            Start with the document, the date it arrived and any deadline
-            printed on it. A short explanation is enough to begin.
+            Received a motoring notice, penalty or court document?
+            Tell us briefly what has happened and the office can
+            consider the next appropriate step.
         </p>
 
         <div class="hero-meta">
@@ -1088,6 +1003,7 @@ button, a {
 
 <section class="section">
     <div class="container contact-intro">
+
         <div>
             <p class="eyebrow">GET IN TOUCH</p>
             <h2 class="section-heading">A clear starting point.</h2>
@@ -1095,23 +1011,23 @@ button, a {
 
         <div class="contact-intro-copy">
             <p>
-                If you have received a motoring notice, penalty, court
-                document or enforcement letter, use the form to explain
-                what has happened.
+                If you have received a motoring notice, penalty,
+                court document or enforcement letter, use the form
+                to explain what has happened.
             </p>
 
             <p>
-                Include the type of document, when it arrived and any
-                response deadline or hearing date shown. You do not need
-                to know the legal terminology to make an enquiry.
+                You do not need to know the legal terminology or
+                have every document detail available to make an enquiry.
             </p>
 
             <p>
-                The information helps the office understand the nature
-                of the matter and identify what documents may be needed
-                for an initial assessment.
+                Provide only the information you are comfortable
+                sharing at this initial stage. The office can ask
+                for further details if they are needed.
             </p>
         </div>
+
     </div>
 </section>
 
@@ -1121,248 +1037,139 @@ button, a {
     <div class="container contact-grid">
 
         <div class="form-panel">
+
             <div class="form-header">
                 <p class="eyebrow">ENQUIRY FORM</p>
-                <h2>Tell us about your notice.</h2>
+                <h2>Tell us about your matter.</h2>
                 <p>
-                    Complete the details below. Fields marked
-                    with an asterisk are required.
+                    Only fields marked with an asterisk are required.
                 </p>
             </div>
 
             <form id="contactForm">
 
-                <!-- SPAM-TRAP FIELD -->
+                <!-- SPAM PROTECTION -->
                 <div class="form-honeypot" aria-hidden="true">
                     <label for="website">Leave this field empty</label>
-                    <input
-                        type="text"
-                        id="website"
-                        name="website"
-                        tabindex="-1"
-                        autocomplete="off"
-                    >
+                    <input type="text" id="website" name="website"
+                           tabindex="-1" autocomplete="off">
                 </div>
 
-                <!-- PERSONAL DETAILS -->
-
-                <h3 class="form-section-title">
-                    01 — Your contact details
-                </h3>
+                <h3 class="form-section-title">01 — Your details</h3>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="fullName">Full name *</label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            placeholder="Your full name"
-                            autocomplete="name"
-                            required
-                        >
-                        <p class="field-error">Please enter your name.</p>
+                        <input type="text" id="fullName" name="fullName"
+                               placeholder="Your full name"
+                               autocomplete="name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email address *</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="you@example.com"
-                            autocomplete="email"
-                            required
-                        >
-                        <p class="field-error">Enter a valid email address.</p>
+                        <input type="email" id="email" name="email"
+                               placeholder="you@example.com"
+                               autocomplete="email" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="phone">Telephone number</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Your contact number"
-                            autocomplete="tel"
-                        >
+                        <label for="phone">
+                            Telephone number <small>(optional)</small>
+                        </label>
+                        <input type="tel" id="phone" name="phone"
+                               placeholder="Your contact number"
+                               autocomplete="tel">
                     </div>
 
                     <div class="form-group">
                         <label for="preferredContact">
-                            Preferred contact method
+                            Preferred contact <small>(optional)</small>
                         </label>
+
                         <select id="preferredContact" name="preferredContact">
-                            <option value="">Select an option</option>
+                            <option value="">No preference</option>
                             <option value="Email">Email</option>
                             <option value="Telephone">Telephone</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- MATTER DETAILS -->
-
-                <h3 class="form-section-title">
-                    02 — What is your enquiry about?
-                </h3>
+                <h3 class="form-section-title">02 — Your motoring matter</h3>
 
                 <div class="form-group">
-                    <label for="matterType">
-                        Type of motoring matter *
-                    </label>
+                    <label for="matterType">What is your enquiry about? *</label>
 
                     <select id="matterType" name="matterType" required>
-                        <option value="">Choose the closest match</option>
-                        <option>Speeding allegation</option>
-                        <option>Notice of Intended Prosecution (NIP)</option>
-                        <option>Section 172 driver identification request</option>
-                        <option>Fixed Penalty Notice</option>
-                        <option>Penalty points / endorsement</option>
-                        <option>Mobile phone allegation</option>
-                        <option>Drink-driving allegation</option>
-                        <option>Drug-driving allegation</option>
-                        <option>Single Justice Procedure Notice</option>
-                        <option>Magistrates' Court summons / requisition</option>
-                        <option>Court hearing / prosecution documents</option>
-                        <option>Driving ban / disqualification</option>
-                        <option>Totting-up / 12 penalty points</option>
-                        <option>Exceptional hardship</option>
-                        <option>Court order / sentencing</option>
-                        <option>Court fine / outstanding balance</option>
-                        <option>Enforcement correspondence</option>
-                        <option>Appeal / previous court decision</option>
-                        <option>Other motoring matter</option>
+                        <option value="">Select a matter</option>
+                        <option value="Speeding">Speeding</option>
+                        <option value="Notice of Intended Prosecution">Notice of Intended Prosecution</option>
+                        <option value="Fixed Penalty Notice">Fixed Penalty Notice</option>
+                        <option value="Penalty Points">Penalty points</option>
+                        <option value="Driving Disqualification">Driving disqualification / driving ban</option>
+                        <option value="Court Proceedings">Court proceedings or summons</option>
+                        <option value="Drink or Drug Driving">Drink-driving or drug-driving</option>
+                        <option value="Mobile Phone Offence">Mobile phone offence</option>
+                        <option value="Driving Without Insurance">Driving without insurance</option>
+                        <option value="Other Motoring Matter">Other motoring matter</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="penaltyPoints">
+                        How many penalty points do you currently have?
+                        <small>(optional)</small>
+                    </label>
+
+                    <input type="number" id="penaltyPoints"
+                           name="penaltyPoints" min="0" max="12"
+                           step="1" placeholder="For example, 6">
 
                     <p class="form-hint">
-                        If you are unsure, choose the closest
-                        description or select Other.
+                        Leave blank if you are unsure.
                     </p>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="authority">
-                            Who issued the document?
-                        </label>
-
-                        <select id="authority" name="authority">
-                            <option value="">Select if known</option>
-                            <option>Police</option>
-                            <option>Safety Camera Unit</option>
-                            <option>Magistrates' Court</option>
-                            <option>HM Courts &amp; Tribunals Service</option>
-                            <option>DVLA</option>
-                            <option>Enforcement Agent</option>
-                            <option>Local Authority</option>
-                            <option>Other</option>
-                            <option>Not sure</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reference">
-                            Document reference number
-                            <small>(optional)</small>
-                        </label>
-
-                        <input
-                            type="text"
-                            id="reference"
-                            name="reference"
-                            placeholder="Reference, if available"
-                        >
-                    </div>
-                </div>
-
-                <!-- IMPORTANT DATES -->
-
-                <h3 class="form-section-title">
-                    03 — Important dates
-                </h3>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="dateReceived">
-                            When did you receive the document?
-                        </label>
-
-                        <input
-                            type="date"
-                            id="dateReceived"
-                            name="dateReceived"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="responseDeadline">
-                            Response deadline
-                        </label>
-
-                        <input
-                            type="date"
-                            id="responseDeadline"
-                            name="responseDeadline"
-                        >
-
-                        <p class="form-hint">
-                            Enter the date shown on your notice,
-                            if one is provided.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="hearingDate">Court hearing date</label>
-                        <input
-                            type="date"
-                            id="hearingDate"
-                            name="hearingDate"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="offenceDate">Date of alleged offence</label>
-                        <input
-                            type="date"
-                            id="offenceDate"
-                            name="offenceDate"
-                        >
-                    </div>
-                </div>
-
-                <!-- CURRENT SITUATION -->
-
-                <h3 class="form-section-title">
-                    04 — Current position
-                </h3>
-
                 <div class="form-group">
                     <label for="currentPosition">
-                        What has happened so far?
+                        What has happened so far? <small>(optional)</small>
                     </label>
 
                     <select id="currentPosition" name="currentPosition">
                         <option value="">Select if applicable</option>
-                        <option>Just received the first notice</option>
-                        <option>Already responded to the notice</option>
-                        <option>Received a fixed penalty offer</option>
-                        <option>Received a court notice</option>
-                        <option>Already attended court</option>
-                        <option>Convicted and sentenced</option>
-                        <option>Currently disqualified</option>
-                        <option>Received enforcement correspondence</option>
-                        <option>Missed a response deadline</option>
-                        <option>Missed a court hearing</option>
-                        <option>Other</option>
+                        <option value="Just received a notice">I have just received a notice</option>
+                        <option value="Received a fixed penalty">I have received a fixed penalty</option>
+                        <option value="Received court documents">I have received court documents</option>
+                        <option value="Already attended court">I have already attended court</option>
+                        <option value="Already convicted">I have already been convicted</option>
+                        <option value="Currently disqualified">I am currently disqualified</option>
+                        <option value="Missed a deadline or hearing">I missed a deadline or hearing</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
 
+                <h3 class="form-section-title">03 — Tell us what happened</h3>
+
                 <div class="form-group">
-                    <label>Is there an urgent deadline?</label>
+                    <label for="message">Your explanation *</label>
+
+                    <textarea id="message" name="message"
+                              minlength="20" maxlength="5000"
+                              placeholder="Briefly explain what happened and what help you are looking for..."
+                              required></textarea>
+
+                    <p class="form-hint">
+                        Include any important details you think the office
+                        should know. Avoid entering passwords, bank details
+                        or unnecessary sensitive information.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Is your matter urgent? <small>(optional)</small>
+                    </label>
 
                     <div class="radio-options">
                         <label class="radio-option">
@@ -1376,233 +1183,123 @@ button, a {
                         </label>
 
                         <label class="radio-option">
-                            <input type="radio" name="urgent" value="Unsure" checked>
+                            <input type="radio" name="urgent" value="Unsure">
                             Unsure
                         </label>
                     </div>
                 </div>
 
-                <!-- MESSAGE -->
-
-                <h3 class="form-section-title">
-                    05 — Tell us what happened
-                </h3>
-
-                <div class="form-group">
-                    <label for="message">Your explanation *</label>
-
-                    <textarea
-                        id="message"
-                        name="message"
-                        minlength="20"
-                        maxlength="5000"
-                        placeholder="Please explain what happened, what document you received, any response you have already made and what you would like us to examine..."
-                        required
-                    ></textarea>
-
-                    <p class="form-hint">
-                        Include the important details, but avoid
-                        entering passwords, bank details or
-                        unnecessary sensitive personal information.
-                    </p>
-
-                    <p class="field-error">
-                        Please provide a little more information.
-                    </p>
-                </div>
-
-                <!-- CONSENT -->
-
                 <div class="consent-row">
-                    <input
-                        type="checkbox"
-                        id="privacyConsent"
-                        required
-                    >
+                    <input type="checkbox" id="privacyConsent"
+                           name="privacyConsent" required>
 
                     <label for="privacyConsent">
-                        I have read the privacy information and
-                        agree that my information may be used
-                        to respond to this enquiry. *
+                        I have read the privacy information and agree
+                        that my information may be used to respond
+                        to this enquiry. *
                     </label>
                 </div>
 
                 <button type="submit" class="form-submit">
-                    Prepare my enquiry →
+                    Submit my enquiry →
                 </button>
 
                 <p class="form-disclaimer">
                     Submitting an enquiry does not create a
-                    solicitor-client relationship, does not
-                    constitute legal representation and does
-                    not suspend any statutory or court deadline.
-                    Do not assume your enquiry has been received
-                    until you have confirmation.
+                    solicitor-client relationship, does not constitute
+                    legal representation and does not suspend any
+                    statutory or court deadline. Do not assume your
+                    enquiry has been received until you have confirmation.
                 </p>
 
-                <div
-                    id="formStatus"
-                    role="status"
-                    aria-live="polite"
-                ></div>
+                <div id="formStatus" role="status" aria-live="polite"></div>
+
             </form>
+
         </div>
 
         <!-- CONTACT SIDEBAR -->
 
         <aside class="contact-sidebar">
+
             <div class="sidebar-block">
                 <p class="eyebrow">SPEAK TO THE OFFICE</p>
+
                 <h3>Prefer to get in touch directly?</h3>
 
                 <p>
-                    If you would rather discuss your enquiry
-                    directly, use the contact details below.
+                    If you would rather discuss your enquiry directly,
+                    use the contact details below.
                 </p>
 
-                <a href="https://wa.me/447480214872" class="sidebar-link">
-                    <strong>+44 7480 214872</strong>
-                    <small>Telephone the office</small>
-                </a>
+                <p>
+                    <a class="sidebar-contact-link"
+                       href="https://wa.me/447480214872">
+                        +44 7480 214872
+                    </a>
+                </p>
 
-                <a href="mailto:info@drivingoffencesolution.co.uk" class="sidebar-link">
-                    <strong>Email the office</strong>
-                    <small>info@drivingoffencesolution.co.uk</small>
-                </a>
+                <p>
+                    <a class="sidebar-contact-link"
+                       href="mailto:info@drivingoffencesolution.co.uk">
+                        info@drivingoffencesolution.co.uk
+                    </a>
+                </p>
             </div>
 
             <div class="sidebar-block">
                 <p class="eyebrow">OFFICE HOURS</p>
+
                 <h3>When we're available</h3>
-                <p>
-                    Monday to Friday<br>
-                    9:00am–6:00pm
+
+                <div class="office-hours">
+                    <span>Monday to Friday</span>
+                    <span>9:00am–6:00pm</span>
+                </div>
+
+                <div class="office-hours">
+                    <span>Saturday</span>
+                    <span>By appointment</span>
+                </div>
+
+                <div class="office-hours">
+                    <span>Sunday</span>
+                    <span>Closed</span>
+                </div>
+
+                <p style="margin-top:16px">
+                    If a court deadline is close, telephone the office
+                    rather than relying only on the online form.
                 </p>
             </div>
 
-            <div class="sidebar-block">
-                <p class="eyebrow">OFFICE</p>
-                <h3>Find the office</h3>
-                <p>
-                    Suite 3, Kingsway House<br>
-                    42 Wellington Street<br>
-                    Leeds LS1 4DL
-                </p>
-            </div>
-
-            <div class="sidebar-block urgent-box">
-                <p class="eyebrow">URGENT MATTERS</p>
-                <h3>Have a court date soon?</h3>
-                <p>
-                    Do not rely on this form for urgent matters.
-                    Call the office and seek advice from a qualified
-                    solicitor where required.
-                </p>
-            </div>
         </aside>
 
     </div>
 </section>
 
-<!-- DOCUMENTS TO PREPARE -->
-
-<section class="section documents-section">
-    <div class="container documents-grid">
-        <div class="documents-copy">
-            <p class="eyebrow">BEFORE YOU GET IN TOUCH</p>
-            <h2 class="section-heading">A few details can help.</h2>
-
-            <p>
-                You do not need to upload documents through this
-                initial form. Start by identifying what you received
-                and when it arrived.
-            </p>
-
-            <p>
-                If documents are needed for a review, the office can
-                explain how to provide them through an appropriate
-                channel.
-            </p>
-        </div>
-
-        <div class="documents-list">
-            <div>
-                <span>The notice or letter</span>
-                <span>Document type</span>
-            </div>
-            <div>
-                <span>Date it arrived</span>
-                <span>Where known</span>
-            </div>
-            <div>
-                <span>Response deadline</span>
-                <span>If stated</span>
-            </div>
-            <div>
-                <span>Court hearing date</span>
-                <span>If applicable</span>
-            </div>
-            <div>
-                <span>Reference number</span>
-                <span>Optional</span>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FAQ -->
 
-<section class="section faq-section">
+<section class="faq-section">
     <div class="container faq-layout">
-        <div class="faq-intro">
-            <p class="eyebrow">COMMON QUESTIONS</p>
-            <h2 class="section-heading">Before submitting.</h2>
 
-            <p>
-                A few practical answers about making an enquiry
-                and what happens next.
-            </p>
+        <div class="faq-heading">
+            <p class="eyebrow">COMMON QUESTIONS</p>
+            <h2>Before you get in touch.</h2>
         </div>
 
         <div class="faq-list">
 
             <div class="faq-item">
                 <button class="faq-question" aria-expanded="false">
-                    <span>Does submitting this form protect a deadline?</span>
+                    <span>What information should I provide?</span>
                     <span>+</span>
                 </button>
-                <div class="faq-answer">
-                    No. Submitting an enquiry does not extend, pause
-                    or replace any legal or court deadline. Continue
-                    to comply with the instructions and dates on
-                    your notice unless an authorised person or
-                    authority confirms otherwise.
-                </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">
-                    <span>What happens after I submit the form?</span>
-                    <span>+</span>
-                </button>
                 <div class="faq-answer">
-                    Your enquiry is sent to the office for review.
-                    The office can then respond using the contact
-                    details you provided. If further documents are
-                    required, you can be told how to provide them.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">
-                    <span>Do I need to know which law applies?</span>
-                    <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    No. Select the closest description and explain
-                    what happened in your own words. Include the
-                    document title and any dates printed on it
-                    where possible.
+                    Explain briefly what happened and what help you
+                    are looking for. You do not need to provide every
+                    document detail at the initial enquiry stage.
                 </div>
             </div>
 
@@ -1611,11 +1308,12 @@ button, a {
                     <span>Can I send documents through this form?</span>
                     <span>+</span>
                 </button>
+
                 <div class="faq-answer">
                     This form does not provide document upload.
                     Do not send original documents, passwords,
-                    bank details or unnecessary sensitive
-                    information through an unverified channel.
+                    bank details or unnecessary sensitive information
+                    through an unverified channel.
                 </div>
             </div>
 
@@ -1624,12 +1322,12 @@ button, a {
                     <span>Does an enquiry mean I have instructed a solicitor?</span>
                     <span>+</span>
                 </button>
+
                 <div class="faq-answer">
                     No. Sending an enquiry does not create a
-                    solicitor-client relationship or amount to
-                    formal legal representation. Any reserved
-                    legal work must be undertaken by an
-                    appropriately authorised professional.
+                    solicitor-client relationship or amount to formal
+                    legal representation. Any reserved legal work must
+                    be undertaken by an appropriately authorised professional.
                 </div>
             </div>
 
@@ -1638,12 +1336,12 @@ button, a {
                     <span>What if my matter is urgent?</span>
                     <span>+</span>
                 </button>
+
                 <div class="faq-answer">
-                    Telephone the office rather than relying
-                    solely on the online form. If court proceedings
-                    or a legal deadline are involved, seek advice
-                    from an appropriately qualified solicitor
-                    where required.
+                    Telephone the office rather than relying solely
+                    on the online form. If court proceedings or a
+                    legal deadline are involved, seek advice from an
+                    appropriately qualified solicitor where required.
                 </div>
             </div>
 
@@ -1655,9 +1353,12 @@ button, a {
 
 <section class="contact-cta">
     <div class="container contact-cta-inner">
+
         <div>
             <p class="eyebrow light">NEED TO SPEAK TO SOMEONE?</p>
+
             <h2>Start with a conversation.</h2>
+
             <p>
                 If you would rather speak directly, telephone
                 the office during business hours.
@@ -1667,6 +1368,7 @@ button, a {
         <a href="https://wa.me/447480214872" class="button button-white">
             Call +44 7480 214872
         </a>
+
     </div>
 </section>
 
@@ -1676,11 +1378,13 @@ button, a {
 
 <footer class="footer">
     <div class="container">
+
         <div class="footer-main">
 
             <div class="footer-brand">
                 <a href="index.html" class="brand">
                     <span class="brand-symbol">DOS</span>
+
                     <span class="brand-name">
                         <strong>Driving Offence Solutions</strong>
                         <small>Motoring notice advice · Leeds</small>
@@ -1713,6 +1417,7 @@ button, a {
         </div>
 
         <div class="footer-bottom">
+
             <p>
                 Driving Offence Solutions Ltd · Company no. 08214993 ·
                 Suite 3, Kingsway House, 42 Wellington Street,
@@ -1726,44 +1431,31 @@ button, a {
                 Outcomes vary; no result is guaranteed.
             </p>
 
-            <span>Â© 2026 Driving Offence Solutions Ltd</span>
+            <span>&copy; 2026 Driving Offence Solutions Ltd</span>
+
         </div>
+
     </div>
 </footer>
 
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
-
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyB-LMT7YDCpEqOhhx6LlLWxGjSAMFOghns",
-    authDomain: "driving-offence-e7def.firebaseapp.com",
-    projectId: "driving-offence-e7def",
-    storageBucket: "driving-offence-e7def.firebasestorage.app",
-    messagingSenderId: "420147130242",
-    appId: "1:420147130242:web:d89db6e68e8c7f380ce99b",
-    measurementId: "G-3PDR0VHSQ9"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
+<script>
+// ==================================================
 // MOBILE NAVIGATION
+// ==================================================
+
 const toggle = document.querySelector(".menu-toggle");
 const navigation = document.querySelector(".navigation");
 
 if (toggle && navigation) {
     toggle.addEventListener("click", () => {
         const open = toggle.getAttribute("aria-expanded") === "true";
+
         toggle.setAttribute("aria-expanded", String(!open));
-        toggle.setAttribute("aria-label", open ? "Open navigation" : "Close navigation");
+        toggle.setAttribute(
+            "aria-label",
+            open ? "Open navigation" : "Close navigation"
+        );
+
         navigation.classList.toggle("open", !open);
     });
 
@@ -1776,119 +1468,214 @@ if (toggle && navigation) {
     });
 }
 
+// ==================================================
 // FAQ ACCORDION
+// ==================================================
+
 document.querySelectorAll(".faq-question").forEach(button => {
     button.addEventListener("click", () => {
         const item = button.closest(".faq-item");
         const open = item.classList.toggle("open");
+
         button.setAttribute("aria-expanded", String(open));
-        button.querySelector("span:last-child").textContent = open ? "−" : "+";
+
+        const indicator = button.querySelector("span:last-child");
+
+        if (indicator) {
+            indicator.textContent = open ? "−" : "+";
+        }
     });
 });
 
-// FIRESTORE ENQUIRY SUBMISSION
+// ==================================================
+// CONTACT FORM — VERCEL API
+// ==================================================
+
 const form = document.getElementById("contactForm");
 const statusBox = document.getElementById("formStatus");
 
 if (form && statusBox) {
+
     form.addEventListener("submit", async event => {
+
         event.preventDefault();
 
         if (!form.reportValidity()) return;
 
         const data = new FormData(form);
 
-        // Spam trap: silently reject bots that fill this field.
-        if (String(data.get("website") || "").trim()) return;
+        // Honeypot spam protection
+        if (String(data.get("website") || "").trim()) {
+            return;
+        }
 
-        const submitButton = form.querySelector('button[type="submit"]');
+        const submitButton =
+            form.querySelector('button[type="submit"]');
+
         const originalButton = submitButton.innerHTML;
 
+        const pointsRaw =
+            String(data.get("penaltyPoints") || "").trim();
+
         const enquiry = {
+
             name: String(data.get("fullName") || "").trim(),
+
             email: String(data.get("email") || "").trim(),
+
             phone: String(data.get("phone") || "").trim(),
-            preferredContact: String(data.get("preferredContact") || "").trim(),
-            matterType: String(data.get("matterType") || "").trim(),
-            authority: String(data.get("authority") || "").trim(),
-            reference: String(data.get("reference") || "").trim(),
-            dateReceived: String(data.get("dateReceived") || "").trim(),
-            responseDeadline: String(data.get("responseDeadline") || "").trim(),
-            hearingDate: String(data.get("hearingDate") || "").trim(),
-            offenceDate: String(data.get("offenceDate") || "").trim(),
-            currentPosition: String(data.get("currentPosition") || "").trim(),
-            urgent: String(data.get("urgent") || "Unsure").trim(),
-            message: String(data.get("message") || "").trim(),
-            privacyConsent: document.getElementById("privacyConsent").checked,
-            status: "new",
-            createdAt: serverTimestamp()
+
+            preferredContact:
+                String(data.get("preferredContact") || "").trim(),
+
+            matterType:
+                String(data.get("matterType") || "").trim(),
+
+            penaltyPoints:
+                pointsRaw === "" ? "" : Number(pointsRaw),
+
+            currentPosition:
+                String(data.get("currentPosition") || "").trim(),
+
+            urgent:
+                String(data.get("urgent") || "Unsure").trim(),
+
+            message:
+                String(data.get("message") || "").trim(),
+
+            privacyConsent:
+                document.getElementById("privacyConsent").checked,
+
+            website: ""
         };
 
         if (
-            !enquiry.name ||
-            !enquiry.email ||
-            !enquiry.matterType ||
-            enquiry.message.length < 20 ||
-            !enquiry.privacyConsent
+            pointsRaw !== "" &&
+            (
+                !Number.isInteger(enquiry.penaltyPoints) ||
+                enquiry.penaltyPoints < 0 ||
+                enquiry.penaltyPoints > 12
+            )
         ) {
             statusBox.className = "error";
-            statusBox.textContent = "Please check your required information and try again.";
+            statusBox.style.display = "block";
+
+            statusBox.textContent =
+                "Please enter a whole number between 0 and 12, or leave the field blank.";
+
             return;
         }
 
         submitButton.disabled = true;
+
         submitButton.innerHTML =
-            '<span class="button-spinner" aria-hidden="true"></span> Saving enquiry...';
+            '<span class="button-spinner" aria-hidden="true"></span> Submitting enquiry...';
 
         statusBox.className = "";
         statusBox.style.display = "block";
-        statusBox.textContent = "Submitting your enquiry securely. Please wait.";
+
+        statusBox.textContent =
+            "Submitting your enquiry securely. Please wait.";
 
         try {
-            // Firestore creates a unique document ID automatically.
-            const docRef = await addDoc(collection(db, "enquiries"), enquiry);
+
+            const response = await fetch("/api/send-enquiry", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(enquiry)
+
+            });
+
+            let result;
+
+            try {
+                result = await response.json();
+            } catch {
+                throw new Error(
+                    "The server returned an unreadable response. Please contact the office."
+                );
+            }
+
+            if (
+                !response.ok ||
+                result.success !== true ||
+                result.saved !== true
+            ) {
+                throw new Error(
+                    result.error ||
+                    result.message ||
+                    "Your enquiry could not be submitted. Please try again."
+                );
+            }
 
             form.reset();
 
-            form.querySelectorAll(".invalid").forEach(field => {
-                field.classList.remove("invalid");
-            });
-
-            form.querySelectorAll(".field-error.visible").forEach(error => {
-                error.classList.remove("visible");
-            });
-
             statusBox.className = "success";
+
+            const officeSent =
+                result.officeEmailSent === true;
+
+            const visitorSent =
+                result.visitorEmailSent === true;
+
+            let deliveryMessage = "";
+
+            if (officeSent && visitorSent) {
+
+                deliveryMessage =
+                    " A confirmation email has also been sent to you.";
+
+            } else if (!officeSent && !visitorSent) {
+
+                deliveryMessage =
+                    " However, email notifications could not be sent. Please telephone the office to confirm receipt.";
+
+            } else if (!officeSent) {
+
+                deliveryMessage =
+                    " Your confirmation email was sent, but the office notification failed. Please telephone the office to confirm receipt.";
+
+            } else {
+
+                deliveryMessage =
+                    " The office has been notified, but your confirmation email could not be sent. Please check your email address or contact the office.";
+
+            }
+
             statusBox.textContent =
-                "Your enquiry has been saved successfully. Your reference is " +
-                docRef.id +
-                ". Please keep this reference. If a deadline is close, telephone the office as well.";
+                "Your enquiry has been received successfully. Your reference is " +
+                result.enquiryId +
+                ". Please keep this reference." +
+                deliveryMessage +
+                " If a deadline is close, telephone the office as well.";
 
         } catch (error) {
-            console.error("Firestore submission error:", error);
+
+            console.error("Enquiry submission error:", error);
 
             statusBox.className = "error";
+            statusBox.style.display = "block";
+
             statusBox.textContent =
-                error.code === "permission-denied"
-                ? "Your enquiry could not be saved because database permissions are blocking it. Please contact the office directly."
-                : "We could not save your enquiry. Please try again or contact the office directly.";
+                error.message ||
+                "We could not submit your enquiry. Please try again or contact the office directly.";
 
         } finally {
+
             submitButton.disabled = false;
             submitButton.innerHTML = originalButton;
+
         }
+
     });
 
-    // Clear field errors when the visitor corrects information.
-    form.querySelectorAll("input, select, textarea").forEach(field => {
-        field.addEventListener("input", () => {
-            field.classList.remove("invalid");
-            field.parentElement.querySelector(".field-error")?.classList.remove("visible");
-        });
-    });
 }
 </script>
-
 
 </body>
 </html>
