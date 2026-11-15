@@ -1,43 +1,53 @@
-﻿const RESEND_API_URL = "https://api.resend.com/emails";
+﻿'use strict';
+
+const RESEND_API_URL = 'https://api.resend.com/emails';
 
 const FROM_EMAIL =
-    "Driving Offence Solutions <no-reply@drivingoffencesolution.co.uk>";
+    'Driving Offence Solutions <no-reply@drivingoffencesolution.co.uk>';
 
-const OFFICE_EMAIL = "info@drivingoffencesolution.co.uk";
-const WHATSAPP_NUMBER = "+44 7480 214872";
+const OFFICE_EMAIL = 'info@drivingoffencesolution.co.uk';
+const WHATSAPP_NUMBER = '+44 7480 214872';
 
-const admin = require("firebase-admin");
+// ==================================================
+// FIREBASE ADMIN — MODULAR SDK
+// ==================================================
 
-/* ==================================================
-   FIREBASE ADMIN INITIALIZATION
+const {
+    initializeApp,
+    getApps,
+    cert
+} = require('firebase-admin/app');
 
-   Firestore is retained.
-   Credentials are read securely from Vercel.
-================================================== */
+const {
+    getAuth
+} = require('firebase-admin/auth');
 
-let firebaseInitialized = false;
-let db = null;
+const {
+    getFirestore,
+    FieldValue
+} = require('firebase-admin/firestore');
 
 function getFirebase() {
-    if (firebaseInitialized && db) {
-        return { admin, db };
-    }
 
-    const credentials = process.env.FIREBASE_SERVICE_ACCOUNT;
+    const rawCredentials =
+        process.env.FIREBASE_SERVICE_ACCOUNT;
 
-    if (!credentials || !credentials.trim()) {
+    if (
+        typeof rawCredentials !== 'string' ||
+        !rawCredentials.trim()
+    ) {
         throw new Error(
-            "Firebase is not configured. Add FIREBASE_SERVICE_ACCOUNT to your Vercel environment variables."
+            'Firebase is not configured. Add FIREBASE_SERVICE_ACCOUNT to your Vercel environment variables.'
         );
     }
 
     let serviceAccount;
 
     try {
-        serviceAccount = JSON.parse(credentials);
-    } catch (error) {
+        serviceAccount = JSON.parse(rawCredentials);
+    } catch {
         throw new Error(
-            "FIREBASE_SERVICE_ACCOUNT is not valid JSON. Check the Vercel environment variable."
+            'FIREBASE_SERVICE_ACCOUNT is not valid JSON. Check your Vercel environment variable.'
         );
     }
 
@@ -47,46 +57,55 @@ function getFirebase() {
         !serviceAccount.private_key
     ) {
         throw new Error(
-            "Firebase service account is incomplete. It must contain project_id, client_email and private_key."
+            'Firebase service-account JSON is incomplete.'
         );
     }
 
     serviceAccount.private_key =
-        serviceAccount.private_key.replace(/\\n/g, "\n");
+        serviceAccount.private_key.replace(/\\n/g, '\n');
 
-    if (!admin.apps.length) {
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
+    const existingApps = getApps();
+
+    const app = existingApps.length > 0
+        ? existingApps[0]
+        : initializeApp({
+            credential: cert(serviceAccount)
         });
-    }
 
-    db = admin.firestore();
-    firebaseInitialized = true;
-
-    return { admin, db };
+    return {
+        auth: getAuth(app),
+        db: getFirestore(app)
+    };
 }
 
-/* ==================================================
-   GENERAL HELPERS
-================================================== */
+// ==================================================
+// GENERAL HELPERS
+// ==================================================
 
 function clean(value, maxLength = 1000) {
-    if (typeof value !== "string") return "";
+
+    if (typeof value !== 'string') {
+        return '';
+    }
 
     return value.trim().slice(0, maxLength);
 }
 
 function escapeHTML(value) {
+
     return String(value).replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
+
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+
     }[character]));
 }
 
 function emailLayout(title, content) {
+
     return `
         <div style="font-family:Arial,sans-serif;color:#222;max-width:680px;margin:auto;line-height:1.7">
 
@@ -115,16 +134,18 @@ function emailLayout(title, content) {
 }
 
 function detail(label, value) {
+
     if (
-        value === "" ||
+        value === '' ||
         value === null ||
         value === undefined
     ) {
-        return "";
+        return '';
     }
 
     return `
         <tr>
+
             <td style="padding:10px;border-bottom:1px solid #eee;font-weight:bold;width:180px;vertical-align:top">
                 ${escapeHTML(label)}
             </td>
@@ -132,114 +153,173 @@ function detail(label, value) {
             <td style="padding:10px;border-bottom:1px solid #eee;white-space:pre-wrap">
                 ${escapeHTML(value)}
             </td>
+
         </tr>
     `;
 }
 
+// ==================================================
+// EMAIL VALIDATION
+// ==================================================
+
 function validEmail(email) {
+
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 }
 
+// ==================================================
+// REQUEST HELPERS
+// ==================================================
+
 function getBody(req) {
-    if (typeof req.body === "string") {
+
+    if (typeof req.body === 'string') {
         return JSON.parse(req.body);
     }
 
-    return req.body || {};
+    if (
+        req.body &&
+        typeof req.body === 'object'
+    ) {
+        return req.body;
+    }
+
+    return {};
 }
 
 function makeError(message, statusCode = 400) {
+
     const error = new Error(message);
+
     error.statusCode = statusCode;
+
     return error;
 }
 
-/* ==================================================
-   RESEND EMAIL SENDER
-================================================== */
+// ==================================================
+// RESEND EMAIL SERVICE
+// ==================================================
 
 async function sendEmail(apiKey, payload) {
+
     const response = await fetch(RESEND_API_URL, {
-        method: "POST",
+
+        method: 'POST',
 
         headers: {
+
             Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json"
+
+            'Content-Type': 'application/json'
+
         },
 
         body: JSON.stringify(payload)
+
     });
 
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-        console.error("Resend error:", {
+
+        console.error('Resend rejected an email:', {
+
             status: response.status,
-            message: result.message || "Email rejected",
+
+            message: result.message || 'Email rejected',
+
             name: result.name || null
+
         });
 
         throw new Error(
-            result.message || "Resend rejected the email."
+            result.message ||
+            `Resend rejected the email (HTTP ${response.status}).`
         );
     }
 
     return result;
 }
 
-/* ==================================================
-   ACTION 1: PUBLIC WEBSITE ENQUIRY
-================================================== */
+// ==================================================
+// ACTION 1: PUBLIC WEBSITE ENQUIRY
+// ==================================================
 
 async function handleEnquiry(body, apiKey) {
 
     // Spam protection
     if (clean(body.website, 200)) {
+
         return {
+
             success: true,
-            spam: true
+
+            saved: true,
+
+            spam: true,
+
+            enquiryId: null,
+
+            officeEmailSent: false,
+
+            visitorEmailSent: false,
+
+            message: 'Your enquiry has been received.'
+
         };
     }
 
-    const { admin, db } = getFirebase();
+    const { db } = getFirebase();
 
-    // Contact details
+    // ------------------------------------------------
+    // CUSTOMER DETAILS
+    // ------------------------------------------------
+
     const name = clean(
         body.name || body.fullName,
         120
     );
 
     const email = clean(body.email, 254);
+
     const phone = clean(body.phone, 50);
 
-    const preferred = clean(
+    const preferredContact = clean(
         body.preferredContact || body.preferred,
         40
     );
 
-    // Matter details
-    const matter = clean(
+    // ------------------------------------------------
+    // MOToring MATTER
+    // ------------------------------------------------
+
+    const matterType = clean(
         body.matterType || body.matter,
         120
     );
 
-    const position = clean(
+    const currentPosition = clean(
         body.currentPosition || body.position,
         150
     );
 
-    const urgent = clean(body.urgent, 30);
+    const urgent = clean(body.urgent, 30) || 'Unsure';
 
     const message = clean(body.message, 5000);
 
-    // Optional penalty points
-    let penaltyPoints = "";
+    // ------------------------------------------------
+    // OPTIONAL PENALTY POINTS
+    // ------------------------------------------------
+
+    let penaltyPoints = '';
 
     if (
-        body.penaltyPoints !== "" &&
+        body.penaltyPoints !== '' &&
         body.penaltyPoints !== undefined &&
         body.penaltyPoints !== null
     ) {
+
         const points = Number(body.penaltyPoints);
 
         if (
@@ -248,55 +328,62 @@ async function handleEnquiry(body, apiKey) {
             points > 12
         ) {
             throw makeError(
-                "Please enter a valid penalty points number between 0 and 12."
+                'Please enter a valid penalty-points number between 0 and 12.'
             );
         }
 
         penaltyPoints = points;
     }
 
-    // Required fields only
+    // ------------------------------------------------
+    // REQUIRED FIELD VALIDATION
+    // ------------------------------------------------
+
     if (!name) {
-        throw makeError("Your full name is required.");
+        throw makeError('Your full name is required.');
     }
 
     if (!validEmail(email)) {
-        throw makeError("Please enter a valid email address.");
+        throw makeError('Please enter a valid email address.');
     }
 
-    if (!matter) {
-        throw makeError("Please select the type of motoring matter.");
+    if (!matterType) {
+        throw makeError('Please select the type of motoring matter.');
     }
 
     if (message.length < 20) {
         throw makeError(
-            "Please provide an explanation of at least 20 characters."
+            'Please provide an explanation of at least 20 characters.'
         );
     }
 
     if (body.privacyConsent !== true) {
         throw makeError(
-            "Please accept the privacy information before submitting."
+            'Please accept the privacy information before submitting.'
         );
     }
 
-    /* ----------------------------------------------
-       SAVE ENQUIRY TO FIRESTORE FIRST
-    ---------------------------------------------- */
+    // ==================================================
+    // SAVE ENQUIRY TO FIRESTORE
+    // ==================================================
 
     const enquiryData = {
+
         name,
+
         fullName: name,
+
         email,
+
         phone,
 
-        preferredContact: preferred,
+        preferredContact,
 
-        matterType: matter,
+        matterType,
 
         penaltyPoints,
 
-        currentPosition: position,
+        currentPosition,
 
         urgent,
 
@@ -304,42 +391,47 @@ async function handleEnquiry(body, apiKey) {
 
         privacyConsent: true,
 
-        status: "new",
+        status: 'new',
 
-        createdAt: admin.firestore.FieldValue.serverTimestamp()
+        createdAt: FieldValue.serverTimestamp()
+
     };
 
     const enquiryRef = await db
-        .collection("enquiries")
+        .collection('enquiries')
         .add(enquiryData);
 
-    console.log("Enquiry saved to Firestore:", enquiryRef.id);
+    console.log(
+        'Enquiry saved to Firestore:',
+        enquiryRef.id
+    );
 
-    /* ----------------------------------------------
-       BUILD ADMIN NOTIFICATION
-    ---------------------------------------------- */
+    // ==================================================
+    // PREPARE OFFICE NOTIFICATION
+    // ==================================================
 
     const fields = `
+
         <table style="width:100%;border-collapse:collapse;font-size:13px">
 
-            ${detail("Customer name", name)}
+            ${detail('Customer name', name)}
 
-            ${detail("Email address", email)}
+            ${detail('Email address', email)}
 
-            ${detail("Telephone", phone)}
+            ${detail('Telephone', phone)}
 
-            ${detail("Preferred contact", preferred)}
+            ${detail('Preferred contact', preferredContact)}
 
-            ${detail("Matter type", matter)}
+            ${detail('Matter type', matterType)}
 
             ${detail(
-                "Current penalty points",
-                penaltyPoints === "" ? "" : String(penaltyPoints)
+                'Current penalty points',
+                penaltyPoints === '' ? '' : String(penaltyPoints)
             )}
 
-            ${detail("Current position", position)}
+            ${detail('Current position', currentPosition)}
 
-            ${detail("Urgency", urgent)}
+            ${detail('Urgency', urgent)}
 
         </table>
 
@@ -350,19 +442,22 @@ async function handleEnquiry(body, apiKey) {
         <div style="background:#f5f5f3;padding:18px;white-space:pre-wrap">
             ${escapeHTML(message)}
         </div>
+
     `;
 
     const officeEmail = {
+
         from: FROM_EMAIL,
 
         to: [OFFICE_EMAIL],
 
         reply_to: email,
 
-        subject: `NEW ENQUIRY: ${name} — ${matter}`,
+        subject: `NEW ENQUIRY: ${name} — ${matterType}`,
 
         html: emailLayout(
-            "You have received a new request",
+            'You have received a new request',
+
             `
                 <p>
                     You have received a new website enquiry from
@@ -378,15 +473,25 @@ async function handleEnquiry(body, apiKey) {
         ),
 
         text: `
+
 NEW WEBSITE ENQUIRY
 
 Customer: ${name}
+
 Email: ${email}
+
 Telephone: ${phone}
-Preferred contact: ${preferred}
-Matter: ${matter}
-Penalty points: ${penaltyPoints === "" ? "Not provided" : penaltyPoints}
-Current position: ${position}
+
+Preferred contact: ${preferredContact}
+
+Matter: ${matterType}
+
+Penalty points: ${
+            penaltyPoints === '' ? 'Not provided' : penaltyPoints
+        }
+
+Current position: ${currentPosition}
+
 Urgency: ${urgent}
 
 Message:
@@ -395,23 +500,26 @@ ${message}
 Firestore enquiry ID: ${enquiryRef.id}
 
 WhatsApp: ${WHATSAPP_NUMBER}
+
         `
     };
 
-    /* ----------------------------------------------
-       BUILD CUSTOMER ACKNOWLEDGEMENT
-    ---------------------------------------------- */
+    // ==================================================
+    // PREPARE CUSTOMER ACKNOWLEDGEMENT
+    // ==================================================
 
     const visitorEmail = {
+
         from: FROM_EMAIL,
 
         to: [email],
 
         subject:
-            "We have received your enquiry | Driving Offence Solutions",
+            'We have received your enquiry | Driving Offence Solutions',
 
         html: emailLayout(
-            "Thank you for your enquiry",
+            'Thank you for your enquiry',
+
             `
                 <p>Hello ${escapeHTML(name)},</p>
 
@@ -446,6 +554,7 @@ WhatsApp: ${WHATSAPP_NUMBER}
         ),
 
         text: `
+
 Hello ${name},
 
 Thank you for contacting Driving Offence Solutions.
@@ -461,15 +570,13 @@ WhatsApp: ${WHATSAPP_NUMBER}
 
 Regards,
 Driving Offence Solutions
+
         `
     };
 
-    /* ----------------------------------------------
-       SEND BOTH EMAILS
-
-       Firestore record remains saved if either
-       email fails.
-    ---------------------------------------------- */
+    // ==================================================
+    // SEND BOTH EMAILS
+    // ==================================================
 
     const emailResults = await Promise.allSettled([
 
@@ -480,10 +587,10 @@ Driving Offence Solutions
     ]);
 
     const officeSent =
-        emailResults[0].status === "fulfilled";
+        emailResults[0].status === 'fulfilled';
 
     const visitorSent =
-        emailResults[1].status === "fulfilled";
+        emailResults[1].status === 'fulfilled';
 
     const officeResult = officeSent
         ? emailResults[0].value
@@ -494,24 +601,29 @@ Driving Offence Solutions
         : null;
 
     if (!officeSent) {
+
         console.error(
-            "Office notification failed:",
+            'Office notification failed:',
             emailResults[0].reason
         );
+
     }
 
     if (!visitorSent) {
+
         console.error(
-            "Customer acknowledgement failed:",
+            'Customer acknowledgement failed:',
             emailResults[1].reason
         );
+
     }
 
-    /* ----------------------------------------------
-       RECORD EMAIL DELIVERY STATUS IN FIRESTORE
-    ---------------------------------------------- */
+    // ==================================================
+    // SAVE EMAIL DELIVERY STATUS
+    // ==================================================
 
     try {
+
         await enquiryRef.update({
 
             officeEmailSent: officeSent,
@@ -523,23 +635,31 @@ Driving Offence Solutions
             visitorResendId: visitorResult?.id || null,
 
             emailStatusUpdatedAt:
-                admin.firestore.FieldValue.serverTimestamp()
+                FieldValue.serverTimestamp()
 
         });
+
     } catch (error) {
+
         console.error(
-            "Could not update enquiry email status:",
-            error
+            'Could not update enquiry email status:',
+            error.message
         );
+
     }
 
-    console.log("Enquiry email results:", {
+    console.log('Enquiry email results:', {
+
         enquiryId: enquiryRef.id,
+
         officeEmailSent: officeSent,
+
         visitorEmailSent: visitorSent
+
     });
 
     return {
+
         success: true,
 
         saved: true,
@@ -550,48 +670,46 @@ Driving Offence Solutions
 
         visitorEmailSent: visitorSent,
 
-        message: "Your enquiry has been saved."
+        message: 'Your enquiry has been saved.'
+
     };
 }
 
-/* ==================================================
-   ACTION 2: AUTHENTICATED ADMINISTRATOR EMAIL
-================================================== */
+// ==================================================
+// ACTION 2: ADMINISTRATOR EMAIL
+// ==================================================
 
 async function handleAdminEmail(req, body, apiKey) {
 
-    const { admin, db } = getFirebase();
+    const { auth, db } = getFirebase();
 
     const authorization =
-        req.headers.authorization || "";
+        req.headers.authorization || '';
 
-    if (!authorization.startsWith("Bearer ")) {
+    if (!authorization.startsWith('Bearer ')) {
+
         throw makeError(
-            "Administrator authentication required.",
+            'Administrator authentication required.',
             401
         );
     }
 
     const idToken = authorization.slice(7);
 
-    // Verify Firebase user identity
-    const decoded = await admin
-        .auth()
-        .verifyIdToken(idToken);
+    // Verify Firebase identity
+    const decoded = await auth.verifyIdToken(idToken);
 
-    // Keep Firestore administrator verification
-    const adminSnap = await db
-        .collection("admins")
-        .doc(decoded.uid)
-        .get();
+    // No Firestore admins/{uid} document is required.
+    // Restrict sending to the verified practice email.
 
     if (
-        !adminSnap.exists ||
-        adminSnap.data().role !== "admin" ||
-        adminSnap.data().active !== true
+        (decoded.email || '').trim().toLowerCase() !==
+            OFFICE_EMAIL.toLowerCase() ||
+        decoded.email_verified !== true
     ) {
+
         throw makeError(
-            "Administrator access denied.",
+            'Administrator access denied.',
             403
         );
     }
@@ -603,32 +721,36 @@ async function handleAdminEmail(req, body, apiKey) {
     const enquiryId = clean(body.enquiryId, 150);
 
     if (!subject || !message) {
+
         throw makeError(
-            "Subject and message are required."
+            'Subject and message are required.'
         );
+
     }
 
     let recipient = clean(body.to, 254);
 
     let enquiryRef = null;
 
-    /* ----------------------------------------------
-       VERIFY CASE RECIPIENT
-    ---------------------------------------------- */
+    // ------------------------------------------------
+    // VERIFY CASE RECIPIENT
+    // ------------------------------------------------
 
     if (enquiryId) {
 
         enquiryRef = db
-            .collection("enquiries")
+            .collection('enquiries')
             .doc(enquiryId);
 
         const enquirySnap = await enquiryRef.get();
 
         if (!enquirySnap.exists) {
+
             throw makeError(
-                "The enquiry could not be found.",
+                'The enquiry could not be found.',
                 404
             );
+
         }
 
         const enquiry = enquirySnap.data();
@@ -642,26 +764,31 @@ async function handleAdminEmail(req, body, apiKey) {
                 recipient.toLowerCase() !== caseEmail.toLowerCase()
             )
         ) {
+
             throw makeError(
-                "The recipient does not match the enquiry."
+                'The recipient does not match the enquiry.'
             );
+
         }
 
         recipient = caseEmail;
+
     }
 
     if (!validEmail(recipient)) {
+
         throw makeError(
-            "A valid recipient email is required."
+            'A valid recipient email is required.'
         );
+
     }
 
-    /* ----------------------------------------------
-       SEND ADMIN EMAIL
-    ---------------------------------------------- */
+    // ==================================================
+    // SEND ADMIN EMAIL
+    // ==================================================
 
     const safeMessage = escapeHTML(message)
-        .replace(/\n/g, "<br>");
+        .replace(/\n/g, '<br>');
 
     const result = await sendEmail(apiKey, {
 
@@ -675,6 +802,7 @@ async function handleAdminEmail(req, body, apiKey) {
 
         html: emailLayout(
             subject,
+
             `
                 <div style="font-size:14px;line-height:1.9">
                     ${safeMessage}
@@ -695,22 +823,26 @@ async function handleAdminEmail(req, body, apiKey) {
         ),
 
         text: `
+
 ${message}
 
 Kind regards,
+
 Driving Offence Solutions
+
 ${OFFICE_EMAIL}
+
         `
+
     });
 
-    /* ----------------------------------------------
-       RECORD EMAIL IN FIRESTORE
-    ---------------------------------------------- */
+    // ==================================================
+    // RECORD EMAIL IN FIRESTORE
+    // ==================================================
 
-    const sentAt =
-        admin.firestore.FieldValue.serverTimestamp();
+    const sentAt = FieldValue.serverTimestamp();
 
-    await db.collection("emailLogs").add({
+    await db.collection('emailLogs').add({
 
         enquiryId: enquiryId || null,
 
@@ -726,82 +858,85 @@ ${OFFICE_EMAIL}
 
         sentBy: decoded.uid,
 
-        status: "accepted"
+        status: 'accepted'
 
     });
 
-    /* ----------------------------------------------
-       UPDATE CASE STATUS
-    ---------------------------------------------- */
+    // ==================================================
+    // UPDATE CASE STATUS
+    // ==================================================
 
     if (enquiryRef) {
 
         await enquiryRef.update({
 
-            status: "replied",
+            status: 'replied',
 
-            lastRepliedAt: sentAt,
+            lastRepliedAt:
+                FieldValue.serverTimestamp(),
 
-            updatedAt: sentAt,
+            updatedAt:
+                FieldValue.serverTimestamp(),
 
             updatedBy: decoded.uid
 
         });
+
     }
 
     return {
 
         success: true,
 
-        message: "Email accepted by Resend.",
+        message: 'Email accepted by Resend.',
 
         id: result.id
 
     };
+
 }
 
-/* ==================================================
-   MAIN VERCEL HANDLER
-================================================== */
+// ==================================================
+// MAIN VERCEL HANDLER
+// ==================================================
 
 module.exports = async function handler(req, res) {
 
-    res.setHeader("Cache-Control", "no-store");
+    res.setHeader('Cache-Control', 'no-store');
 
-    /* ----------------------------------------------
-       METHOD CHECK
-    ---------------------------------------------- */
+    // Only allow POST
+    if (req.method !== 'POST') {
 
-    if (req.method !== "POST") {
-
-        res.setHeader("Allow", "POST");
+        res.setHeader('Allow', 'POST');
 
         return res.status(405).json({
 
             success: false,
 
-            error: "Method not allowed."
+            error: 'Method not allowed.'
 
         });
+
     }
 
-    /* ----------------------------------------------
-       RESEND CONFIGURATION
-    ---------------------------------------------- */
+    // ==================================================
+    // RESEND CONFIGURATION
+    // ==================================================
 
     const apiKey = process.env.RESEND_API_KEY;
 
     if (!apiKey) {
 
-        console.error("RESEND_API_KEY is missing.");
+        console.error('RESEND_API_KEY is missing.');
 
         return res.status(500).json({
 
             success: false,
 
-            error: "Email service is not configured."
+            error: 'Email service is not configured.'
 
         });
+
     }
 
     try {
@@ -810,27 +945,29 @@ module.exports = async function handler(req, res) {
 
         if (
             !body ||
-            typeof body !== "object" ||
+            typeof body !== 'object' ||
             Array.isArray(body)
         ) {
+
             return res.status(400).json({
 
                 success: false,
 
-                error: "Invalid request data."
+                error: 'Invalid request data.'
 
             });
+
         }
 
-        const action = body.action || "enquiry";
+        const action = body.action || 'enquiry';
 
         let result;
 
-        /* ------------------------------------------
-           ADMIN EMAIL ACTION
-        ------------------------------------------ */
+        // ------------------------------------------------
+        // ADMIN EMAIL
+        // ------------------------------------------------
 
-        if (action === "admin-email") {
+        if (action === 'admin-email') {
 
             result = await handleAdminEmail(
                 req,
@@ -840,11 +977,11 @@ module.exports = async function handler(req, res) {
 
         }
 
-        /* ------------------------------------------
-           PUBLIC ENQUIRY ACTION
-        ------------------------------------------ */
+        // ------------------------------------------------
+        // PUBLIC ENQUIRY
+        // ------------------------------------------------
 
-        else if (action === "enquiry") {
+        else if (action === 'enquiry') {
 
             result = await handleEnquiry(
                 body,
@@ -853,9 +990,9 @@ module.exports = async function handler(req, res) {
 
         }
 
-        /* ------------------------------------------
-           UNKNOWN ACTION
-        ------------------------------------------ */
+        // ------------------------------------------------
+        // UNKNOWN ACTION
+        // ------------------------------------------------
 
         else {
 
@@ -863,7 +1000,7 @@ module.exports = async function handler(req, res) {
 
                 success: false,
 
-                error: "Unknown request action."
+                error: 'Unknown request action.'
 
             });
 
@@ -873,9 +1010,12 @@ module.exports = async function handler(req, res) {
 
     } catch (error) {
 
-        console.error("Request failed:", {
+        console.error('Request failed:', {
+
             message: error.message,
+
             statusCode: error.statusCode || 500
+
         });
 
         return res.status(error.statusCode || 500).json({
@@ -884,7 +1024,7 @@ module.exports = async function handler(req, res) {
 
             error:
                 error.message ||
-                "The request could not be completed."
+                'The request could not be completed.'
 
         });
 
