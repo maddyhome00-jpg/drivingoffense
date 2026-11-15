@@ -603,9 +603,19 @@
       background: #edf2ff;
     }
 
-    .status-pill.open {
-      color: var(--amber);
+    .status-pill.seen {
+      color: #895b0a;
       background: #fff5df;
+    }
+
+    .status-pill.open {
+      color: #435d83;
+      background: #edf1f7;
+    }
+
+    .status-pill.sent {
+      color: var(--green);
+      background: #e8f7ef;
     }
 
     .status-pill.closed {
@@ -1338,8 +1348,10 @@
 
               <select id="statusFilter">
                 <option value="">All statuses</option>
-                <option value="new">New</option>
-                <option value="open">Open</option>
+                <option value="new">New — not yet seen</option>
+                <option value="seen">Seen — awaiting response</option>
+                <option value="open">In progress</option>
+                <option value="sent">Sent — replied</option>
                 <option value="closed">Closed</option>
               </select>
 
@@ -1446,11 +1458,12 @@
                     <th>Recipient</th>
                     <th>Subject</th>
                     <th>Related case</th>
+                    <th>Status</th>
                     <th>Date sent</th>
                   </tr>
                 </thead>
                 <tbody id="emailRows">
-                  <tr><td colspan="4">Loading email history...</td></tr>
+                  <tr><td colspan="5">Loading email history...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1533,7 +1546,7 @@
     getDocs,
     doc,
     updateDoc,
-    addDoc,
+    deleteDoc,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
@@ -1560,6 +1573,7 @@
   let allEnquiries = [];
   let emailLogs = [];
   let activeEnquiry = null;
+  let pendingReplyEnquiryId = null;
   let currentUser = null;
 
   const $ = id => document.getElementById(id);
@@ -1628,17 +1642,44 @@
   }
 
   function getStatus(item) {
-    const value = String(item.status || "new").toLowerCase();
+    const value = String(item.status || "new")
+      .trim()
+      .toLowerCase()
+      .replace(/[\s-]+/g, "_");
 
     if (["closed", "completed", "resolved"].includes(value)) {
       return "closed";
     }
 
-    if (["open", "in progress", "in-progress"].includes(value)) {
+    if (["replied", "sent", "responded", "answered"].includes(value)) {
+      return "sent";
+    }
+
+    if (["seen", "opened", "read", "viewed"].includes(value)) {
+      return "seen";
+    }
+
+    if (["open", "in_progress", "reviewing", "awaiting_client"].includes(value)) {
       return "open";
     }
 
     return "new";
+  }
+
+  function getStatusLabel(itemOrStatus) {
+    const status = typeof itemOrStatus === "string"
+      ? itemOrStatus
+      : getStatus(itemOrStatus);
+
+    const labels = {
+      new: "New",
+      seen: "Seen",
+      open: "In progress",
+      sent: "Sent",
+      closed: "Closed"
+    };
+
+    return labels[status] || "New";
   }
 
   function getDateValue(item) {
@@ -1950,7 +1991,7 @@
     ).length;
 
     const openCount = allEnquiries.filter(
-      item => getStatus(item) === "open"
+      item => ["seen", "open", "sent"].includes(getStatus(item))
     ).length;
 
     const closedCount = allEnquiries.filter(
@@ -1988,7 +2029,7 @@
 
         <td>
           <span class="status-pill ${getStatus(item)}">
-            ${escapeHTML(getStatus(item).toUpperCase())}
+            ${escapeHTML(getStatusLabel(item))}
           </span>
         </td>
       </tr>
@@ -2168,7 +2209,7 @@
 
         <td>
           <span class="status-pill ${getStatus(item)}">
-            ${escapeHTML(getStatus(item).toUpperCase())}
+            ${escapeHTML(getStatusLabel(item))}
           </span>
         </td>
       </tr>
@@ -2201,6 +2242,17 @@
     "submittedAt",
     "date",
     "created",
+    "openedAt",
+    "seenAt",
+    "repliedAt",
+    "lastRepliedAt",
+    "updatedAt",
+    "updatedBy",
+    "officeEmailSent",
+    "visitorEmailSent",
+    "officeResendId",
+    "visitorResendId",
+    "emailStatusUpdatedAt",
     "reference",
     "referenceNumber",
     "caseReference",
@@ -2216,6 +2268,10 @@
     phone: "Phone number",
     telephone: "Telephone",
     phoneNumber: "Phone number",
+    penaltyPoints: "Current penalty points",
+    preferredContact: "Preferred contact",
+    currentPosition: "Current position",
+    urgent: "Urgency",
     matter: "Matter type",
     matterType: "Matter type",
     offence: "Offence",
@@ -2404,9 +2460,33 @@
   // CASE DETAILS DRAWER
   // --------------------------------------------------
 
-  function openEnquiry(id) {
+  async function openEnquiry(id) {
     const item = allEnquiries.find(enquiry => enquiry.id === id);
     if (!item) return;
+
+    // Mark a new enquiry as Seen the first time the administrator opens it.
+    // It remains Seen until a reply is successfully sent.
+    if (getStatus(item) === "new") {
+      try {
+        await updateDoc(doc(db, "enquiries", id), {
+          status: "seen",
+          seenAt: serverTimestamp(),
+          openedAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+
+        item.status = "seen";
+        item.seenAt = new Date();
+        item.openedAt = new Date();
+
+        renderDashboard();
+        renderEnquiries();
+
+      } catch (error) {
+        console.error("Could not mark enquiry as seen:", error);
+        showToast("Enquiry opened, but its Seen status could not be saved.");
+      }
+    }
 
     activeEnquiry = item;
 
@@ -2438,7 +2518,7 @@
           </div>
 
           <span class="status-pill ${status}">
-            ${escapeHTML(status.toUpperCase())}
+            ${escapeHTML(getStatusLabel(status))}
           </span>
         </div>
       </div>
@@ -2519,8 +2599,9 @@
             color:#253047;
             font-size:16px;
           ">
-          <option value="new" ${status === "new" ? "selected" : ""}>New</option>
-          <option value="open" ${status === "open" ? "selected" : ""}>Open</option>
+          <option value="seen" ${status === "seen" ? "selected" : ""}>Seen — awaiting response</option>
+          <option value="open" ${status === "open" ? "selected" : ""}>In progress</option>
+          <option value="sent" ${status === "sent" ? "selected" : ""}>Sent — replied</option>
           <option value="closed" ${status === "closed" ? "selected" : ""}>Closed</option>
         </select>
 
@@ -2534,6 +2615,15 @@
               Reply to client
             </button>
           ` : ""}
+
+          <button
+            class="subtle-btn"
+            id="deleteEnquiryBtn"
+            type="button"
+            style="border-color:#f0caca;color:#b42318;background:#fff7f7"
+          >
+            Delete enquiry
+          </button>
         </div>
       </div>
     `;
@@ -2542,6 +2632,7 @@
     document.body.style.overflow = "hidden";
 
     $("saveCaseStatus").addEventListener("click", saveCaseStatus);
+    $("deleteEnquiryBtn").addEventListener("click", deleteActiveEnquiry);
 
     $("replyToClient")?.addEventListener("click", () => {
       const selectedItem = activeEnquiry;
@@ -2555,6 +2646,9 @@
       $("composeMessage").value =
         `Dear ${getClientName(selectedItem)},\n\n` +
         `Thank you for contacting Driving Offence Solution.\n\n`;
+
+      // Keep the enquiry ID after the details drawer is closed.
+      pendingReplyEnquiryId = selectedItem.id;
 
       closeCaseDrawer();
       showView("Compose");
@@ -2604,6 +2698,56 @@
     }
   }
 
+  async function deleteActiveEnquiry() {
+    if (!activeEnquiry) return;
+
+    const enquiryId = activeEnquiry.id;
+    const clientName = getClientName(activeEnquiry);
+
+    const confirmed = window.confirm(
+      `Permanently delete the enquiry from ${clientName}?\n\nThis removes the enquiry record from Firestore. Previously sent email-history records are retained. This action cannot be undone.`
+    );
+
+    if (!confirmed) return;
+
+    const button = $("deleteEnquiryBtn");
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Deleting...";
+    }
+
+    try {
+      await deleteDoc(doc(db, "enquiries", enquiryId));
+
+      allEnquiries = allEnquiries.filter(item => item.id !== enquiryId);
+
+      if (pendingReplyEnquiryId === enquiryId) {
+        pendingReplyEnquiryId = null;
+      }
+
+      closeCaseDrawer();
+      renderDashboard();
+      renderEnquiries();
+      populateMatterFilter();
+
+      showToast("Enquiry deleted successfully.");
+
+    } catch (error) {
+      console.error("Enquiry deletion error:", error);
+
+      showToast(
+        error.code === "permission-denied"
+          ? "You do not have permission to delete this enquiry."
+          : `Unable to delete enquiry: ${error.message || "Please try again."}`
+      );
+
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Delete enquiry";
+      }
+    }
+  }
+
   function closeCaseDrawer() {
     $("caseOverlay").classList.remove("active");
     document.body.style.overflow = "";
@@ -2642,6 +2786,7 @@
     const to = $("composeTo").value.trim();
     const subject = $("composeSubject").value.trim();
     const message = $("composeMessage").value.trim();
+    const enquiryId = pendingReplyEnquiryId || null;
 
     if (!to || !subject || !message) {
       showToast("Please complete all email fields.");
@@ -2654,7 +2799,7 @@
     button.innerHTML = "<span>Sending...</span>";
 
     try {
-      const token = await currentUser.getIdToken();
+      const token = await currentUser.getIdToken(true);
 
       const response = await fetch("/api/send-enquiry", {
         method: "POST",
@@ -2667,13 +2812,13 @@
           to,
           subject,
           message,
-          enquiryId: activeEnquiry?.id || null
+          enquiryId
         })
       });
 
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
+      if (!response.ok || result.success !== true) {
         throw new Error(
           result.error ||
           result.message ||
@@ -2681,21 +2826,19 @@
         );
       }
 
-      await addDoc(collection(db, "emailLogs"), {
-        to,
-        subject,
-        message,
-        enquiryId: activeEnquiry?.id || null,
-        sentBy: currentUser.email,
-        createdAt: serverTimestamp(),
-        status: "sent"
-      });
+      // The API already records this email in Firestore.
+      // Do not create a duplicate browser-side emailLogs document.
+      pendingReplyEnquiryId = null;
 
       $("composeForm").reset();
 
-      showToast("Email sent successfully.");
+      if (enquiryId) {
+        await loadEnquiries();
+      }
 
       await loadEmailHistory();
+
+      showToast("Email sent successfully.");
 
     } catch (error) {
       console.error("Email sending error:", error);
@@ -2733,14 +2876,14 @@
       console.error("Email history error:", error);
 
       $("emailRows").innerHTML =
-        '<tr><td colspan="4">Unable to load email history.</td></tr>';
+        '<tr><td colspan="5">Unable to load email history.</td></tr>';
     }
   }
 
   function renderEmailHistory() {
     if (!emailLogs.length) {
       $("emailRows").innerHTML =
-        '<tr><td colspan="4">No sent emails have been recorded yet.</td></tr>';
+        '<tr><td colspan="5">No sent emails have been recorded yet.</td></tr>';
 
       return;
     }
@@ -2769,6 +2912,14 @@
                 ? getReference(related)
                 : item.enquiryId || "—"
             )}
+          </td>
+
+          <td>
+            <span class="status-pill sent">
+              ${["accepted", "sent", "delivered"].includes(String(item.status || "").toLowerCase())
+                ? "Sent"
+                : escapeHTML(item.status || "Recorded")}
+            </span>
           </td>
 
           <td>${escapeHTML(formatDate(getDateValue(item), true))}</td>
