@@ -6,30 +6,51 @@ const FROM_EMAIL =
 const OFFICE_EMAIL = "info@drivingoffencesolution.co.uk";
 const WHATSAPP_NUMBER = "+44 7480 214872";
 
-const admin = require("firebase-admin");
+// ==================================================
+// FIREBASE ADMIN SDK — MODULAR INITIALIZATION
+// ==================================================
+
+const {
+  initializeApp,
+  getApps,
+  cert
+} = require("firebase-admin/app");
+
+const { getAuth } = require("firebase-admin/auth");
+
+const {
+  getFirestore,
+  FieldValue
+} = require("firebase-admin/firestore");
 
 // --------------------------------------------------
 // FIREBASE ADMIN INITIALIZATION
 // --------------------------------------------------
 
-if (!admin.apps.length) {
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT
-  );
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+  throw new Error("FIREBASE_SERVICE_ACCOUNT is not configured.");
 }
 
-const db = admin.firestore();
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT
+);
 
-// --------------------------------------------------
+const firebaseApp = getApps().length
+  ? getApps()[0]
+  : initializeApp({
+      credential: cert(serviceAccount)
+    });
+
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
+
+// ==================================================
 // GENERAL HELPERS
-// --------------------------------------------------
+// ==================================================
 
 function clean(value, maxLength = 1000) {
   if (typeof value !== "string") return "";
+
   return value.trim().slice(0, maxLength);
 }
 
@@ -87,9 +108,17 @@ function detail(label, value) {
   `;
 }
 
+// --------------------------------------------------
+// EMAIL VALIDATION
+// --------------------------------------------------
+
 function validEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+// --------------------------------------------------
+// REQUEST BODY
+// --------------------------------------------------
 
 function getBody(req) {
   if (typeof req.body === "string") {
@@ -99,9 +128,9 @@ function getBody(req) {
   return req.body || {};
 }
 
-// --------------------------------------------------
+// ==================================================
 // RESEND EMAIL SERVICE
-// --------------------------------------------------
+// ==================================================
 
 async function sendEmail(apiKey, payload) {
   const response = await fetch(RESEND_API_URL, {
@@ -233,7 +262,7 @@ async function handleEnquiry(body, apiKey) {
 
     status: "new",
 
-    createdAt: admin.firestore.FieldValue.serverTimestamp()
+    createdAt: FieldValue.serverTimestamp()
 
   });
 
@@ -450,7 +479,7 @@ async function handleAdminEmail(req, body, apiKey) {
   const idToken = authorization.slice(7);
 
   // Verify Firebase user identity.
-  const decoded = await admin.auth().verifyIdToken(idToken);
+  const decoded = await auth.verifyIdToken(idToken);
 
   // ------------------------------------------------
   // ADMIN AUTHORIZATION
@@ -582,7 +611,9 @@ async function handleAdminEmail(req, body, apiKey) {
     text: `${message}
 
 Kind regards,
+
 Driving Offence Solutions
+
 ${OFFICE_EMAIL}`
 
   });
@@ -591,8 +622,7 @@ ${OFFICE_EMAIL}`
   // RECORD EMAIL IN FIRESTORE
   // ------------------------------------------------
 
-  const sentAt =
-    admin.firestore.FieldValue.serverTimestamp();
+  const sentAt = FieldValue.serverTimestamp();
 
   await db.collection("emailLogs").add({
 
