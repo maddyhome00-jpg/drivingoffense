@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101827">
-  <title>Admin Dashboard | Driving Offence Solution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Driving Offence Solution | Admin</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,85 +13,92 @@
 
   <style>
     :root {
-      --navy: #101827;
-      --navy-soft: #182438;
-      --ink: #172033;
-      --muted: #778196;
-      --line: #e8ebf0;
-      --surface: #ffffff;
-      --background: #f5f7fa;
-      --blue: #315ee7;
-      --blue-light: #edf2ff;
+      --navy: #111b2e;
+      --navy-2: #1d2b43;
+      --ink: #1b2435;
+      --muted: #778399;
+      --muted-2: #9aa4b5;
+      --line: #e7ebf1;
+      --surface: #fff;
+      --bg: #f4f6fa;
+      --blue: #3d5fe8;
+      --blue-dark: #2e4fd0;
+      --blue-soft: #eef2ff;
       --green: #16865b;
-      --red: #d84c4c;
-      --amber: #b7791f;
-      --radius: 14px;
-      --shadow: 0 8px 30px rgba(20, 35, 60, .06);
+      --amber: #a66b0b;
+      --red: #d44e4e;
+      --radius: 17px;
+      --shadow: 0 8px 28px rgba(23, 35, 57, .045);
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      background: var(--background);
       color: var(--ink);
+      background: var(--bg);
       font-family: "DM Sans", sans-serif;
       font-size: 14px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    button, input, textarea, select { font: inherit; }
+    button, input, select, textarea {
+      font: inherit;
+    }
+
     button { cursor: pointer; }
 
     /* LOGIN */
 
     .login-screen {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       background:
-        radial-gradient(circle at 15% 10%, rgba(49,94,231,.13), transparent 30%),
-        #f3f5f8;
+        radial-gradient(circle at 15% 10%, rgba(61,95,232,.12), transparent 32%),
+        #f3f5f9;
     }
 
     .login-card {
       width: 100%;
       max-width: 420px;
       padding: 42px;
-      background: white;
-      border: 1px solid #e8ebf0;
-      border-radius: 18px;
-      box-shadow: 0 20px 65px rgba(16,24,39,.09);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 22px 70px rgba(16, 27, 46, .09);
     }
 
     .brand-mark {
-      width: 46px;
-      height: 46px;
+      width: 45px;
+      height: 45px;
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      color: white;
+      margin-bottom: 27px;
+      border-radius: 13px;
+      color: #fff;
       background: var(--navy);
-      font-family: Manrope, sans-serif;
-      font-weight: 800;
-      font-size: 19px;
-      margin-bottom: 28px;
+      font: 800 20px Manrope, sans-serif;
     }
 
     .login-card h1 {
-      font: 800 25px Manrope, sans-serif;
       margin: 0 0 8px;
+      font: 800 25px Manrope, sans-serif;
       letter-spacing: -.7px;
     }
 
     .login-subtitle {
+      margin: 0 0 29px;
       color: var(--muted);
-      line-height: 1.6;
-      margin: 0 0 30px;
+      line-height: 1.65;
     }
 
-    .field { margin-bottom: 18px; }
+    .field { margin-bottom: 19px; }
 
     .field label {
       display: block;
@@ -103,107 +111,123 @@
     .field input,
     .field textarea,
     .field select {
+      display: block;
       width: 100%;
+      min-height: 47px;
       padding: 12px 14px;
-      border: 1px solid #dce1e9;
-      border-radius: 9px;
+      border: 1px solid #dce2eb;
+      border-radius: 10px;
       outline: none;
-      background: white;
+      background: #fff;
       color: var(--ink);
-      transition: .2s;
+      font-size: 16px;
+      transition: border-color .18s, box-shadow .18s;
+    }
+
+    .field textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 1.65;
     }
 
     .field input:focus,
     .field textarea:focus,
     .field select:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(49,94,231,.1);
+      box-shadow: 0 0 0 3px rgba(61,95,232,.10);
     }
 
     .primary-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      min-height: 45px;
+      padding: 12px 19px;
       border: 0;
-      border-radius: 9px;
-      padding: 12px 18px;
+      border-radius: 10px;
       background: var(--blue);
       color: white;
       font-weight: 700;
-      transition: .2s;
+      transition: background .18s, transform .18s;
     }
 
-    .primary-btn:hover { background: #244dcc; }
+    .primary-btn:hover { background: var(--blue-dark); }
+    .primary-btn:active { transform: scale(.985); }
     .primary-btn:disabled { opacity: .6; cursor: wait; }
 
-    .login-submit { width: 100%; margin-top: 6px; }
+    .login-submit { width: 100%; margin-top: 5px; }
 
     .text-btn {
+      padding: 13px 0 0;
       border: 0;
       background: none;
       color: var(--blue);
       font-weight: 700;
-      padding: 12px 0 0;
     }
 
     .login-message {
+      margin-top: 14px;
       color: var(--red);
       font-size: 13px;
-      margin-top: 14px;
       line-height: 1.5;
     }
 
-    /* MAIN APPLICATION */
+    /* APP SHELL */
 
     .app-shell {
       display: none;
       min-height: 100vh;
+      min-height: 100dvh;
     }
 
     .sidebar {
-      width: 250px;
       position: fixed;
       inset: 0 auto 0 0;
       z-index: 30;
       display: flex;
       flex-direction: column;
-      background: var(--navy);
-      color: white;
+      width: 252px;
       padding: 25px 17px;
+      color: white;
+      background: var(--navy);
     }
 
     .sidebar-brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 4px 9px 30px;
+      padding: 4px 9px 27px;
       border-bottom: 1px solid rgba(255,255,255,.1);
     }
 
     .sidebar-brand .brand-mark {
-      width: 39px;
-      height: 39px;
+      width: 40px;
+      height: 40px;
       margin: 0;
-      border-radius: 10px;
-      background: white;
+      border-radius: 11px;
       color: var(--navy);
+      background: white;
     }
 
     .brand-name {
-      font: 800 13px Manrope, sans-serif;
-      line-height: 1.35;
-      letter-spacing: -.2px;
+      font: 800 12px Manrope, sans-serif;
+      line-height: 1.4;
+      letter-spacing: .1px;
     }
 
     .brand-name span {
       display: block;
+      margin-top: 3px;
       color: #9ba8bb;
       font: 500 10px "DM Sans", sans-serif;
-      margin-top: 3px;
-      letter-spacing: .6px;
+      letter-spacing: .8px;
       text-transform: uppercase;
     }
 
     .nav-label {
       padding: 27px 11px 10px;
-      color: #8794a9;
+      color: #8996aa;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 1.2px;
@@ -217,28 +241,28 @@
     }
 
     .nav-btn {
-      width: 100%;
       display: flex;
       align-items: center;
       gap: 13px;
-      border: 0;
-      border-radius: 9px;
+      width: 100%;
       padding: 12px 13px;
-      text-align: left;
+      border: 0;
+      border-radius: 10px;
       background: transparent;
       color: #b9c3d2;
+      text-align: left;
       font-weight: 600;
-      transition: .2s;
+      transition: .18s;
     }
 
     .nav-btn:hover {
-      background: rgba(255,255,255,.07);
       color: white;
+      background: rgba(255,255,255,.07);
     }
 
     .nav-btn.active {
-      background: #263a5b;
       color: white;
+      background: #263a5b;
     }
 
     .nav-icon {
@@ -253,26 +277,28 @@
       border-top: 1px solid rgba(255,255,255,.1);
       color: #9ba8bb;
       font-size: 11px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .main-area {
       min-height: 100vh;
-      margin-left: 250px;
+      margin-left: 252px;
     }
 
+    /* TOP BAR AND PROFILE MENU */
+
     .topbar {
-      height: 76px;
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 25;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 76px;
       padding: 0 34px;
-      background: rgba(255,255,255,.96);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(14px);
     }
 
     .topbar-title {
@@ -291,18 +317,84 @@
       font-size: 12px;
     }
 
-    .admin-avatar {
-      width: 37px;
-      height: 37px;
-      display: grid;
-      place-items: center;
+    .profile-wrap { position: relative; }
+
+    .profile-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 43px;
+      height: 43px;
+      border: 0;
       border-radius: 50%;
-      background: var(--blue-light);
       color: var(--blue);
-      font-weight: 800;
+      background: var(--blue-soft);
+      font: 800 15px Manrope, sans-serif;
+      transition: box-shadow .18s, transform .18s;
     }
 
+    .profile-trigger:hover {
+      box-shadow: 0 0 0 4px rgba(61,95,232,.09);
+    }
+
+    .profile-trigger:active { transform: scale(.96); }
+
+    .profile-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      z-index: 60;
+      display: none;
+      width: 265px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 18px 55px rgba(18,31,52,.15);
+    }
+
+    .profile-menu.open { display: block; }
+
+    .profile-menu-info {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-menu-info strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .profile-menu-info span {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .profile-menu button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 7px;
+      padding: 11px 12px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: #b33c3c;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .profile-menu button:hover { background: #fff2f2; }
+
+    /* PAGE LAYOUT */
+
     .page-content {
+      width: 100%;
       max-width: 1500px;
       margin: 0 auto;
       padding: 30px 34px 55px;
@@ -312,38 +404,40 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 16px;
       margin-bottom: 23px;
     }
 
     .page-heading h1 {
-      font: 800 23px Manrope, sans-serif;
-      margin: 0 0 5px;
-      letter-spacing: -.6px;
+      margin: 0 0 6px;
+      font: 800 25px Manrope, sans-serif;
+      letter-spacing: -.8px;
     }
 
     .page-heading p {
       margin: 0;
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.6;
     }
 
     .section-view { display: none; }
     .section-view.active { display: block; }
 
-    /* COMMON PANELS */
+    /* PANELS */
 
     .panel {
-      background: var(--surface);
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      background: var(--surface);
       box-shadow: var(--shadow);
     }
 
     .panel-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
       padding: 19px 21px;
       border-bottom: 1px solid var(--line);
@@ -355,24 +449,29 @@
     }
 
     .panel-header p {
+      margin: 5px 0 0;
       color: var(--muted);
-      margin: 4px 0 0;
       font-size: 12px;
     }
 
     .panel-body { padding: 20px; }
 
     .subtle-btn {
-      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 39px;
+      padding: 9px 13px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 9px;
       background: white;
       color: #475467;
       font-size: 12px;
       font-weight: 700;
     }
 
-    .subtle-btn:hover { background: #f7f8fa; }
+    .subtle-btn:hover { background: #f8f9fc; }
 
     /* DASHBOARD CHART */
 
@@ -389,19 +488,19 @@
     }
 
     #enquiryChart svg {
+      display: block;
       width: 100%;
       height: 175px;
-      display: block;
       overflow: visible;
     }
 
     .chart-caption {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      margin-top: 7px;
       color: var(--muted);
       font-size: 11px;
-      margin-top: 7px;
     }
 
     /* STATISTICS */
@@ -415,9 +514,9 @@
 
     .stat-card {
       padding: 19px;
-      background: white;
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      background: white;
       box-shadow: var(--shadow);
     }
 
@@ -435,14 +534,13 @@
 
     .stat-note {
       margin-top: 5px;
-      color: #98a1b1;
+      color: var(--muted-2);
       font-size: 11px;
     }
 
-    /* ENQUIRY LIST */
+    /* TABLES AND GMAIL-STYLE ENQUIRY ROWS */
 
     .table-panel { overflow: hidden; }
-
     .table-scroll { width: 100%; overflow-x: auto; }
 
     table {
@@ -453,7 +551,7 @@
 
     th {
       padding: 12px 17px;
-      background: #fafbfc;
+      background: #fafbfd;
       color: #8791a2;
       font-size: 10px;
       font-weight: 800;
@@ -501,18 +599,18 @@
     }
 
     .status-pill.new {
-      background: #edf2ff;
       color: #315ee7;
+      background: #edf2ff;
     }
 
     .status-pill.open {
+      color: var(--amber);
       background: #fff5df;
-      color: #a36b10;
     }
 
     .status-pill.closed {
+      color: var(--green);
       background: #e8f7ef;
-      color: #16865b;
     }
 
     /* FILTERS */
@@ -528,33 +626,120 @@
 
     .filter-bar input,
     .filter-bar select {
-      min-height: 38px;
-      padding: 8px 11px;
+      min-height: 40px;
+      padding: 9px 12px;
       border: 1px solid #e1e5ec;
-      border-radius: 8px;
-      background: white;
+      border-radius: 9px;
       outline: none;
+      background: white;
       color: #344054;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .filter-bar input {
       flex: 1;
-      min-width: 180px;
+      min-width: 190px;
     }
 
-    /* COMPOSE */
+    /* COMPOSE EMAIL — PROFESSIONAL MAIL CLIENT */
 
     .compose-panel {
-      max-width: 850px;
+      max-width: 950px;
+      margin: 0 auto;
     }
 
-    .compose-panel .panel-body { padding: 24px; }
+    .compose-panel .panel-header {
+      justify-content: flex-start;
+      padding: 20px 24px;
+    }
 
-    .field textarea {
-      min-height: 170px;
-      resize: vertical;
-      line-height: 1.6;
+    .compose-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .gmail-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 1px solid #edf0f4;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .gmail-mark svg {
+      display: block;
+      width: 22px;
+      height: 17px;
+    }
+
+    .compose-brand-title {
+      font: 800 14px Manrope, sans-serif;
+    }
+
+    .compose-brand-subtitle {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .compose-panel .panel-body {
+      padding: 25px;
+    }
+
+    .compose-panel .field {
+      margin-bottom: 19px;
+    }
+
+    .compose-panel .field label {
+      color: #475467;
+      font-size: 12px;
+    }
+
+    .compose-panel .field input,
+    .compose-panel .field textarea {
+      min-height: 48px;
+      padding: 13px 15px;
+      border: 1px solid #dfe4ec;
+      border-radius: 10px;
+      background: #fff;
+      font-size: 16px;
+    }
+
+    .compose-panel .field textarea {
+      min-height: 250px;
+      line-height: 1.7;
+    }
+
+    .compose-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 5px;
+    }
+
+    .compose-actions-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .send-email-btn {
+      min-width: 135px;
+      min-height: 47px;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .compose-security-note {
+      color: var(--muted);
+      font-size: 11px;
     }
 
     /* EMAIL HISTORY */
@@ -566,8 +751,8 @@
 
     .email-subject span {
       display: block;
-      color: #8b95a5;
       margin-top: 4px;
+      color: #8b95a5;
       font-size: 11px;
     }
 
@@ -580,17 +765,21 @@
       display: none;
       justify-content: flex-end;
       background: rgba(13,22,38,.48);
+      backdrop-filter: blur(2px);
     }
 
     .case-overlay.active { display: flex; }
 
     .case-drawer {
-      width: min(620px, 100%);
+      width: min(680px, 100%);
       height: 100%;
+      height: 100dvh;
       overflow-y: auto;
+      overscroll-behavior: contain;
       background: white;
       box-shadow: -15px 0 50px rgba(0,0,0,.12);
       animation: drawerIn .22s ease;
+      -webkit-overflow-scrolling: touch;
     }
 
     @keyframes drawerIn {
@@ -605,9 +794,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 24px;
-      background: white;
+      padding: 19px 24px;
       border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+    }
+
+    .drawer-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 11px;
     }
 
     .drawer-header h2 {
@@ -615,17 +811,36 @@
       font: 800 17px Manrope, sans-serif;
     }
 
-    .icon-btn {
-      width: 35px;
-      height: 35px;
+    .drawer-mail-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: white;
-      color: #667085;
-      font-size: 18px;
+      border-radius: 10px;
+      background: #fff;
     }
 
-    .case-content { padding: 24px; }
+    .drawer-mail-icon svg {
+      width: 20px;
+      height: 16px;
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      color: #667085;
+      font-size: 19px;
+    }
+
+    .icon-btn:hover { background: #f7f8fa; }
+
+    .case-content { padding: 25px; }
 
     /* TOAST */
 
@@ -652,46 +867,54 @@
       transform: translateY(0);
     }
 
-    /* MOBILE BOTTOM NAVIGATION */
+    /* MOBILE NAVIGATION */
 
-    .mobile-nav {
-      display: none;
-    }
+    .mobile-nav { display: none; }
 
-    @media (max-width: 1050px) {
+    /* TABLET */
+
+    @media (max-width: 1100px) {
       .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .page-content { padding-left: 24px; padding-right: 24px; }
     }
+
+    /* MOBILE */
 
     @media (max-width: 760px) {
       .sidebar { display: none; }
 
       .main-area {
         margin-left: 0;
-        padding-bottom: 82px;
+        padding-bottom: calc(78px + env(safe-area-inset-bottom));
       }
 
       .topbar {
-        height: 62px;
+        height: 66px;
         padding: 0 17px;
       }
 
       .topbar-title { font-size: 16px; }
       .top-email { display: none; }
-      .admin-avatar { width: 34px; height: 34px; }
+
+      .profile-trigger {
+        width: 41px;
+        height: 41px;
+      }
 
       .page-content {
-        padding: 22px 15px 35px;
+        padding: 23px 15px 30px;
       }
 
       .page-heading {
         align-items: flex-start;
-        margin-bottom: 17px;
+        margin-bottom: 18px;
       }
 
-      .page-heading h1 { font-size: 21px; }
+      .page-heading h1 { font-size: 22px; }
+      .page-heading p { font-size: 13px; }
 
       .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
         margin-bottom: 16px;
       }
@@ -703,26 +926,32 @@
       .panel-header { padding: 16px; }
       .panel-body { padding: 15px; }
 
-      .table-panel { overflow: visible; }
+      /* MOBILE GMAIL-LIKE ENQUIRY ROWS */
+
+      .table-panel { overflow: hidden; }
       .table-scroll { overflow: visible; }
 
-      /* Gmail-style mobile enquiry rows */
-      table, tbody { display: block; width: 100%; }
+      table, tbody {
+        display: block;
+        width: 100%;
+      }
+
       thead { display: none; }
+
       tbody tr:not(:has(td[colspan])) {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 5px 10px;
-        padding: 13px 14px;
+        gap: 6px 10px;
+        padding: 14px;
         border-top: 1px solid #edf0f4;
         background: white;
       }
 
       tbody td {
         display: block;
+        min-width: 0;
         padding: 0;
         border: 0;
-        min-width: 0;
       }
 
       tbody td:nth-child(1) { grid-column: 1; grid-row: 1; }
@@ -748,15 +977,76 @@
         gap: 8px;
       }
 
-      .filter-bar input { flex-basis: 100%; }
-      .filter-bar select { flex: 1; min-width: 0; }
+      .filter-bar input {
+        flex-basis: 100%;
+        min-width: 100%;
+      }
 
-      .compose-panel .panel-body { padding: 17px; }
+      .filter-bar select {
+        flex: 1;
+        min-width: 0;
+      }
 
-      .case-drawer { width: 100%; }
-      .case-content { padding: 18px; }
+      /* COMPOSER MOBILE */
 
-      /* Fixed, visible mobile navigation */
+      .compose-panel {
+        border-radius: 15px;
+      }
+
+      .compose-panel .panel-header {
+        padding: 16px;
+      }
+
+      .compose-panel .panel-body {
+        padding: 17px;
+      }
+
+      .compose-panel .field input,
+      .compose-panel .field textarea {
+        font-size: 16px;
+      }
+
+      .compose-panel .field textarea {
+        min-height: 230px;
+      }
+
+      .compose-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .compose-actions-left { width: 100%; }
+
+      .send-email-btn {
+        width: 100%;
+        min-height: 49px;
+      }
+
+      .compose-security-note {
+        text-align: center;
+      }
+
+      /* CASE DETAILS MOBILE */
+
+      .case-drawer {
+        width: 100%;
+        max-width: none;
+      }
+
+      .drawer-header {
+        padding: 15px 17px;
+      }
+
+      .case-content { padding: 19px 17px; }
+
+      /* PROFILE MENU */
+
+      .profile-menu {
+        width: min(280px, calc(100vw - 30px));
+      }
+
+      /* FIXED BOTTOM NAV */
+
       .mobile-nav {
         position: fixed;
         inset: auto 0 0 0;
@@ -765,8 +1055,8 @@
         grid-template-columns: repeat(4, 1fr);
         min-height: 68px;
         padding: 7px 5px max(7px, env(safe-area-inset-bottom));
-        background: rgba(255,255,255,.98);
         border-top: 1px solid #e5e9ef;
+        background: rgba(255,255,255,.98);
         box-shadow: 0 -6px 22px rgba(16,24,39,.07);
         backdrop-filter: blur(14px);
       }
@@ -779,7 +1069,7 @@
         gap: 4px;
         min-width: 0;
         border: 0;
-        border-radius: 9px;
+        border-radius: 10px;
         background: transparent;
         color: #8993a3;
         font-size: 10px;
@@ -798,7 +1088,7 @@
 
       .toast {
         right: 14px;
-        bottom: 85px;
+        bottom: calc(82px + env(safe-area-inset-bottom));
       }
     }
 
@@ -813,7 +1103,7 @@
 
 <body>
 
-  <!-- LOGIN SCREEN -->
+  <!-- LOGIN -->
   <section class="login-screen" id="loginScreen">
     <div class="login-card">
       <div class="brand-mark">D</div>
@@ -846,10 +1136,10 @@
     </div>
   </section>
 
-  <!-- APPLICATION SHELL -->
+  <!-- APP -->
   <div class="app-shell" id="appShell">
 
-    <!-- DESKTOP SIDEBAR NAVIGATION -->
+    <!-- DESKTOP SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-brand">
         <div class="brand-mark">D</div>
@@ -894,7 +1184,7 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN AREA -->
     <main class="main-area">
 
       <header class="topbar">
@@ -902,13 +1192,56 @@
 
         <div class="topbar-right">
           <span class="top-email" id="topEmail"></span>
-          <div class="admin-avatar" id="adminAvatar">A</div>
+
+          <!-- PROFILE BUTTON -->
+          <div class="profile-wrap">
+            <button
+              class="profile-trigger"
+              id="profileTrigger"
+              type="button"
+              aria-label="Open account menu"
+              aria-expanded="false"
+              onclick="
+                const menu = document.getElementById('profileMenu');
+                const open = menu.classList.toggle('open');
+                this.setAttribute('aria-expanded', String(open));
+              "
+            >A</button>
+
+            <div class="profile-menu" id="profileMenu">
+              <div class="profile-menu-info">
+                <strong>Administrator account</strong>
+                <span id="profileEmail">Administrator</span>
+              </div>
+
+              <button
+                type="button"
+                id="logoutBtn"
+                onclick="
+                  (async () => {
+                    try {
+                      const appModule = await import('https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js');
+                      const authModule = await import('https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js');
+                      await authModule.signOut(authModule.getAuth(appModule.getApp()));
+                      document.getElementById('profileMenu').classList.remove('open');
+                    } catch (error) {
+                      console.error(error);
+                      alert('Unable to sign out. Please try again.');
+                    }
+                  })();
+                "
+              >
+                <span>↪</span>
+                <span>Log out</span>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
       <div class="page-content">
 
-        <!-- DASHBOARD VIEW -->
+        <!-- DASHBOARD -->
         <section class="section-view active" id="dashboardView">
           <div class="page-heading">
             <div>
@@ -926,6 +1259,7 @@
               </div>
               <span class="stat-label" id="chartWeekTotal">This week</span>
             </div>
+
             <div class="chart-wrap">
               <div id="enquiryChart"></div>
               <div class="chart-caption">
@@ -988,12 +1322,12 @@
           </div>
         </section>
 
-        <!-- ENQUIRIES VIEW -->
+        <!-- ENQUIRIES -->
         <section class="section-view" id="enquiriesView">
           <div class="page-heading">
             <div>
               <h1>Client enquiries</h1>
-              <p>Review, search and manage all submitted enquiries.</p>
+              <p>Review, search and manage submitted enquiries.</p>
             </div>
             <button class="subtle-btn" id="refreshEnquiries" type="button">↻ Refresh</button>
           </div>
@@ -1033,30 +1367,43 @@
           </div>
         </section>
 
-        <!-- COMPOSE EMAIL VIEW -->
+        <!-- COMPOSE EMAIL -->
         <section class="section-view" id="composeView">
           <div class="page-heading">
             <div>
               <h1>Compose email</h1>
-              <p>Send a message to a client from the administration portal.</p>
+              <p>Send professional correspondence to your clients.</p>
             </div>
           </div>
 
           <div class="panel compose-panel">
             <div class="panel-header">
-              <h3>New message</h3>
+              <div class="compose-brand">
+                <div class="gmail-mark" aria-label="Gmail-style mail icon">
+                  <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 16V3.2C2 1.9 3.5 1.2 4.5 2L12 7.8L19.5 2C20.5 1.2 22 1.9 22 3.2V16" stroke="#4285F4" stroke-width="2.6" stroke-linecap="round"/>
+                    <path d="M2 3.2V16" stroke="#34A853" stroke-width="2.6" stroke-linecap="round"/>
+                    <path d="M22 3.2V16" stroke="#EA4335" stroke-width="2.6" stroke-linecap="round"/>
+                    <path d="M2 3.2L12 10.8L22 3.2" stroke="#FBBC04" stroke-width="2.2" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="compose-brand-title">New message</div>
+                  <div class="compose-brand-subtitle">Driving Offence Solution correspondence</div>
+                </div>
+              </div>
             </div>
 
             <div class="panel-body">
               <form id="composeForm">
                 <div class="field">
-                  <label for="composeTo">Recipient email</label>
-                  <input id="composeTo" type="email" placeholder="client@example.com" required>
+                  <label for="composeTo">To</label>
+                  <input id="composeTo" type="email" placeholder="client@example.com" required autocomplete="email">
                 </div>
 
                 <div class="field">
                   <label for="composeSubject">Subject</label>
-                  <input id="composeSubject" type="text" placeholder="Enter email subject" required>
+                  <input id="composeSubject" type="text" placeholder="Enter a clear subject" required>
                 </div>
 
                 <div class="field">
@@ -1064,15 +1411,24 @@
                   <textarea id="composeMessage" placeholder="Write your message..." required></textarea>
                 </div>
 
-                <button class="primary-btn" id="composeSendBtn" type="submit">
-                  Send email
-                </button>
+                <div class="compose-actions">
+                  <div class="compose-actions-left">
+                    <button class="primary-btn send-email-btn" id="composeSendBtn" type="submit">
+                      <span>➤</span>
+                      <span>Send email</span>
+                    </button>
+                  </div>
+
+                  <div class="compose-security-note">
+                    Sent through the secure administration portal
+                  </div>
+                </div>
               </form>
             </div>
           </div>
         </section>
 
-        <!-- EMAIL HISTORY VIEW -->
+        <!-- EMAIL HISTORY -->
         <section class="section-view" id="emailsView">
           <div class="page-heading">
             <div>
@@ -1104,7 +1460,7 @@
       </div>
     </main>
 
-    <!-- MOBILE BOTTOM NAVIGATION -->
+    <!-- MOBILE BOTTOM NAV -->
     <nav class="mobile-nav" aria-label="Mobile navigation">
       <button class="active" type="button"
         onclick="document.getElementById('navDashboard').click()">
@@ -1137,17 +1493,26 @@
   <div class="case-overlay" id="caseOverlay">
     <div class="case-drawer">
       <div class="drawer-header">
-        <h2>Enquiry details</h2>
+        <div class="drawer-title-wrap">
+          <div class="drawer-mail-icon">
+            <svg viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 3L12 10L22 3" stroke="#4285F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 3V16H22V3" stroke="#AAB4C5" stroke-width="1.7" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h2>Enquiry details</h2>
+        </div>
         <button class="icon-btn" id="closeDrawer" type="button" aria-label="Close">×</button>
       </div>
+
       <div class="case-content" id="caseContent"></div>
     </div>
   </div>
 
-  <!-- NOTIFICATION -->
+  <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <!-- PART 2 STARTS HERE: paste the JavaScript below this line -->
+  <!-- PART 2 STARTS HERE: paste your JavaScript below this line -->
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
@@ -1173,7 +1538,10 @@
     limit
   } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
+  // --------------------------------------------------
   // FIREBASE CONFIGURATION
+  // --------------------------------------------------
+
   const firebaseConfig = {
     apiKey: "AIzaSyB-LMT7YDCpEqOhhx6LlLWxGjSAMFOghns",
     authDomain: "driving-offence-e7def.firebaseapp.com",
@@ -1188,7 +1556,6 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // Only this account is permitted to use the dashboard.
   const ADMIN_EMAILS = [
     "info@drivingoffencesolution.co.uk"
   ];
@@ -1200,7 +1567,10 @@
 
   const $ = id => document.getElementById(id);
 
-  // HTML ESCAPING
+  // --------------------------------------------------
+  // GENERAL HELPERS
+  // --------------------------------------------------
+
   function escapeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, char => ({
       "&": "&amp;",
@@ -1213,10 +1583,15 @@
 
   function getValue(item, keys, fallback = "") {
     for (const key of keys) {
-      if (item?.[key] !== undefined && item[key] !== null && item[key] !== "") {
+      if (
+        item?.[key] !== undefined &&
+        item[key] !== null &&
+        item[key] !== ""
+      ) {
         return item[key];
       }
     }
+
     return fallback;
   }
 
@@ -1260,8 +1635,13 @@
   function getStatus(item) {
     const value = String(item.status || "new").toLowerCase();
 
-    if (["closed", "completed", "resolved"].includes(value)) return "closed";
-    if (["open", "in progress", "in-progress"].includes(value)) return "open";
+    if (["closed", "completed", "resolved"].includes(value)) {
+      return "closed";
+    }
+
+    if (["open", "in progress", "in-progress"].includes(value)) {
+      return "open";
+    }
 
     return "new";
   }
@@ -1294,15 +1674,21 @@
   }
 
   function formatDate(value, includeTime = false) {
-    const date = value instanceof Date ? value : getDateValue({ createdAt: value });
+    let date = value instanceof Date
+      ? value
+      : getDateValue({ createdAt: value });
 
-    if (!date || Number.isNaN(date.getTime())) return "Date unavailable";
+    if (!date || Number.isNaN(date.getTime())) {
+      return "Date unavailable";
+    }
 
     return new Intl.DateTimeFormat("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",
-      ...(includeTime ? { hour: "2-digit", minute: "2-digit" } : {})
+      ...(includeTime
+        ? { hour: "2-digit", minute: "2-digit" }
+        : {})
     }).format(date);
   }
 
@@ -1314,6 +1700,7 @@
     toast.classList.add("show");
 
     clearTimeout(showToast.timer);
+
     showToast.timer = setTimeout(() => {
       toast.classList.remove("show");
     }, 3500);
@@ -1321,13 +1708,45 @@
 
   function setLoginMessage(message, isError = true) {
     const element = $("loginMessage");
-    if (!element) return;
 
     element.textContent = message;
-    element.style.color = isError ? "#d84c4c" : "#16865b";
+    element.style.color = isError ? "#d44e4e" : "#16865b";
   }
 
+  // --------------------------------------------------
+  // PROFILE MENU AND LOGOUT
+  // --------------------------------------------------
+
+  function closeProfileMenu() {
+    $("profileMenu")?.classList.remove("open");
+    $("profileTrigger")?.setAttribute("aria-expanded", "false");
+  }
+
+  $("logoutBtn").addEventListener("click", async event => {
+    event.preventDefault();
+    closeProfileMenu();
+
+    try {
+      await signOut(auth);
+      showToast("You have been signed out.");
+    } catch (error) {
+      console.error("Logout error:", error);
+      showToast("Unable to sign out. Please try again.");
+    }
+  });
+
+  document.addEventListener("click", event => {
+    const profileWrap = document.querySelector(".profile-wrap");
+
+    if (profileWrap && !profileWrap.contains(event.target)) {
+      closeProfileMenu();
+    }
+  });
+
+  // --------------------------------------------------
   // NAVIGATION
+  // --------------------------------------------------
+
   const views = {
     Dashboard: "dashboardView",
     Enquiries: "enquiriesView",
@@ -1354,24 +1773,24 @@
     if (!viewId) return;
 
     Object.values(views).forEach(id => {
-      $(id)?.classList.remove("active");
+      $(id).classList.remove("active");
     });
 
-    $(viewId)?.classList.add("active");
+    $(viewId).classList.add("active");
 
     Object.entries(navButtons).forEach(([key, id]) => {
-      $(id)?.classList.toggle("active", key === name);
+      $(id).classList.toggle("active", key === name);
     });
 
-    // Keep mobile navigation selection in sync.
     document.querySelectorAll(".mobile-nav button").forEach((button, index) => {
-      button.classList.toggle(
-        "active",
-        ["Dashboard", "Enquiries", "Compose", "Emails"][index] === name
-      );
+      const names = ["Dashboard", "Enquiries", "Compose", "Emails"];
+
+      button.classList.toggle("active", names[index] === name);
     });
 
-    $("topTitle").textContent = viewTitles[name] || name;
+    $("topTitle").textContent = viewTitles[name];
+
+    closeProfileMenu();
 
     if (name === "Enquiries") renderEnquiries();
     if (name === "Emails") renderEmailHistory();
@@ -1384,9 +1803,14 @@
   $("navCompose").addEventListener("click", () => showView("Compose"));
   $("navEmails").addEventListener("click", () => showView("Emails"));
 
-  $("viewAllBtn").addEventListener("click", () => showView("Enquiries"));
+  $("viewAllBtn").addEventListener("click", () => {
+    showView("Enquiries");
+  });
 
+  // --------------------------------------------------
   // AUTHENTICATION
+  // --------------------------------------------------
+
   $("loginForm").addEventListener("submit", async event => {
     event.preventDefault();
 
@@ -1396,32 +1820,31 @@
     if (!email || !password) return;
 
     if (!ADMIN_EMAILS.includes(email)) {
-      setLoginMessage("This account is not authorised to access the administration portal.");
+      setLoginMessage("This account is not authorised.");
       return;
     }
 
-    $("loginBtn").disabled = true;
-    $("loginBtn").textContent = "Signing in...";
+    const button = $("loginBtn");
+
+    button.disabled = true;
+    button.textContent = "Signing in...";
 
     try {
-      const credential = await signInWithEmailAndPassword(auth, email, password);
-
-      if (!ADMIN_EMAILS.includes(credential.user.email.toLowerCase())) {
-        await signOut(auth);
-        throw new Error("This account is not authorised.");
-      }
-
+      await signInWithEmailAndPassword(auth, email, password);
       setLoginMessage("Login successful.", false);
+
     } catch (error) {
       console.error("Login error:", error);
+
       setLoginMessage(
         error.code === "auth/invalid-credential"
           ? "Incorrect email or password."
-          : error.message || "Unable to sign in. Please try again."
+          : error.message || "Unable to sign in."
       );
+
     } finally {
-      $("loginBtn").disabled = false;
-      $("loginBtn").textContent = "Sign in securely";
+      button.disabled = false;
+      button.textContent = "Sign in securely";
     }
   });
 
@@ -1429,7 +1852,7 @@
     const email = $("loginEmail").value.trim().toLowerCase();
 
     if (!email) {
-      setLoginMessage("Enter your administrator email address first.");
+      setLoginMessage("Enter your administrator email first.");
       $("loginEmail").focus();
       return;
     }
@@ -1441,18 +1864,25 @@
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setLoginMessage("Password reset instructions have been sent if the account exists.", false);
+
+      setLoginMessage(
+        "Password reset instructions have been sent if the account exists.",
+        false
+      );
+
     } catch (error) {
       console.error(error);
-      setLoginMessage("Unable to send the password reset email. Please try again.");
+      setLoginMessage("Unable to send password reset instructions.");
     }
   });
 
   onAuthStateChanged(auth, async user => {
     if (!user) {
       currentUser = null;
+
       $("appShell").style.display = "none";
       $("loginScreen").style.display = "flex";
+
       return;
     }
 
@@ -1473,13 +1903,19 @@
     $("adminName").textContent = email;
     $("adminAvatar").textContent = email.charAt(0).toUpperCase();
 
+    $("profileTrigger").textContent = email.charAt(0).toUpperCase();
+    $("profileEmail").textContent = email;
+
     await loadEnquiries();
     await loadEmailHistory();
 
     showView("Dashboard");
   });
 
+  // --------------------------------------------------
   // FIRESTORE ENQUIRIES
+  // --------------------------------------------------
+
   async function loadEnquiries() {
     try {
       const enquiryQuery = query(
@@ -1495,10 +1931,10 @@
         ...document.data()
       }));
 
-      // Newest first, including records without createdAt.
       allEnquiries.sort((a, b) => {
         const dateA = getDateValue(a)?.getTime() || 0;
         const dateB = getDateValue(b)?.getTime() || 0;
+
         return dateB - dateA;
       });
 
@@ -1508,20 +1944,35 @@
 
     } catch (error) {
       console.error("Enquiry loading error:", error);
+
       showToast("Unable to load enquiries. Check Firestore permissions.");
+
       $("recentRows").innerHTML =
         '<tr><td colspan="4">Unable to load enquiries.</td></tr>';
+
       $("enquiryRows").innerHTML =
         '<tr><td colspan="5">Unable to load enquiries.</td></tr>';
     }
   }
 
-  // DASHBOARD STATISTICS
+  // --------------------------------------------------
+  // DASHBOARD
+  // --------------------------------------------------
+
   function renderDashboard() {
     const total = allEnquiries.length;
-    const newCount = allEnquiries.filter(item => getStatus(item) === "new").length;
-    const openCount = allEnquiries.filter(item => getStatus(item) === "open").length;
-    const closedCount = allEnquiries.filter(item => getStatus(item) === "closed").length;
+
+    const newCount = allEnquiries.filter(
+      item => getStatus(item) === "new"
+    ).length;
+
+    const openCount = allEnquiries.filter(
+      item => getStatus(item) === "open"
+    ).length;
+
+    const closedCount = allEnquiries.filter(
+      item => getStatus(item) === "closed"
+    ).length;
 
     $("statTotal").textContent = total;
     $("statNew").textContent = newCount;
@@ -1534,7 +1985,8 @@
 
     if (!recent.length) {
       $("recentRows").innerHTML =
-        '<tr><td colspan="4">No enquiries have been received yet.</td></tr>';
+        '<tr><td colspan="4">No enquiries received yet.</td></tr>';
+
       return;
     }
 
@@ -1546,8 +1998,11 @@
             <span>${escapeHTML(getClientEmail(item))}</span>
           </div>
         </td>
+
         <td>${escapeHTML(getMatter(item))}</td>
+
         <td>${escapeHTML(formatDate(getDateValue(item)))}</td>
+
         <td>
           <span class="status-pill ${getStatus(item)}">
             ${escapeHTML(getStatus(item).toUpperCase())}
@@ -1557,11 +2012,16 @@
     `).join("");
 
     $("recentRows").querySelectorAll("tr[data-id]").forEach(row => {
-      row.addEventListener("click", () => openEnquiry(row.dataset.id));
+      row.addEventListener("click", () => {
+        openEnquiry(row.dataset.id);
+      });
     });
   }
 
-  // SEVEN-DAY ENQUIRY CHART
+  // --------------------------------------------------
+  // CHART
+  // --------------------------------------------------
+
   function renderChart() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -1593,21 +2053,25 @@
     });
 
     const total = days.reduce((sum, day) => sum + day.count, 0);
+
     $("chartWeekTotal").textContent = `${total} this week`;
 
     const max = Math.max(...days.map(day => day.count), 1);
+
     const width = 700;
     const height = 175;
     const left = 25;
     const right = 20;
     const top = 15;
     const bottom = 30;
+
     const graphHeight = height - top - bottom;
     const graphWidth = width - left - right;
 
     const points = days.map((day, index) => {
       const x = left + (graphWidth / 6) * index;
       const y = top + graphHeight - (day.count / max) * graphHeight;
+
       return { ...day, x, y };
     });
 
@@ -1615,40 +2079,52 @@
       `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`
     ).join(" ");
 
-    const areaPath = `${linePath} L ${points[6].x} ${height - bottom} L ${points[0].x} ${height - bottom} Z`;
+    const areaPath =
+      `${linePath} L ${points[6].x} ${height - bottom} ` +
+      `L ${points[0].x} ${height - bottom} Z`;
 
     const gridLines = [0, 1, 2, 3].map(index => {
       const y = top + (graphHeight / 3) * index;
-      return `<line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="#edf0f5" stroke-dasharray="4 5"/>`;
+
+      return `
+        <line x1="${left}" y1="${y}"
+          x2="${width - right}" y2="${y}"
+          stroke="#edf0f5" stroke-dasharray="4 5"/>
+      `;
     }).join("");
 
     const labels = points.map(point => `
-      <text x="${point.x}" y="${height - 8}" text-anchor="middle"
-        fill="#8993a3" font-size="11">${escapeHTML(point.label)}</text>
+      <text x="${point.x}" y="${height - 8}"
+        text-anchor="middle" fill="#8993a3" font-size="11">
+        ${escapeHTML(point.label)}
+      </text>
     `).join("");
 
     const circles = points.map(point => `
       <circle cx="${point.x}" cy="${point.y}" r="4.5"
-        fill="#315ee7" stroke="#ffffff" stroke-width="2">
+        fill="#315ee7" stroke="#fff" stroke-width="2">
         <title>${point.count} enquiries</title>
       </circle>
     `).join("");
 
     $("enquiryChart").innerHTML = `
-      <svg viewBox="0 0 ${width} ${height}" role="img"
-        aria-label="Enquiry activity over the last seven days">
+      <svg viewBox="0 0 ${width} ${height}"
+        role="img" aria-label="Enquiry activity over the last seven days">
         ${gridLines}
         <path d="${areaPath}" fill="rgba(49,94,231,.09)"></path>
-        <path d="${linePath}" fill="none" stroke="#315ee7"
-          stroke-width="3" stroke-linecap="round"
-          stroke-linejoin="round"></path>
+        <path d="${linePath}" fill="none"
+          stroke="#315ee7" stroke-width="3"
+          stroke-linecap="round" stroke-linejoin="round"></path>
         ${circles}
         ${labels}
       </svg>
     `;
   }
 
+  // --------------------------------------------------
   // MATTER FILTER
+  // --------------------------------------------------
+
   function populateMatterFilter() {
     const select = $("matterFilter");
     const selected = select.value;
@@ -1660,13 +2136,18 @@
     select.innerHTML =
       '<option value="">All matter types</option>' +
       matters.map(matter => `
-        <option value="${escapeHTML(matter)}">${escapeHTML(matter)}</option>
+        <option value="${escapeHTML(matter)}">
+          ${escapeHTML(matter)}
+        </option>
       `).join("");
 
     select.value = matters.includes(selected) ? selected : "";
   }
 
-  // ENQUIRY FILTERING AND RENDERING
+  // --------------------------------------------------
+  // ENQUIRY LIST
+  // --------------------------------------------------
+
   function renderEnquiries() {
     const search = $("searchInput").value.trim().toLowerCase();
     const status = $("statusFilter").value;
@@ -1691,6 +2172,7 @@
     if (!filtered.length) {
       $("enquiryRows").innerHTML =
         '<tr><td colspan="5">No matching enquiries found.</td></tr>';
+
       return;
     }
 
@@ -1702,9 +2184,11 @@
             <span>${escapeHTML(getClientEmail(item))}</span>
           </div>
         </td>
+
         <td>${escapeHTML(getMatter(item))}</td>
         <td>${escapeHTML(getReference(item))}</td>
         <td>${escapeHTML(formatDate(getDateValue(item)))}</td>
+
         <td>
           <span class="status-pill ${getStatus(item)}">
             ${escapeHTML(getStatus(item).toUpperCase())}
@@ -1714,7 +2198,9 @@
     `).join("");
 
     $("enquiryRows").querySelectorAll("tr[data-id]").forEach(row => {
-      row.addEventListener("click", () => openEnquiry(row.dataset.id));
+      row.addEventListener("click", () => {
+        openEnquiry(row.dataset.id);
+      });
     });
   }
 
@@ -1722,100 +2208,353 @@
   $("statusFilter").addEventListener("change", renderEnquiries);
   $("matterFilter").addEventListener("change", renderEnquiries);
 
+  // --------------------------------------------------
+  // COMPLETE ENQUIRY FIELD RENDERING
+  // --------------------------------------------------
+
+  const INTERNAL_FIELDS = new Set([
+    "id",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "timestamp",
+    "submittedAt",
+    "date",
+    "created",
+    "reference",
+    "referenceNumber",
+    "caseReference",
+    "ref"
+  ]);
+
+  const FIELD_LABELS = {
+    name: "Client name",
+    fullName: "Full name",
+    clientName: "Client name",
+    email: "Email address",
+    clientEmail: "Client email",
+    phone: "Phone number",
+    telephone: "Telephone",
+    phoneNumber: "Phone number",
+    matter: "Matter type",
+    matterType: "Matter type",
+    offence: "Offence",
+    caseType: "Case type",
+    message: "Client message",
+    description: "Description",
+    details: "Additional details",
+    enquiry: "Enquiry",
+    content: "Message",
+    address: "Address",
+    postcode: "Postcode",
+    vehicleRegistration: "Vehicle registration",
+    registration: "Vehicle registration",
+    vehicleReg: "Vehicle registration",
+    noticeNumber: "Notice number",
+    offenceDate: "Offence date",
+    incidentDate: "Incident date",
+    location: "Location",
+    document: "Document",
+    documents: "Documents",
+    attachment: "Attachment",
+    attachments: "Attachments",
+    file: "Uploaded file",
+    files: "Uploaded files"
+  };
+
+  function humanizeField(key) {
+    if (FIELD_LABELS[key]) return FIELD_LABELS[key];
+
+    return String(key)
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/[_-]/g, " ")
+      .replace(/\b\w/g, letter => letter.toUpperCase());
+  }
+
+  function isWebUrl(value) {
+    try {
+      const url = new URL(value);
+      return ["http:", "https:"].includes(url.protocol);
+    } catch {
+      return false;
+    }
+  }
+
+  function renderFieldValue(key, value) {
+    if (value === null || value === undefined || value === "") {
+      return '<span style="color:#98a2b3">Not provided</span>';
+    }
+
+    if (value?.toDate) {
+      return escapeHTML(formatDate(value, true));
+    }
+
+    if (value instanceof Date) {
+      return escapeHTML(formatDate(value, true));
+    }
+
+    if (Array.isArray(value)) {
+      if (!value.length) {
+        return '<span style="color:#98a2b3">None provided</span>';
+      }
+
+      return `
+        <div style="display:grid;gap:9px">
+          ${value.map((item, index) => `
+            <div style="padding:10px 12px;background:#f7f8fb;border:1px solid #edf0f4;border-radius:9px">
+              ${renderFieldValue(key, item)}
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    if (typeof value === "object") {
+      const possibleUrl = value.url || value.downloadURL || value.downloadUrl;
+      const fileName = value.name || value.fileName || value.filename;
+
+      if (possibleUrl && isWebUrl(possibleUrl)) {
+        return `
+          <a href="${escapeHTML(possibleUrl)}"
+            target="_blank" rel="noopener noreferrer"
+            style="color:#315ee7;font-weight:700;text-decoration:none;overflow-wrap:anywhere">
+            ${escapeHTML(fileName || "Open uploaded document")} ↗
+          </a>
+        `;
+      }
+
+      return `
+        <div style="display:grid;gap:8px">
+          ${Object.entries(value).map(([nestedKey, nestedValue]) => `
+            <div>
+              <div style="font-size:10px;color:#8993a3;margin-bottom:4px">
+                ${escapeHTML(humanizeField(nestedKey))}
+              </div>
+              <div style="overflow-wrap:anywhere">
+                ${renderFieldValue(nestedKey, nestedValue)}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    if (
+      typeof value === "string" &&
+      isWebUrl(value) &&
+      /file|document|attachment|upload|image|pdf/i.test(key)
+    ) {
+      return `
+        <a href="${escapeHTML(value)}"
+          target="_blank" rel="noopener noreferrer"
+          style="color:#315ee7;font-weight:700;text-decoration:none;overflow-wrap:anywhere">
+          Open uploaded file ↗
+        </a>
+      `;
+    }
+
+    return `
+      <span style="white-space:pre-wrap;overflow-wrap:anywhere">
+        ${escapeHTML(value)}
+      </span>
+    `;
+  }
+
+  function renderAllSubmittedFields(item) {
+    const fields = Object.entries(item).filter(([key, value]) => {
+      if (INTERNAL_FIELDS.has(key)) return false;
+      if (value === undefined || value === null || value === "") return false;
+      return true;
+    });
+
+    if (!fields.length) {
+      return `
+        <p style="color:#8993a3;font-size:13px">
+          No additional submitted fields were found.
+        </p>
+      `;
+    }
+
+    return `
+      <div class="submitted-fields"
+        style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px">
+
+        ${fields.map(([key, value]) => {
+          const fullWidth =
+            /message|description|details|document|attachment|file|address/i.test(key);
+
+          return `
+            <div style="
+              min-width:0;
+              ${fullWidth ? "grid-column:1/-1;" : ""}
+              padding:13px;
+              border:1px solid #e9edf3;
+              border-radius:11px;
+              background:#fff;
+            ">
+              <div style="
+                margin-bottom:7px;
+                color:#8b95a5;
+                font-size:10px;
+                font-weight:800;
+                letter-spacing:.6px;
+                text-transform:uppercase;
+              ">
+                ${escapeHTML(humanizeField(key))}
+              </div>
+
+              <div style="
+                color:#253047;
+                font-size:13px;
+                line-height:1.65;
+                font-weight:600;
+                overflow-wrap:anywhere;
+              ">
+                ${renderFieldValue(key, value)}
+              </div>
+            </div>
+          `;
+        }).join("")}
+
+      </div>
+    `;
+  }
+
+  // --------------------------------------------------
   // CASE DETAILS DRAWER
+  // --------------------------------------------------
+
   function openEnquiry(id) {
     const item = allEnquiries.find(enquiry => enquiry.id === id);
     if (!item) return;
 
     activeEnquiry = item;
 
-    const message = getValue(item, [
-      "message",
-      "description",
-      "details",
-      "enquiry",
-      "content"
-    ], "No message was included with this enquiry.");
-
-    const phone = getValue(item, [
-      "phone",
-      "telephone",
-      "phoneNumber"
-    ], "Not provided");
-
     const status = getStatus(item);
+    const email = getClientEmail(item);
+    const client = getClientName(item);
 
     $("caseContent").innerHTML = `
-      <div style="margin-bottom:22px">
-        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
-          <div>
-            <h2 style="margin:0 0 5px;font:800 21px Manrope,sans-serif">
-              ${escapeHTML(getClientName(item))}
+      <div style="margin-bottom:23px">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:flex-start;
+          gap:12px;
+        ">
+          <div style="min-width:0">
+            <h2 style="
+              margin:0 0 6px;
+              font:800 22px Manrope,sans-serif;
+              letter-spacing:-.5px;
+              overflow-wrap:anywhere;
+            ">
+              ${escapeHTML(client)}
             </h2>
-            <div style="color:#8490a1;font-size:12px">
-              ${escapeHTML(getReference(item))}
+
+            <div style="color:#8490a1;font-size:12px;overflow-wrap:anywhere">
+              Reference: ${escapeHTML(getReference(item))}
             </div>
           </div>
+
           <span class="status-pill ${status}">
             ${escapeHTML(status.toUpperCase())}
           </span>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:23px">
-        <div>
-          <div style="color:#8b95a5;font-size:11px;margin-bottom:5px">EMAIL ADDRESS</div>
-          <div style="font-weight:700;overflow-wrap:anywhere">
-            ${escapeHTML(getClientEmail(item) || "Not provided")}
+      <div style="
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:15px;
+        margin-bottom:24px;
+      ">
+        <div style="min-width:0">
+          <div style="color:#8b95a5;font-size:10px;font-weight:800;margin-bottom:6px">
+            EMAIL ADDRESS
+          </div>
+
+          <div style="font-size:13px;font-weight:700;overflow-wrap:anywhere">
+            ${escapeHTML(email || "Not provided")}
           </div>
         </div>
 
-        <div>
-          <div style="color:#8b95a5;font-size:11px;margin-bottom:5px">PHONE</div>
-          <div style="font-weight:700">${escapeHTML(phone)}</div>
+        <div style="min-width:0">
+          <div style="color:#8b95a5;font-size:10px;font-weight:800;margin-bottom:6px">
+            DATE RECEIVED
+          </div>
+
+          <div style="font-size:13px;font-weight:700">
+            ${escapeHTML(formatDate(getDateValue(item), true))}
+          </div>
         </div>
 
-        <div>
-          <div style="color:#8b95a5;font-size:11px;margin-bottom:5px">MATTER TYPE</div>
-          <div style="font-weight:700">${escapeHTML(getMatter(item))}</div>
-        </div>
+        <div style="min-width:0;grid-column:1/-1">
+          <div style="color:#8b95a5;font-size:10px;font-weight:800;margin-bottom:6px">
+            MATTER TYPE
+          </div>
 
-        <div>
-          <div style="color:#8b95a5;font-size:11px;margin-bottom:5px">DATE RECEIVED</div>
-          <div style="font-weight:700">${escapeHTML(formatDate(getDateValue(item), true))}</div>
+          <div style="font-size:13px;font-weight:700">
+            ${escapeHTML(getMatter(item))}
+          </div>
         </div>
       </div>
 
-      <div style="border-top:1px solid #e8ebf0;padding-top:20px">
-        <h3 style="font:800 14px Manrope,sans-serif;margin:0 0 12px">
-          Client message
+      <div style="border-top:1px solid #e8ebf0;padding-top:21px">
+        <div style="margin-bottom:15px">
+          <h3 style="margin:0 0 5px;font:800 15px Manrope,sans-serif">
+            Submitted information
+          </h3>
+
+          <p style="margin:0;color:#8993a3;font-size:12px;line-height:1.5">
+            Information and documents submitted through the client enquiry form.
+          </p>
+        </div>
+
+        ${renderAllSubmittedFields(item)}
+      </div>
+
+      <div style="
+        margin-top:24px;
+        padding-top:21px;
+        border-top:1px solid #e8ebf0;
+      ">
+        <h3 style="margin:0 0 13px;font:800 14px Manrope,sans-serif">
+          Case management
         </h3>
-        <div style="background:#f7f8fa;border:1px solid #edf0f4;border-radius:10px;padding:16px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere">
-          ${escapeHTML(message)}
-        </div>
-      </div>
 
-      <div style="margin-top:22px">
-        <label for="caseStatus" style="display:block;font-weight:700;margin-bottom:8px">
+        <label for="caseStatus"
+          style="display:block;font-weight:700;font-size:12px;margin-bottom:8px">
           Update case status
         </label>
-        <select id="caseStatus" style="width:100%;padding:12px;border:1px solid #dce1e9;border-radius:8px;background:white">
+
+        <select id="caseStatus"
+          style="
+            width:100%;
+            min-height:47px;
+            padding:11px 13px;
+            border:1px solid #dce2eb;
+            border-radius:10px;
+            background:white;
+            color:#253047;
+            font-size:16px;
+          ">
           <option value="new" ${status === "new" ? "selected" : ""}>New</option>
           <option value="open" ${status === "open" ? "selected" : ""}>Open</option>
           <option value="closed" ${status === "closed" ? "selected" : ""}>Closed</option>
         </select>
-      </div>
 
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
-        <button class="primary-btn" id="saveCaseStatus" type="button">
-          Save status
-        </button>
-
-        ${getClientEmail(item) ? `
-          <button class="subtle-btn" id="replyToClient" type="button">
-            Reply to client
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <button class="primary-btn" id="saveCaseStatus" type="button">
+            Save status
           </button>
-        ` : ""}
+
+          ${email ? `
+            <button class="subtle-btn" id="replyToClient" type="button">
+              Reply to client
+            </button>
+          ` : ""}
+        </div>
       </div>
     `;
 
@@ -1825,16 +2564,21 @@
     $("saveCaseStatus").addEventListener("click", saveCaseStatus);
 
     $("replyToClient")?.addEventListener("click", () => {
-      const email = getClientEmail(activeEnquiry);
-      const client = getClientName(activeEnquiry);
+      const selectedItem = activeEnquiry;
+      if (!selectedItem) return;
 
-      $("composeTo").value = email;
-      $("composeSubject").value = `Regarding your enquiry - ${getReference(activeEnquiry)}`;
+      $("composeTo").value = getClientEmail(selectedItem);
+
+      $("composeSubject").value =
+        `Regarding your enquiry - ${getReference(selectedItem)}`;
+
       $("composeMessage").value =
-        `Dear ${client},\n\nThank you for contacting Driving Offence Solution.\n\n`;
+        `Dear ${getClientName(selectedItem)},\n\n` +
+        `Thank you for contacting Driving Offence Solution.\n\n`;
 
       closeCaseDrawer();
       showView("Compose");
+
       $("composeMessage").focus();
     });
   }
@@ -1842,6 +2586,7 @@
   async function saveCaseStatus() {
     if (!activeEnquiry) return;
 
+    const selectedId = activeEnquiry.id;
     const newStatus = $("caseStatus").value;
     const button = $("saveCaseStatus");
 
@@ -1849,28 +2594,31 @@
     button.textContent = "Saving...";
 
     try {
-      await updateDoc(doc(db, "enquiries", activeEnquiry.id), {
+      await updateDoc(doc(db, "enquiries", selectedId), {
         status: newStatus,
         updatedAt: serverTimestamp()
       });
 
-      const index = allEnquiries.findIndex(item => item.id === activeEnquiry.id);
+      const index = allEnquiries.findIndex(
+        item => item.id === selectedId
+      );
 
       if (index !== -1) {
         allEnquiries[index].status = newStatus;
       }
 
-      activeEnquiry.status = newStatus;
-
       renderDashboard();
       renderEnquiries();
 
       showToast("Case status updated successfully.");
-      openEnquiry(activeEnquiry.id);
+
+      openEnquiry(selectedId);
 
     } catch (error) {
       console.error("Status update error:", error);
+
       showToast("Unable to update case status.");
+
       button.disabled = false;
       button.textContent = "Save status";
     }
@@ -1891,12 +2639,18 @@
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && $("caseOverlay").classList.contains("active")) {
+    if (
+      event.key === "Escape" &&
+      $("caseOverlay").classList.contains("active")
+    ) {
       closeCaseDrawer();
     }
   });
 
-  // SEND EMAIL
+  // --------------------------------------------------
+  // COMPOSE AND SEND EMAIL
+  // --------------------------------------------------
+
   $("composeForm").addEventListener("submit", async event => {
     event.preventDefault();
 
@@ -1915,8 +2669,9 @@
     }
 
     const button = $("composeSendBtn");
+
     button.disabled = true;
-    button.textContent = "Sending...";
+    button.innerHTML = "<span>Sending...</span>";
 
     try {
       const token = await currentUser.getIdToken();
@@ -1939,7 +2694,11 @@
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result.error || result.message || "Email sending failed.");
+        throw new Error(
+          result.error ||
+          result.message ||
+          "Email sending failed."
+        );
       }
 
       await addDoc(collection(db, "emailLogs"), {
@@ -1955,18 +2714,23 @@
       $("composeForm").reset();
 
       showToast("Email sent successfully.");
+
       await loadEmailHistory();
 
     } catch (error) {
       console.error("Email sending error:", error);
       showToast(error.message || "Unable to send email.");
+
     } finally {
       button.disabled = false;
-      button.textContent = "Send email";
+      button.innerHTML = "<span>➤</span><span>Send email</span>";
     }
   });
 
+  // --------------------------------------------------
   // EMAIL HISTORY
+  // --------------------------------------------------
+
   async function loadEmailHistory() {
     try {
       const emailQuery = query(
@@ -1996,6 +2760,7 @@
     if (!emailLogs.length) {
       $("emailRows").innerHTML =
         '<tr><td colspan="4">No sent emails have been recorded yet.</td></tr>';
+
       return;
     }
 
@@ -2006,37 +2771,55 @@
 
       return `
         <tr>
-          <td>${escapeHTML(item.to || item.recipient || "Unknown recipient")}</td>
+          <td>
+            ${escapeHTML(item.to || item.recipient || "Unknown recipient")}
+          </td>
+
           <td>
             <div class="email-subject">
               <strong>${escapeHTML(item.subject || "No subject")}</strong>
               <span>${escapeHTML(item.sentBy || "")}</span>
             </div>
           </td>
-          <td>${escapeHTML(related ? getReference(related) : item.enquiryId || "—")}</td>
+
+          <td>
+            ${escapeHTML(
+              related
+                ? getReference(related)
+                : item.enquiryId || "—"
+            )}
+          </td>
+
           <td>${escapeHTML(formatDate(item.createdAt, true))}</td>
         </tr>
       `;
     }).join("");
   }
 
+  // --------------------------------------------------
   // REFRESH BUTTONS
+  // --------------------------------------------------
+
   $("refreshBtn").addEventListener("click", async () => {
     await loadEnquiries();
     await loadEmailHistory();
+
     showToast("Dashboard refreshed.");
   });
 
   $("refreshEnquiries").addEventListener("click", async () => {
     await loadEnquiries();
+
     showToast("Enquiries refreshed.");
   });
 
   $("refreshEmails").addEventListener("click", async () => {
     await loadEmailHistory();
+
     showToast("Email history refreshed.");
   });
 
 </script>
 </body>
 </html>
+
